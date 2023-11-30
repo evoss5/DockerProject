@@ -1,11 +1,17 @@
 package Pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePage extends BasicPage {
+
+    WebDriverWait wait;
+    BasicPage page;
+
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -38,6 +44,10 @@ public class HomePage extends BasicPage {
     @FindBy(xpath = ".//*[@aria-label=\"Język Polski\"]")
     WebElement changeLanguageToPolish;
 
+    @FindBy(xpath = ".//button[@id='navbarLoginButton']")
+    WebElement loginHomePage;
+
+
 
 
     public void sideNavButtonClick() {
@@ -57,6 +67,7 @@ public class HomePage extends BasicPage {
     public void clickLanguageSelectionMenu() {
         languageSelectionMenu.click();
 
+
     }
     public void clickDismissCookieMessage() {
         dismissCookieMessage.click();
@@ -72,6 +83,9 @@ public class HomePage extends BasicPage {
 
     public void clickChangeLanguageToPolish() {
         changeLanguageToPolish.click();
+    }
+    public void clickLoginHomePage(){
+        loginHomePage.click();
     }
 
 

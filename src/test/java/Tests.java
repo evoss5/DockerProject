@@ -1,6 +1,7 @@
 import Pages.BasicPage;
 import Pages.FirstPage;
 import Pages.HomePage;
+import Pages.LoginPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -21,6 +22,9 @@ public class Tests {
     HomePage home;
     WebDriverWait wait;
 
+    LoginPage login;
+
+
 
     @BeforeMethod
     public void beforeTest() {
@@ -38,7 +42,6 @@ public class Tests {
         home = new HomePage(driver);
         home.clickWelcomeBannerDismiss();
         home.clickLanguageSelectionMenu();
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@aria-label=\"Język Polski\"]")));
         home.clickChangeLanguageToPolish();
 
     }
@@ -48,9 +51,22 @@ public class Tests {
         home = new HomePage(driver);
         home.clickWelcomeBannerDismiss();
         home.sideNavButtonClick();
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//span[text()=' GitHub ']")));
         home.clickGitHub();
 
 
+
+    }
+
+    @Test
+    public void LoginPageTest() {
+        home = new HomePage(driver);
+        login = new LoginPage(driver);
+        home.clickWelcomeBannerDismiss();
+        home.clickAccountIcon();
+        home.clickLoginHomePage();
+        login.inputLogin();
+        login.inputPassword();
+        login.checkPassword();
+        login.loginInByStandardButton();
     }
 }
