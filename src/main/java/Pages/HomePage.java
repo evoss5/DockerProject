@@ -35,6 +35,9 @@ public class HomePage extends BasicPage {
     @FindBy(xpath = ".//span[text()=' GitHub ']")
     WebElement gitHubRef;
 
+    @FindBy(xpath = ".//*[@aria-label=\"Język Polski\"]")
+    WebElement changeLanguageToPolish;
+
 
 
     public void sideNavButtonClick() {
@@ -65,6 +68,10 @@ public class HomePage extends BasicPage {
     }
     public void clickGitHub() {
         gitHubRef.click();
+    }
+
+    public void clickChangeLanguageToPolish() {
+        changeLanguageToPolish.click();
     }
 
 

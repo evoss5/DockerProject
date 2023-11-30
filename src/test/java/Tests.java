@@ -38,6 +38,8 @@ public class Tests {
         home = new HomePage(driver);
         home.clickWelcomeBannerDismiss();
         home.clickLanguageSelectionMenu();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@aria-label=\"Język Polski\"]")));
+        home.clickChangeLanguageToPolish();
 
     }
 
