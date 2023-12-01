@@ -5,19 +5,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePage extends BasicPage {
-
-    WebDriverWait wait;
-    BasicPage page;
 
 
     public HomePage(WebDriver driver) {
         super(driver);
     }
 
-    @FindBy(xpath = ".//*[@aria-label='Open Sidenav']")
+    @FindBy(xpath = "//*[@aria-label='Open Sidenav']")
     WebElement sideNavButton;
 
     @FindBy(xpath = ".//*[@aria-label='Back to homepage']")
@@ -41,16 +37,22 @@ public class HomePage extends BasicPage {
     @FindBy(xpath = ".//span[text()=' GitHub ']")
     WebElement gitHubRef;
 
-    @FindBy(xpath = ".//*[@aria-label=\"Język Polski\"]")
+    @FindBy(xpath = "//label//span//input[@aria-label=\"Język Polski\"]/ancestor::label")
     WebElement changeLanguageToPolish;
+
+    @FindBy(xpath = "//label//span//input[@aria-label=\"Język Polski\"]/ancestor::label")
+    WebElement changeLanguageToPolish2;
+
 
     @FindBy(xpath = ".//button[@id='navbarLoginButton']")
     WebElement loginHomePage;
 
-
+    @FindBy(xpath = ".//span[text()=' Konto ']")
+    WebElement checkIfLanguageisPolish;
 
 
     public void sideNavButtonClick() {
+        wait.until(ExpectedConditions.visibilityOf(sideNavButton));
         sideNavButton.click();
     }
 
@@ -61,34 +63,52 @@ public class HomePage extends BasicPage {
     public void clickSearchIcon() {
         searchIcon.click();
     }
+
     public void clickAccountIcon() {
         accountIcon.click();
     }
+
     public void clickLanguageSelectionMenu() {
         languageSelectionMenu.click();
 
 
     }
+
     public void clickDismissCookieMessage() {
         dismissCookieMessage.click();
 
 
     }
+
     public void clickWelcomeBannerDismiss() {
         welcomeBannerDismiss.click();
     }
+
     public void clickGitHub() {
+        wait.until(ExpectedConditions.visibilityOf(gitHubRef));
         gitHubRef.click();
     }
 
     public void clickChangeLanguageToPolish() {
+        wait.until(ExpectedConditions.visibilityOf(changeLanguageToPolish));
         changeLanguageToPolish.click();
     }
-    public void clickLoginHomePage(){
+
+    public void clickLoginHomePage() {
         loginHomePage.click();
     }
 
+    public boolean clickCheckIfLanguageIsPolish() {
+
+        changeLanguageToPolish.click();
+        changeLanguageToPolish2.click();
+        return true;
+    }
 
 
 }
+
+
+
+
 

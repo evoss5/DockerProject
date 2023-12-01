@@ -8,11 +8,12 @@ import java.time.Duration;
 
 public class BasicPage {
     protected WebDriver driver;
-    protected WebDriverWait webDriverWait;
+    protected WebDriverWait wait;
     private static final int TIMEOUT = 10;
 
     public BasicPage(WebDriver driver) {
         this.driver = driver;
+        wait = new WebDriverWait(driver, TIMEOUT);
         PageFactory.initElements(driver, this);
     }
 }
