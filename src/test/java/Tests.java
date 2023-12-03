@@ -4,8 +4,10 @@ import Pages.HomePage;
 import Pages.LoginPage;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -79,6 +81,8 @@ public class Tests {
         login.loginInByGoogle();
         googlePage.clickCreateNewAccount();
 
-
     }
 }
+
+
+//        driver.findElement(By.xpath(".//div[@id=\"selectionc0\"]")).click();

@@ -51,6 +51,7 @@ public class HomePage extends BasicPage {
     WebElement checkIfLanguageisPolish;
 
 
+
     public void sideNavButtonClick() {
         wait.until(ExpectedConditions.visibilityOf(sideNavButton));
         sideNavButton.click();
@@ -104,6 +105,7 @@ public class HomePage extends BasicPage {
         changeLanguageToPolish2.click();
         return true;
     }
+
 
 
 }
