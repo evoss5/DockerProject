@@ -7,56 +7,72 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class GooglePage extends BasicPage {
+
+
+
+    @FindBy(xpath = "//span[text()='Utwórz konto']")
+    private WebElement createNewAccount;
+
+    @FindBy(xpath = "//input[@aria-label=\"Imię\"]")
+    private WebElement inputName;
+
+    @FindBy(xpath = "//span[text()='Dalej']")
+    private WebElement pageForwadrd;
+
+    @FindBy(xpath = "//input[@aria-label='Dzień']")
+    private WebElement birthDay;
+
+    @FindBy(xpath = "//input[@aria-label='Rok']")
+    private WebElement yearDate;
+
+    @FindBy(xpath = ".//span[text()='Dalej']")
+    private WebElement nextStep;
+
+    @FindBy(xpath = ".//select[@id='month']/option[3]")
+    private WebElement chooseMonth;
+
+    @FindBy(xpath = ".//select[@id='month']")
+    private WebElement selectMonth;
+
+
+    @FindBy(xpath = ".//select[@id='gender']")
+    private WebElement selectGender;
+
+    @FindBy(xpath = ".//select[@id='gender']/option[3]")
+    private WebElement selectMan;
+
+    @FindBy(xpath = ".//input[@type='text']")
+    private WebElement createUsername;
+
+    @FindBy(xpath = ".//input[@name='Passwd']")
+    private WebElement setPassword;
+
+    @FindBy(xpath = ".//input[@name='PasswdAgain']")
+    private WebElement repeatPassword;
+
     public GooglePage(WebDriver driver) {
         super(driver);
 
     }
 
-    @FindBy(xpath = "//span[text()='Utwórz konto']")
-    WebElement createNewAccount;
-
-    @FindBy(xpath = "//input[@aria-label=\"Imię\"]")
-    WebElement inputName;
-
-    @FindBy(xpath = "//span[text()='Dalej']")
-    WebElement pageForwadrd;
-
-    @FindBy(xpath = "//input[@aria-label='Dzień']")
-    WebElement birthDay;
-
-    @FindBy(xpath = "//input[@aria-label='Rok']")
-    WebElement yearDate;
-
-    @FindBy(xpath = ".//span[text()='Dalej']")
-    WebElement nextStep;
-
-    @FindBy(xpath = ".//select[@id='month']/option[3]")
-    WebElement chooseMonth;
-
-    @FindBy(xpath = ".//select[@id='month']")
-    WebElement selectMonth;
-
-
-    @FindBy(xpath = ".//select[@id='gender']")
-    WebElement selectGender;
-
-    @FindBy(xpath = ".//select[@id='gender']/option[3]")
-    WebElement selectMan;
-
-    @FindBy(xpath = ".//input[@type='text']")
-    WebElement createUsername;
-
-    @FindBy(xpath = ".//input[@name='Passwd']")
-    WebElement setPassword;
-
-    @FindBy(xpath = ".//input[@name='PasswdAgain']")
-    WebElement repeatPassword;
-
 
     public void clickCreateNewAccount() {
+        wait.until(ExpectedConditions.visibilityOf(createNewAccount));
         createNewAccount.click();
+
+    }
+
+    public void inputNameAndClickForward() {
         inputName.sendKeys("Matthew");
         pageForwadrd.click();
+    }
+
+    public boolean doesPageShowInsertaBithdayWindow() {
+        wait.until(ExpectedConditions.visibilityOf(selectMonth));
+        return true;
+    }
+
+    public void insertDateAndGender() {
         wait.until(ExpectedConditions.visibilityOf(birthDay));
         birthDay.sendKeys("10");
         yearDate.sendKeys("1991");
@@ -65,9 +81,27 @@ public class GooglePage extends BasicPage {
         selectGender.click();
         selectMan.click();
         nextStep.click();
-        wait.until(ExpectedConditions.elementToBeClickable(createUsername));
+
+
+    }
+
+    public boolean checkIfThereIsUsernameWindow() {
+        wait.until(ExpectedConditions.visibilityOf(createUsername));
+        return true;
+    }
+
+    public void createUsernameAndClickForward() {
         createUsername.sendKeys("Mathewww123987");
         driver.findElement(By.xpath(".//span[text()='Dalej']")).click();
+
+    }
+
+    public boolean checkIfThereIsPasswordToInsert() {
+        wait.until(ExpectedConditions.visibilityOf(setPassword));
+        return true;
+    }
+
+    public void setPasswordAndAccept() {
         wait.until(ExpectedConditions.elementToBeClickable(setPassword));
         setPassword.sendKeys("RandomPassword1!");
         repeatPassword.sendKeys("RandomPassword1!");

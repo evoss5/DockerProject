@@ -1,11 +1,9 @@
-import Pages.BasicPage;
-import Pages.GooglePage;
-import Pages.HomePage;
-import Pages.LoginPage;
+import Pages.*;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -23,7 +21,7 @@ public class Tests {
 
     LoginPage login;
     GooglePage googlePage;
-
+    RegistrationPage register;
 
 
     @BeforeMethod
@@ -52,7 +50,8 @@ public class Tests {
         home.clickWelcomeBannerDismiss();
         home.sideNavButtonClick();
         home.clickGitHub();
-
+        String rightURL = "https://github.com/juice-shop/juice-shop";
+        Assertions.assertEquals(rightURL, driver.getCurrentUrl(), "Page is not right one");
 
 
     }
@@ -68,6 +67,7 @@ public class Tests {
         login.inputPassword();
         login.checkPassword();
         login.loginInByStandardButton();
+        Assertions.assertTrue(home.IsThereInfoAboutWrongLoginOrPassword(), "The message is wrong");
     }
 
     @Test
@@ -82,7 +82,40 @@ public class Tests {
         googlePage.clickCreateNewAccount();
 
     }
+
+    @Test
+    public void LoginByGoogleTest2() {
+        home = new HomePage(driver);
+        login = new LoginPage(driver);
+        googlePage = new GooglePage(driver);
+        home.clickWelcomeBannerDismiss();
+        Assertions.assertTrue(home.isWelcomeMessageDismissed(), "Welcome message is still there");
+        home.clickAccountIcon();
+        home.clickLoginHomePage();
+        String loginPage = "http://localhost:3000/#/login";
+        Assertions.assertEquals(loginPage, driver.getCurrentUrl(), "The page is not login page");
+        login.loginInByGoogle();
+
+
+
+    }
+
+    @Test
+    public void LoginByCustomerLink() {
+        home = new HomePage(driver);
+        login = new LoginPage(driver);
+        googlePage = new GooglePage(driver);
+//        home.clickWelcomeBannerDismiss();
+        Assertions.assertTrue(home.isWelcomeMessageDismissed(), "Welcome message is still there");
+        login = home.goToLoginPage();
+        String loginPage = "http://localhost:3000/#/login";
+        Assertions.assertEquals(loginPage, driver.getCurrentUrl(), "The page is not login page");
+        register = login.goToRegistrationPage();
+        Assertions.assertTrue(register.checkIfPageShowsEmailField(), "The page is not login page");
+
+
+    }
+
+
 }
 
-
-//        driver.findElement(By.xpath(".//div[@id=\"selectionc0\"]")).click();

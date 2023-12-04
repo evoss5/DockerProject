@@ -3,35 +3,37 @@ package Pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LoginPage extends BasicPage {
-
-    public LoginPage(WebDriver driver) {
-        super(driver);
-    }
-
 
 
 
 
 
     @FindBy(xpath = ".//button[@id='loginButtonGoogle']")
-    WebElement googleLoginButton;
+    private WebElement googleLoginButton;
 
     @FindBy(xpath = ".//button[@id='loginButton']")
-    WebElement standardLoginButton;
+    private WebElement standardLoginButton;
 
     @FindBy(xpath = ".//input[@id='email']")
-    WebElement emailField;
+    private WebElement emailField;
 
     @FindBy(xpath = ".//input[@id='password']")
-    WebElement passwordField;
+    private WebElement passwordField;
 
     @FindBy(xpath = ".//*[@aria-label='Eye']")
-    WebElement showPassword;
+    private WebElement showPassword;
 
     @FindBy(xpath = ".//button[@aria-label='Back to homepage']")
-    WebElement returnToHomePage;
+    private WebElement returnToHomePage;
+    @FindBy(xpath = "//div[@id='newCustomerLink']")
+    private WebElement createAccountButton;
+
+    public LoginPage(WebDriver driver) {
+        super(driver);
+    }
 
 
     public void loginInByGoogle(){
@@ -53,6 +55,13 @@ public class LoginPage extends BasicPage {
     public void returnToHomePageClick() {
         returnToHomePage.click();
     }
+    public RegistrationPage goToRegistrationPage() {
+        wait.until(ExpectedConditions.visibilityOf(createAccountButton));
+        wait.until(ExpectedConditions.elementToBeClickable(createAccountButton));
+        createAccountButton.click();
+        return  new RegistrationPage(driver);
+    }
+
 
 
 }

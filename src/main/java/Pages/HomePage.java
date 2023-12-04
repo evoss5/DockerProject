@@ -9,9 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 public class HomePage extends BasicPage {
 
 
-    public HomePage(WebDriver driver) {
-        super(driver);
-    }
+
 
     @FindBy(xpath = "//*[@aria-label='Open Sidenav']")
     WebElement sideNavButton;
@@ -50,6 +48,11 @@ public class HomePage extends BasicPage {
     @FindBy(xpath = ".//span[text()=' Konto ']")
     WebElement checkIfLanguageisPolish;
 
+    @FindBy(xpath = "//div[text()='Invalid email or password.']")
+    WebElement invalidEmailOrPasswordInfo;
+    public HomePage(WebDriver driver) {
+        super(driver);
+    }
 
 
     public void sideNavButtonClick() {
@@ -100,15 +103,33 @@ public class HomePage extends BasicPage {
     }
 
     public boolean clickCheckIfLanguageIsPolish() {
-
-        changeLanguageToPolish.click();
-        changeLanguageToPolish2.click();
+        wait.until(ExpectedConditions.visibilityOf(checkIfLanguageisPolish));
         return true;
+
+
+    }
+    public boolean IsThereInfoAboutWrongLoginOrPassword(){
+        wait.until(ExpectedConditions.visibilityOf(invalidEmailOrPasswordInfo));
+        return true;
+
+    }
+    public boolean isWelcomeMessageDismissed() {
+        return wait.until(ExpectedConditions.visibilityOf(welcomeBannerDismiss)).isDisplayed();
+
+    }
+
+
+
+    public LoginPage goToLoginPage(){
+        clickAccountIcon();
+        clickLoginHomePage();
+        return new LoginPage(driver);
     }
 
 
 
 }
+
 
 
 

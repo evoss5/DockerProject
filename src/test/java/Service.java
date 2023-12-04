@@ -5,12 +5,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeMethod;
 
 import java.time.Duration;
+import java.util.Random;
 
 public class Service {
 
     WebDriver driver;
     Service service;
     WebDriverWait webDriverWait;
+    Random random;
 
     public Service(WebDriver driver) {
         this.driver = driver;
@@ -43,4 +45,13 @@ public class Service {
 
 
     }
+
+    public int randomNumber(int min, int max) {
+        return random.nextInt(max - min + 1) + min;
+    }
+    public int randomNumber() {
+        return random.nextInt(9999 - 1000 + 1) + 1000;
+    }
+
+
 }
