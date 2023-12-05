@@ -62,6 +62,24 @@ public class LoginPage extends BasicPage {
         return  new RegistrationPage(driver);
     }
 
+    public LoginPage insertMyLogin(String myEmail){
+        wait.until(ExpectedConditions.visibilityOf(emailField));
+        emailField.sendKeys(myEmail);
+        return new LoginPage(driver);
+    }
+
+    public LoginPage insertMyPassword(String myPassword) {
+        wait.until(ExpectedConditions.visibilityOf(passwordField));
+        passwordField.sendKeys(myPassword);
+        return new LoginPage(driver);
+    }
+    public HomePage goToHomePage() {
+        wait.until(ExpectedConditions.visibilityOf(standardLoginButton));
+        loginInByStandardButton();
+        return new HomePage(driver);
+    }
+
+
 
 
 }

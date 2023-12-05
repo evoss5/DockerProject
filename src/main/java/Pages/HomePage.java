@@ -54,6 +54,9 @@ public class HomePage extends BasicPage {
         super(driver);
     }
 
+    @FindBy(xpath = "//button[@aria-label='Show the shopping cart']")
+    private WebElement yourBasketAfterLogin;
+
 
     public void sideNavButtonClick() {
         wait.until(ExpectedConditions.visibilityOf(sideNavButton));
@@ -124,6 +127,11 @@ public class HomePage extends BasicPage {
         clickAccountIcon();
         clickLoginHomePage();
         return new LoginPage(driver);
+    }
+
+    public boolean checkIfYouAreLoggedAndYouAreOnHomePage() {
+        wait.until(ExpectedConditions.visibilityOf(yourBasketAfterLogin));
+        return true;
     }
 
 
