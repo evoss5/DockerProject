@@ -108,6 +108,16 @@ public class Service {
         surnameList.add("AmalMiranda");
         return surnameList;
     }
+    public ArrayList<String> countriesList() {
+        ArrayList<String>countryList = new ArrayList<>();
+        countryList.add("Poland");
+        countryList.add("Germany");
+        countryList.add("Greece");
+        countryList.add("Spain");
+        return  countryList;
+
+
+    }
 
     public ArrayList<String> eMailsDomenList() {
         ArrayList<String> eMailDomensList = new ArrayList<>();

@@ -9,8 +9,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 public class HomePage extends BasicPage {
 
 
-
-
     @FindBy(xpath = "//*[@aria-label='Open Sidenav']")
     WebElement sideNavButton;
     @FindBy(xpath = ".//*[@aria-label='Back to homepage']")
@@ -37,9 +35,11 @@ public class HomePage extends BasicPage {
     WebElement checkIfLanguageisPolish;
     @FindBy(xpath = "//div[text()='Invalid email or password.']")
     WebElement invalidEmailOrPasswordInfo;
+
     public HomePage(WebDriver driver) {
         super(driver);
     }
+
     @FindBy(xpath = "//button[@aria-label='Show the shopping cart']")
     private WebElement yourBasketAfterLogin;
 
@@ -52,12 +52,15 @@ public class HomePage extends BasicPage {
     public void clickMainLogoPage() {
         mainPageLogo.click();
     }
+
     public void clickSearchIcon() {
         searchIcon.click();
     }
+
     public void clickAccountIcon() {
         accountIcon.click();
     }
+
     public void clickLanguageSelectionMenu() {
         languageSelectionMenu.click();
     }
@@ -69,14 +72,17 @@ public class HomePage extends BasicPage {
     public void clickWelcomeBannerDismiss() {
         welcomeBannerDismiss.click();
     }
+
     public void clickGitHub() {
         wait.until(ExpectedConditions.visibilityOf(gitHubRef));
         gitHubRef.click();
     }
+
     public void clickChangeLanguageToPolish() {
         wait.until(ExpectedConditions.visibilityOf(changeLanguageToPolish));
         changeLanguageToPolish.click();
     }
+
     public void clickLoginHomePage() {
         loginHomePage.click();
     }
@@ -85,18 +91,22 @@ public class HomePage extends BasicPage {
         wait.until(ExpectedConditions.visibilityOf(checkIfLanguageisPolish));
         return true;
     }
-    public boolean IsThereInfoAboutWrongLoginOrPassword(){
+
+    public boolean IsThereInfoAboutWrongLoginOrPassword() {
         wait.until(ExpectedConditions.visibilityOf(invalidEmailOrPasswordInfo));
         return true;
     }
+
     public boolean isWelcomeMessageDismissed() {
         return wait.until(ExpectedConditions.visibilityOf(welcomeBannerDismiss)).isDisplayed();
     }
-    public LoginPage goToLoginPage(){
+
+    public LoginPage goToLoginPage() {
         clickAccountIcon();
         clickLoginHomePage();
         return new LoginPage(driver);
     }
+
     public boolean checkIfYouAreLoggedAndYouAreOnHomePage() {
         wait.until(ExpectedConditions.visibilityOf(yourBasketAfterLogin));
         return true;

@@ -37,18 +37,22 @@ public class GooglePage extends BasicPage {
     public GooglePage(WebDriver driver) {
         super(driver);
     }
+
     public void clickCreateNewAccount() {
         wait.until(ExpectedConditions.visibilityOf(createNewAccountButton));
         createNewAccountButton.click();
     }
+
     public void inputNameAndClickForward() {
         inputName.sendKeys("Matthew");
         pageForwadrd.click();
     }
+
     public boolean doesPageShowInsertaBithdayWindow() {
         wait.until(ExpectedConditions.visibilityOf(selectMonth));
         return true;
     }
+
     public void insertDateAndGender() {
         wait.until(ExpectedConditions.visibilityOf(birthDay));
         birthDay.sendKeys("10");
@@ -59,18 +63,22 @@ public class GooglePage extends BasicPage {
         selectMan.click();
         nextStep.click();
     }
+
     public boolean checkIfThereIsUsernameWindow() {
         wait.until(ExpectedConditions.visibilityOf(createUsername));
         return true;
     }
+
     public void createUsernameAndClickForward() {
         createUsername.sendKeys("Mathewww123987");
         driver.findElement(By.xpath(".//span[text()='Dalej']")).click();
     }
+
     public boolean checkIfThereIsPasswordToInsert() {
         wait.until(ExpectedConditions.visibilityOf(setPassword));
         return true;
     }
+
     public void setPassword(String password) {
         wait.until(ExpectedConditions.elementToBeClickable(setPassword));
         setPassword.sendKeys(password);

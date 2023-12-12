@@ -22,6 +22,8 @@ public class Tests {
     LoginPage login;
     GooglePage googlePage;
     RegistrationPage register;
+    AfterLoginPage afterLoginPage;
+    CartPage cart;
 
 
     @BeforeMethod
@@ -33,6 +35,7 @@ public class Tests {
         System.setProperty(service.getDriver(), service.chromeDriverURL());
         driver.get(service.getURL());
         driver.manage().window().maximize();
+        logInToThePageByCredentials();
 
     }
 
@@ -142,10 +145,8 @@ public class Tests {
         home = login.goToHomePage();
         home.checkIfYouAreLoggedAndYouAreOnHomePage();
     }
-
-
     @Test
-    public void logInToThePage2() {
+    public void logInToThePageByCredentials() {
         home = new HomePage(driver);
         login = new LoginPage(driver);
         service = new Service(driver);
@@ -155,8 +156,24 @@ public class Tests {
         String myLogin = service.getCredentialValue("myLogin");
         String myPassword = service.getCredentialValue("myPassword");
         login.insertMyLogin(myLogin);
+        login.insertMyPassword(myPassword);
+        home = login.goToHomePage();
     }
+    @Test
+    public void cartTest() {
+        home = new HomePage(driver);
+        afterLoginPage = new AfterLoginPage(driver);
+        afterLoginPage.addAppleJuiceToCart();
+        cart = afterLoginPage.goToCartPage();
+        Assertions.assertTrue(afterLoginPage.IsTotalPriceLayoutVisible());
+        cart.clickCheckoutButton();
+        cart.addNewAdress();
+        String randomCountry = service.getRandomValue(service.countriesList());
+        cart.inputCountryName(randomCountry);
+        String randomName = service.getRandomValue(service.namesList());
+        cart.inputName(randomName);
 
+    }
 }
 
 

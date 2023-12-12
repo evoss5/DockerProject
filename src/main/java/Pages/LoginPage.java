@@ -20,13 +20,15 @@ public class LoginPage extends BasicPage {
     private WebElement returnToHomePage;
     @FindBy(xpath = "//div[@id='newCustomerLink']")
     private WebElement createAccountButton;
+
     public LoginPage(WebDriver driver) {
         super(driver);
     }
 
-    public void loginInByGoogle(){
+    public void loginInByGoogle() {
         googleLoginButton.click();
     }
+
     public void loginInByStandardButton() {
         standardLoginButton.click();
     }
@@ -34,31 +36,38 @@ public class LoginPage extends BasicPage {
     public void inputLogin() {
         emailField.sendKeys("admin");
     }
+
     public void inputPassword() {
         passwordField.sendKeys("admin");
     }
+
     public void checkPassword() {
         showPassword.click();
     }
+
     public void returnToHomePageClick() {
         returnToHomePage.click();
     }
+
     public RegistrationPage goToRegistrationPage() {
         wait.until(ExpectedConditions.visibilityOf(createAccountButton));
         wait.until(ExpectedConditions.elementToBeClickable(createAccountButton));
         createAccountButton.click();
-        return  new RegistrationPage(driver);
+        return new RegistrationPage(driver);
     }
-    public LoginPage insertMyLogin(String myEmail){
+
+    public LoginPage insertMyLogin(String myEmail) {
         wait.until(ExpectedConditions.visibilityOf(emailField));
         emailField.sendKeys(myEmail);
         return new LoginPage(driver);
     }
+
     public LoginPage insertMyPassword(String myPassword) {
         wait.until(ExpectedConditions.visibilityOf(passwordField));
         passwordField.sendKeys(myPassword);
         return new LoginPage(driver);
     }
+
     public HomePage goToHomePage() {
         wait.until(ExpectedConditions.visibilityOf(standardLoginButton));
         loginInByStandardButton();
