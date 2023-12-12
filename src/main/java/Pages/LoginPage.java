@@ -6,35 +6,23 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LoginPage extends BasicPage {
-
-
-
-
-
     @FindBy(xpath = ".//button[@id='loginButtonGoogle']")
     private WebElement googleLoginButton;
-
     @FindBy(xpath = ".//button[@id='loginButton']")
     private WebElement standardLoginButton;
-
     @FindBy(xpath = ".//input[@id='email']")
     private WebElement emailField;
-
     @FindBy(xpath = ".//input[@id='password']")
     private WebElement passwordField;
-
     @FindBy(xpath = ".//*[@aria-label='Eye']")
     private WebElement showPassword;
-
     @FindBy(xpath = ".//button[@aria-label='Back to homepage']")
     private WebElement returnToHomePage;
     @FindBy(xpath = "//div[@id='newCustomerLink']")
     private WebElement createAccountButton;
-
     public LoginPage(WebDriver driver) {
         super(driver);
     }
-
 
     public void loginInByGoogle(){
         googleLoginButton.click();
@@ -61,13 +49,11 @@ public class LoginPage extends BasicPage {
         createAccountButton.click();
         return  new RegistrationPage(driver);
     }
-
     public LoginPage insertMyLogin(String myEmail){
         wait.until(ExpectedConditions.visibilityOf(emailField));
         emailField.sendKeys(myEmail);
         return new LoginPage(driver);
     }
-
     public LoginPage insertMyPassword(String myPassword) {
         wait.until(ExpectedConditions.visibilityOf(passwordField));
         passwordField.sendKeys(myPassword);
@@ -78,9 +64,5 @@ public class LoginPage extends BasicPage {
         loginInByStandardButton();
         return new HomePage(driver);
     }
-
-
-
-
 }
 

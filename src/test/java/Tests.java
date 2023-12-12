@@ -98,7 +98,6 @@ public class Tests {
         login.loginInByGoogle();
 
 
-
     }
 
     @Test
@@ -145,8 +144,19 @@ public class Tests {
     }
 
 
-
-
+    @Test
+    public void logInToThePage2() {
+        home = new HomePage(driver);
+        login = new LoginPage(driver);
+        service = new Service(driver);
+        login = home.goToLoginPage();
+        String loginPage = "http://localhost:3000/#/login";
+        Assertions.assertEquals(loginPage, driver.getCurrentUrl(), "The page is not login page");
+        String myLogin = service.getCredentialValue("myLogin");
+        String myPassword = service.getCredentialValue("myPassword");
+        login.insertMyLogin(myLogin);
+    }
 
 }
+
 

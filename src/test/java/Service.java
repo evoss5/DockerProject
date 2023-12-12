@@ -4,8 +4,13 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeMethod;
 
-import java.time.Duration;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
 import java.util.Random;
 
 public class Service {
@@ -47,6 +52,19 @@ public class Service {
 
 
     }
+
+    public String getCredentialValue(String credentialName) {
+        String credentialValue = null;
+        try (FileReader reader = new FileReader("credentials")) {
+            Properties properties = new Properties();
+            properties.load(reader);
+            credentialValue = properties.getProperty(credentialName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return credentialValue;
+    }
+
 
     public int randomNumber(int min, int max) {
         return random.nextInt(max - min + 1) + min;
@@ -122,32 +140,47 @@ public class Service {
         randomPasswordsList.add("lH8LKv5");
         randomPasswordsList.add("kj6os3Prk");
         randomPasswordsList.add("1byW9mFq1PT");
-        return  randomPasswordsList;
+        return randomPasswordsList;
     }
 
 
     public String getRandomValue(ArrayList<String> list) {
         int randomIndex = random.nextInt(list.size());
-        String randomValue = list.get(randomIndex);
-        return randomValue;
+        return list.get(randomIndex);
     }
 
 
     public String createEmailAddress(String name, String sureName, int number, String mailDomen) {
-        String email = name + sureName + number + mailDomen;
-        return email;
+        return name + sureName + number + mailDomen;
 
 
     }
 
     public String createEmailAdress(String name, String sureName) {
-        String email = name + sureName;
-        return email;
+        return name + sureName;
     }
 
     public String createRandomPassword(String password, int number) {
         String pass = password + number;
         return pass;
+    }
+
+    private static String getRandomLineFromFile(String path) {
+        List<String> lines;
+        try {
+            lines = Files.readAllLines(Paths.get(path));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Random random = new Random();
+        return lines.get(random.nextInt(lines.size()));
+    }
+
+    public String randomValueFromDomain() {
+        getRandomLineFromFile("domainList.txt");
+        return getRandomLineFromFile("domainList.txt");
+
+
     }
 }
 
