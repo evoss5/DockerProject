@@ -12,11 +12,8 @@ public class AfterLoginPage extends BasicPage {
     WebElement MelonBike;
     @FindBy(xpath = "//div[@id='price']")
     WebElement totalPriceLayout;
-
     @FindBy(xpath = "//span[text()=' Your Basket']")
     WebElement cartLayout;
-
-
     public AfterLoginPage(WebDriver driver) {
         super(driver);
     }
@@ -25,14 +22,12 @@ public class AfterLoginPage extends BasicPage {
         wait.until(ExpectedConditions.elementToBeClickable(AppleJuice));
         AppleJuice.click();
     }
-
     public boolean IsTotalPriceLayoutVisible() {
         wait.until(ExpectedConditions.visibilityOf(totalPriceLayout));
         totalPriceLayout.isDisplayed();
         return true;
 
     }
-
     public CartPage goToCartPage() {
         wait.until(ExpectedConditions.visibilityOf(cartLayout));
         cartLayout.click();
