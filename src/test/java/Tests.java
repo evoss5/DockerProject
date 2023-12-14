@@ -145,6 +145,7 @@ public class Tests {
         home = login.goToHomePage();
         home.checkIfYouAreLoggedAndYouAreOnHomePage();
     }
+
     @Test
     public void logInToThePageByCredentials() {
         home = new HomePage(driver);
@@ -159,8 +160,9 @@ public class Tests {
         login.insertMyPassword(myPassword);
         home = login.goToHomePage();
     }
+
     @Test
-    public void cartTest() {
+    public void addNewAdressInCart() {
         home = new HomePage(driver);
         afterLoginPage = new AfterLoginPage(driver);
         afterLoginPage.addAppleJuiceToCart();
@@ -172,8 +174,39 @@ public class Tests {
         cart.inputCountryName(randomCountry);
         String randomName = service.getRandomValue(service.namesList());
         cart.inputName(randomName);
-
+        cart.phoneNumber(service.cellPhoneNumber());
+        cart.inputAdress(service.getRandomValue(service.randomCities()));
+        String zipCode = service.getRandomValue(service.randomzipCodes());
+        cart.inputZipCode(zipCode);
+        String city = service.getRandomValue(service.randomCities());
+        cart.inputCityName(city);
+        Assertions.assertTrue(cart.isSubmitButtonEnabled());
+        cart.submitButtonClick();
+        cart.selectAdressClick();
     }
+
+    @Test
+    public void chooseDeliveryOptionTest() {
+        addNewAdressInCart();
+        Assertions.assertTrue(cart.isContinueButtonClickable());
+        cart.continueButtonClick();
+        WebElement deliveryMessage = driver.findElement(By.xpath("//*[@class='mat-card mat-focus-indicator mat-elevation-z6']//h1[1]"));
+        Assertions.assertEquals("Delivery Address" , deliveryMessage.getText());
+        cart.chooseDeliveryOption();
+        Assertions.assertTrue(cart.isContinueButtonClickable());
+    }
+    @Test
+    public void addCardNumberTestForShipment() {
+        chooseDeliveryOptionTest();
+        cart.continueButtonClick();
+        cart.addCreditCard();
+        cart.inputCardNumber(service.cardNumber());
+        String digits = String.valueOf(service.cardNumber().length());
+        System.out.println(digits);
+        Assertions.assertEquals("16" , digits, "The card number has different digits than expected");
+    }
+
+
 }
 
 

@@ -71,6 +71,7 @@ public class Service {
         return random.nextInt(max - min + 1) + min;
     }
 
+
     public int randomNumber() {
         return random.nextInt(9999 - 1000 + 1) + 1000;
     }
@@ -153,8 +154,27 @@ public class Service {
         randomPasswordsList.add("1byW9mFq1PT");
         return randomPasswordsList;
     }
-
-
+    public ArrayList<String> randomzipCodes(){
+        ArrayList<String>zipCode = new ArrayList<>();
+        zipCode.add("00-001");
+        zipCode.add("00-064");
+        zipCode.add("00-124");
+        zipCode.add("00-191");
+        zipCode.add("00-227");
+        zipCode.add("00-664");
+        zipCode.add("52-231");
+        return zipCode;
+    }
+    public ArrayList<String>randomCities() {
+        ArrayList<String>randomCity = new ArrayList<>();
+        randomCity.add("Poznan");
+        randomCity.add("Warsaw");
+        randomCity.add("Glogow");
+        randomCity.add("Madrid");
+        randomCity.add("Barcelona");
+        randomCity.add("Glasgow");
+        return randomCity;
+    }
     public String getRandomValue(ArrayList<String> list) {
         int randomIndex = random.nextInt(list.size());
         return list.get(randomIndex);
@@ -193,7 +213,19 @@ public class Service {
 
 
     }
+    public String cellPhoneNumber() {
+        String contactNumber = String.valueOf(randomNumber(508, 895)) + String.valueOf(randomNumber(100,999)) + String.valueOf(randomNumber(100, 999));
+        System.out.println("Contact number " + contactNumber);
+        return contactNumber;
+
+    }
+    public String cardNumber() {
+        String cardNumber = String.valueOf(randomNumber(1000, 9999)) + String.valueOf(randomNumber(1000, 9999)) + String.valueOf(randomNumber(1000, 9999)) + String.valueOf(randomNumber(1000, 9999));
+        System.out.println("Card Number ");
+        return cardNumber;
+    }
 }
+
 
 
 
