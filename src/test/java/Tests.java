@@ -191,10 +191,11 @@ public class Tests {
         Assertions.assertTrue(cart.isContinueButtonClickable());
         cart.continueButtonClick();
         WebElement deliveryMessage = driver.findElement(By.xpath("//*[@class='mat-card mat-focus-indicator mat-elevation-z6']//h1[1]"));
-        Assertions.assertEquals("Delivery Address" , deliveryMessage.getText());
+        Assertions.assertEquals("Delivery Address", deliveryMessage.getText());
         cart.chooseDeliveryOption();
         Assertions.assertTrue(cart.isContinueButtonClickable());
     }
+
     @Test
     public void addCardNumberTestForShipment() {
         chooseDeliveryOptionTest();
@@ -203,9 +204,21 @@ public class Tests {
         cart.inputCardNumber(service.cardNumber());
         String digits = String.valueOf(service.cardNumber().length());
         System.out.println(digits);
-        Assertions.assertEquals("16" , digits, "The card number has different digits than expected");
+        Assertions.assertEquals("16", digits, "The card number has different digits than expected");    //checking if card number has 16 digits
+        cart.chooseCreditCard();
+
+
     }
 
+    @Test
+    public void finishPurchaseTest() {
+        addCardNumberTestForShipment();
+        Assertions.assertTrue(cart.isContinueButtonClickable());
+        cart.continueButtonClick();
+        Assertions.assertTrue(cart.IsOrderSummarVisible());
+        cart.purchaseProducts();
+        Assertions.assertTrue(cart.checkIfConfirmationMessageIsVisible());
+    }
 
 }
 

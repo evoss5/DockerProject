@@ -36,6 +36,14 @@ public class CartPage extends BasicPage {
     private WebElement cardNumberField;
     @FindBy(xpath = ".//*[@class='mat-expansion-panel mat-elevation-z0 ng-tns-c41-24 ng-star-inserted']")
     private WebElement creditCardPanel;
+    @FindBy(xpath = "//label[@class='mat-radio-label']")
+    private WebElement creditCardCheckbox;
+    @FindBy(xpath = "//div[@class='order-summary']")
+    private WebElement orderSummaryLayout;
+    @FindBy(xpath = "//button[@id='checkoutButton']")
+    private WebElement placeYourOrderButton;
+    @FindBy(xpath = "//h1[@class='confirmation']")
+    private WebElement confirmationMessage;
 
     public CartPage(WebDriver driver) {
         super(driver);
@@ -120,4 +128,23 @@ public class CartPage extends BasicPage {
     public void addCreditCard() {
         creditCardPanel.click();
     }
-}
+    public void chooseCreditCard() {
+        wait.until(ExpectedConditions.visibilityOf(creditCardCheckbox));
+        wait.until(ExpectedConditions.elementToBeClickable(creditCardCheckbox));
+        creditCardCheckbox.click();
+    }
+    public boolean IsOrderSummarVisible() {
+        orderSummaryLayout.isDisplayed();
+        return true;
+    }
+    public void purchaseProducts() {
+        wait.until(ExpectedConditions.visibilityOf(placeYourOrderButton));
+        placeYourOrderButton.click();
+    }
+    public boolean checkIfConfirmationMessageIsVisible() {
+        wait.until(ExpectedConditions.visibilityOf(confirmationMessage));
+        confirmationMessage.isDisplayed();
+        return true;
+    }
+    }
+
