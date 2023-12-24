@@ -33,6 +33,8 @@ public class GooglePage extends BasicPage {
     private WebElement setPassword;
     @FindBy(xpath = ".//input[@name='PasswdAgain']")
     private WebElement repeatPassword;
+    @FindBy(xpath = "//h1[@id='headingText']")
+    private WebElement googleHeader;
 
     public GooglePage(WebDriver driver) {
         super(driver);
@@ -50,7 +52,7 @@ public class GooglePage extends BasicPage {
 
     public boolean doesPageShowInsertaBithdayWindow() {
         wait.until(ExpectedConditions.visibilityOf(selectMonth));
-        return true;
+        return selectMonth.isDisplayed();
     }
 
     public void insertDateAndGender() {
@@ -66,7 +68,7 @@ public class GooglePage extends BasicPage {
 
     public boolean checkIfThereIsUsernameWindow() {
         wait.until(ExpectedConditions.visibilityOf(createUsername));
-        return true;
+        return createUsername.isDisplayed();
     }
 
     public void createUsernameAndClickForward() {
@@ -83,5 +85,8 @@ public class GooglePage extends BasicPage {
         wait.until(ExpectedConditions.elementToBeClickable(setPassword));
         setPassword.sendKeys(password);
         repeatPassword.sendKeys(password);
+    }
+    public boolean IsGoogleHeaderVisible() {
+        return wait.until(ExpectedConditions.visibilityOf(googleHeader)).isDisplayed();
     }
 }

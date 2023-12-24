@@ -58,12 +58,16 @@ public class LoginPage extends BasicPage {
 
     public LoginPage insertMyLogin(String myEmail) {
         wait.until(ExpectedConditions.visibilityOf(emailField));
+        wait.until(ExpectedConditions.elementToBeClickable(emailField));
+        emailField.clear();
         emailField.sendKeys(myEmail);
         return new LoginPage(driver);
     }
 
     public LoginPage insertMyPassword(String myPassword) {
         wait.until(ExpectedConditions.visibilityOf(passwordField));
+        wait.until(ExpectedConditions.elementToBeClickable(passwordField));
+        passwordField.clear();
         passwordField.sendKeys(myPassword);
         return new LoginPage(driver);
     }

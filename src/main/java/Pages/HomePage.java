@@ -75,26 +75,29 @@ public class HomePage extends BasicPage {
 
     public void clickGitHub() {
         wait.until(ExpectedConditions.visibilityOf(gitHubRef));
+        wait.until(ExpectedConditions.elementToBeClickable(gitHubRef));
         gitHubRef.click();
     }
 
     public void clickChangeLanguageToPolish() {
         wait.until(ExpectedConditions.visibilityOf(changeLanguageToPolish));
+        wait.until(ExpectedConditions.elementToBeClickable(changeLanguageToPolish));
         changeLanguageToPolish.click();
     }
 
     public void clickLoginHomePage() {
+        wait.until(ExpectedConditions.visibilityOf(loginHomePage));
+        wait.until(ExpectedConditions.elementToBeClickable(loginHomePage));
         loginHomePage.click();
     }
 
     public boolean clickCheckIfLanguageIsPolish() {
         wait.until(ExpectedConditions.visibilityOf(checkIfLanguageisPolish));
-        return true;
+        return checkIfLanguageisPolish.isDisplayed();
     }
 
     public boolean IsThereInfoAboutWrongLoginOrPassword() {
-        wait.until(ExpectedConditions.visibilityOf(invalidEmailOrPasswordInfo));
-        return true;
+        return wait.until(ExpectedConditions.visibilityOf(invalidEmailOrPasswordInfo)).isDisplayed();
     }
 
     public boolean isWelcomeMessageDismissed() {
@@ -108,8 +111,7 @@ public class HomePage extends BasicPage {
     }
 
     public boolean checkIfYouAreLoggedAndYouAreOnHomePage() {
-        wait.until(ExpectedConditions.visibilityOf(yourBasketAfterLogin));
-        return true;
+       return wait.until(ExpectedConditions.visibilityOf(yourBasketAfterLogin)).isDisplayed();
     }
 }
 

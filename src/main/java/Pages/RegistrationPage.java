@@ -47,8 +47,7 @@ public class RegistrationPage extends BasicPage {
     }
 
     public boolean checkIfPageShowsEmailField() {
-        wait.until(ExpectedConditions.visibilityOf(emailField));
-        return true;
+        return wait.until(ExpectedConditions.visibilityOf(emailField)).isDisplayed();
     }
 
     public void clickSecurityQuestionField() {
@@ -68,11 +67,11 @@ public class RegistrationPage extends BasicPage {
 
     public void clickRegister() {
         wait.until(ExpectedConditions.visibilityOf(registerButton));
+        wait.until(ExpectedConditions.elementToBeClickable(registerButton));
         registerButton.click();
     }
 
     public boolean checkIfAccountIsCreatedSucessfuly() {
-        wait.until(ExpectedConditions.visibilityOf(registrationIsCompleteInfo));
-        return true;
+       return wait.until(ExpectedConditions.visibilityOf(registrationIsCompleteInfo)).isDisplayed();
     }
 }

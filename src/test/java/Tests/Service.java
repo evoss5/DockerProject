@@ -1,10 +1,11 @@
+package Tests;
+
+import com.github.javafaker.Faker;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeMethod;
-
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -20,6 +21,7 @@ public class Service {
     Service service;
     WebDriverWait webDriverWait;
     Random random = new Random();
+    Faker faker = new Faker();
 
     public Service(WebDriver driver) {
         this.driver = driver;

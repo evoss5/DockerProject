@@ -12,25 +12,29 @@ public class AfterLoginPage extends BasicPage {
     WebElement MelonBike;
     @FindBy(xpath = "//div[@id='price']")
     WebElement totalPriceLayout;
-    @FindBy(xpath = "//span[text()=' Your Basket']")
+    @FindBy(xpath = "//span[@class='fa-layers-counter fa-layers-top-right fa-3x warn-notification']")
     WebElement cartLayout;
     public AfterLoginPage(WebDriver driver) {
         super(driver);
     }
 
     public void addAppleJuiceToCart() {
+        wait.until(ExpectedConditions.visibilityOf(AppleJuice));
         wait.until(ExpectedConditions.elementToBeClickable(AppleJuice));
         AppleJuice.click();
     }
     public boolean IsTotalPriceLayoutVisible() {
         wait.until(ExpectedConditions.visibilityOf(totalPriceLayout));
-        totalPriceLayout.isDisplayed();
-        return true;
-
+        return totalPriceLayout.isDisplayed();
     }
     public CartPage goToCartPage() {
         wait.until(ExpectedConditions.visibilityOf(cartLayout));
+        wait.until(ExpectedConditions.elementToBeClickable(cartLayout));
         cartLayout.click();
         return new CartPage(driver);
+    }
+    public boolean IsCartLayoutVisible() {
+         wait.until(ExpectedConditions.visibilityOf(cartLayout));
+         return true;
     }
 }

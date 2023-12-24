@@ -56,48 +56,65 @@ public class CartPage extends BasicPage {
     }
 
     public void addNewAdress() {
+        wait.until(ExpectedConditions.visibilityOf(newAdressButton));
         wait.until(ExpectedConditions.elementToBeClickable(newAdressButton));
         newAdressButton.click();
     }
 
     public void inputCountryName(String country) {
+        wait.until(ExpectedConditions.visibilityOf(countryField));
         wait.until(ExpectedConditions.elementToBeClickable(countryField));
         countryField.sendKeys(country);
         System.out.println("Country name " + country);
         new CartPage(driver);
     }
 
-    public void inputName(String name) {
+    public CartPage inputName(String name) {
+        wait.until(ExpectedConditions.visibilityOf(nameField));
         wait.until(ExpectedConditions.elementToBeClickable(nameField));
+        nameField.clear();
         nameField.sendKeys(name);
         System.out.println("Name " + name);
-        new CartPage(driver);
+        return this;
     }
 
     public CartPage phoneNumber(String number) {
+        wait.until(ExpectedConditions.visibilityOf(phoneNumberField));
+        wait.until(ExpectedConditions.elementToBeClickable(phoneNumberField));
+        phoneNumberField.clear();
         phoneNumberField.sendKeys(number);
         return new CartPage(driver);
     }
 
     public void inputZipCode(String zipCode) {
+        wait.until(ExpectedConditions.visibilityOf(zipCodeField));
+        wait.until(ExpectedConditions.elementToBeClickable(zipCodeField));
+        zipCodeField.clear();
         zipCodeField.sendKeys(zipCode);
-
     }
 
-    public void inputCityName(String city) {
+    public CartPage inputCityName(String city) {
+        wait.until(ExpectedConditions.visibilityOf(cityField));
+        wait.until(ExpectedConditions.elementToBeClickable(cityField));
+        cityField.clear();
         cityField.sendKeys(city);
+        return this;
     }
 
     public void inputAdress(String adress) {
+        wait.until(ExpectedConditions.visibilityOf(adressField));
+        wait.until(ExpectedConditions.elementToBeClickable(adressField));
+        adressField.clear();
         adressField.sendKeys(adress);
     }
 
     public boolean isSubmitButtonEnabled() {
-        submitButton.isEnabled();
-        return true;
+        return submitButton.isEnabled();
     }
 
     public void submitButtonClick() {
+        wait.until(ExpectedConditions.visibilityOf(submitButton));
+        wait.until(ExpectedConditions.elementToBeClickable(submitButton));
         submitButton.click();
     }
 
@@ -108,43 +125,55 @@ public class CartPage extends BasicPage {
     }
 
     public void continueButtonClick() {
+        wait.until(ExpectedConditions.visibilityOf(continueButton));
+        wait.until(ExpectedConditions.elementToBeClickable(continueButton));
         continueButton.click();
     }
 
     public boolean isContinueButtonClickable() {
-        continueButton.isEnabled();
-        return true;
+        return continueButton.isEnabled();
     }
 
     public void chooseDeliveryOption() {
+        wait.until(ExpectedConditions.visibilityOf(deliveryOption));
+        wait.until(ExpectedConditions.elementToBeClickable(deliveryOption));
         deliveryOption.click();
     }
 
     public void inputCardNumber(String cardNumber) {
         wait.until(ExpectedConditions.visibilityOf(cardNumberField));
+        cardNumberField.clear();
         cardNumberField.sendKeys(cardNumber);
     }
 
     public void addCreditCard() {
+        wait.until(ExpectedConditions.visibilityOf(creditCardPanel));
+        wait.until(ExpectedConditions.elementToBeClickable(creditCardPanel));
         creditCardPanel.click();
     }
+
     public void chooseCreditCard() {
         wait.until(ExpectedConditions.visibilityOf(creditCardCheckbox));
         wait.until(ExpectedConditions.elementToBeClickable(creditCardCheckbox));
         creditCardCheckbox.click();
     }
+
     public boolean IsOrderSummarVisible() {
-        orderSummaryLayout.isDisplayed();
-        return true;
+        return orderSummaryLayout.isDisplayed();
     }
+
     public void purchaseProducts() {
         wait.until(ExpectedConditions.visibilityOf(placeYourOrderButton));
+        wait.until(ExpectedConditions.elementToBeClickable(placeYourOrderButton));
         placeYourOrderButton.click();
     }
+
     public boolean checkIfConfirmationMessageIsVisible() {
         wait.until(ExpectedConditions.visibilityOf(confirmationMessage));
-        confirmationMessage.isDisplayed();
-        return true;
+        return confirmationMessage.isDisplayed();
     }
-    }
+}
+
+// TODO: 23.12.2023  Metody boolean = zmienić returny   (Zrobione)
+// TODO: 23.12.2023 Waity w metodach click i sendkeys   (Zrobione)
 
