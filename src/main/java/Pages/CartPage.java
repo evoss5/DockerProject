@@ -1,9 +1,13 @@
 package Pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.util.List;
+import java.util.Random;
 
 public class CartPage extends BasicPage {
     @FindBy(xpath = "//button[contains(@class, 'checkout-button')]")
@@ -44,6 +48,10 @@ public class CartPage extends BasicPage {
     private WebElement placeYourOrderButton;
     @FindBy(xpath = "//h1[@class='confirmation']")
     private WebElement confirmationMessage;
+    @FindBy(xpath = "//input[@id='mat-input-10']")
+    private WebElement purchaserNameField;
+    @FindBy(xpath = "//option[@value>'0' and @value<13]")
+    private WebElement expiryMonthDate;
 
     public CartPage(WebDriver driver) {
         super(driver);
@@ -172,6 +180,36 @@ public class CartPage extends BasicPage {
         wait.until(ExpectedConditions.visibilityOf(confirmationMessage));
         return confirmationMessage.isDisplayed();
     }
+    public CartPage inputPurchaserName(String name) {
+        purchaserNameField.sendKeys(name);
+        return this;
+    }
+    public void randomItem() {
+        List<WebElement> expiryMonthOptions = driver.findElements(By.xpath("//option[@value>'0' and @value<13]"));
+        int maxOptionsSize = expiryMonthOptions.size();
+        Random random = new Random();
+        int randomOption = random.nextInt(maxOptionsSize);
+        expiryMonthOptions.get(randomOption).click();
+    }
+    public void randomExpiryYear(){
+        List<WebElement>expiryYearsOptions = driver.findElements(By.xpath("//option[@value>=2080]"));
+        int yearsOptionsSize = expiryYearsOptions.size();
+        Random random = new Random();
+        int randomYearOption = random.nextInt(yearsOptionsSize);
+        expiryYearsOptions.get(randomYearOption).click();
+    }
+    public void randomCard() {
+
+        List<WebElement>cardOptions = driver.findElements(By.xpath("//input[contains(@id,'mat-radio')]"));
+        int cardOptionsSize = cardOptions.size();
+        Random random = new Random();
+        int randomCardOption = random.nextInt(cardOptionsSize);
+        wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.xpath("//input[contains(@id,'mat-radio')]"), 0));
+        cardOptions.get(randomCardOption).click();
+    }
+
+
+
 }
 
 // TODO: 23.12.2023  Metody boolean = zmienić returny   (Zrobione)

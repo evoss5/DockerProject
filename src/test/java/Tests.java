@@ -48,7 +48,7 @@
 //        Assertions.assertTrue(home.clickCheckIfLanguageIsPolish(), "Page is not in Polish");
 //    }
 //
-//    @Test
+//    @Tests
 //    public void openSideMenuTest() {
 //        home = new HomePage(driver);
 //        home.clickWelcomeBannerDismiss();
