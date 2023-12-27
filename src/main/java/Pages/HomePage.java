@@ -1,8 +1,6 @@
 package Pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -10,31 +8,31 @@ public class HomePage extends BasicPage {
 
 
     @FindBy(xpath = "//*[@aria-label='Open Sidenav']")
-    WebElement sideNavButton;
+    private WebElement sideNavButton;
     @FindBy(xpath = ".//*[@aria-label='Back to homepage']")
-    WebElement mainPageLogo;
+    private WebElement mainPageLogo;
     @FindBy(xpath = ".//span/mat-icon[2]")
-    WebElement searchIcon;
+    private WebElement searchIcon;
     @FindBy(xpath = ".//*[@aria-label='Show/hide account menu']")
-    WebElement accountIcon;
+    private WebElement accountIcon;
     @FindBy(xpath = ".//*[@aria-label='Language selection menu']")
-    WebElement languageSelectionMenu;
+    private WebElement languageSelectionMenu;
     @FindBy(xpath = ".//a[@aria-label = 'dismiss cookie message']")
-    WebElement dismissCookieMessage;
+    private WebElement dismissCookieMessage;
     @FindBy(xpath = ".//*[@aria-label=\"Close Welcome Banner\"]")
-    WebElement welcomeBannerDismiss;
+    private WebElement welcomeBannerDismiss;
     @FindBy(xpath = ".//span[text()=' GitHub ']")
-    WebElement gitHubRef;
-    @FindBy(xpath = "//label//span//input[@aria-label=\"Język Polski\"]/ancestor::label")
-    WebElement changeLanguageToPolish;
-    @FindBy(xpath = "//label//span//input[@aria-label=\"Język Polski\"]/ancestor::label")
-    WebElement changeLanguageToPolish2;
+    private WebElement gitHubRef;
+    @FindBy(xpath = "//label//span//input[@aria-label='Język Polski']/ancestor::label")
+    private WebElement changeLanguageToPolish;
+    @FindBy(xpath = "//label//span//input[@aria-label='Język Polski']/ancestor::label")
+    private WebElement changeLanguageToPolish2;
     @FindBy(xpath = ".//button[@id='navbarLoginButton']")
-    WebElement loginHomePage;
+    private WebElement loginHomePage;
     @FindBy(xpath = ".//span[text()=' Konto ']")
-    WebElement checkIfLanguageisPolish;
+    private WebElement checkIfLanguageisPolish;
     @FindBy(xpath = "//div[text()='Invalid email or password.']")
-    WebElement invalidEmailOrPasswordInfo;
+    private WebElement invalidEmailOrPasswordInfo;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -69,26 +67,47 @@ public class HomePage extends BasicPage {
         dismissCookieMessage.click();
     }
 
-    public void clickWelcomeBannerDismiss() {
+    public HomePage clickWelcomeBannerDismiss() {
+        wait.until(ExpectedConditions.visibilityOf(welcomeBannerDismiss));
+        wait.until(ExpectedConditions.elementToBeClickable(welcomeBannerDismiss));
         welcomeBannerDismiss.click();
+        return this;
     }
 
-    public void clickGitHub() {
+    public boolean isWelcomeBannerVisible() {
+        try {
+            return wait.until(ExpectedConditions.visibilityOf(welcomeBannerDismiss)).isDisplayed();
+        } catch (NoSuchElementException | TimeoutException e){
+            return false;
+        }
+    }
+
+    public HomePage closeWelcomeBanner() {
+        if (isWelcomeBannerVisible()) {
+            clickWelcomeBannerDismiss();
+        }
+        return this;
+    }
+
+    public HomePage clickGitHub() {
         wait.until(ExpectedConditions.visibilityOf(gitHubRef));
         wait.until(ExpectedConditions.elementToBeClickable(gitHubRef));
         gitHubRef.click();
+        return this;
     }
 
-    public void clickChangeLanguageToPolish() {
+    public HomePage clickChangeLanguageToPolish() {
         wait.until(ExpectedConditions.visibilityOf(changeLanguageToPolish));
         wait.until(ExpectedConditions.elementToBeClickable(changeLanguageToPolish));
         changeLanguageToPolish.click();
+        return this;
     }
 
-    public void clickLoginHomePage() {
+    public HomePage clickLoginHomePage() {
         wait.until(ExpectedConditions.visibilityOf(loginHomePage));
         wait.until(ExpectedConditions.elementToBeClickable(loginHomePage));
         loginHomePage.click();
+        return this;
     }
 
     public boolean clickCheckIfLanguageIsPolish() {
@@ -111,7 +130,7 @@ public class HomePage extends BasicPage {
     }
 
     public boolean checkIfYouAreLoggedAndYouAreOnHomePage() {
-       return wait.until(ExpectedConditions.visibilityOf(yourBasketAfterLogin)).isDisplayed();
+        return wait.until(ExpectedConditions.visibilityOf(yourBasketAfterLogin)).isDisplayed();
     }
 }
 

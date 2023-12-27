@@ -33,7 +33,7 @@ public class RegistrationPage extends BasicPage {
         wait.until(ExpectedConditions.elementToBeClickable(emailField));
         emailField.clear();
         emailField.sendKeys(email);
-        return new RegistrationPage(driver);
+        return this;
     }
 
     public RegistrationPage insertPassword(String password) {
@@ -43,18 +43,19 @@ public class RegistrationPage extends BasicPage {
         passwordField.sendKeys(password);
         repeatPasswordField.clear();
         repeatPasswordField.sendKeys(password);
-        return new RegistrationPage(driver);
+        return this;
     }
 
     public boolean checkIfPageShowsEmailField() {
         return wait.until(ExpectedConditions.visibilityOf(emailField)).isDisplayed();
     }
 
-    public void clickSecurityQuestionField() {
+    public RegistrationPage clickSecurityQuestionField() {
         wait.until(ExpectedConditions.visibilityOf(securityQuestionField));
         securityQuestionField.click();
         wait.until(ExpectedConditions.visibilityOf(securityQuestionOption));
         securityQuestionOption.click();
+        return this;
 
     }
 
@@ -62,16 +63,21 @@ public class RegistrationPage extends BasicPage {
         wait.until(ExpectedConditions.visibilityOf(answerForSecurityQuestion));
         answerForSecurityQuestion.clear();
         answerForSecurityQuestion.sendKeys(name);
-        return new RegistrationPage(driver);
+        return this;
     }
 
-    public void clickRegister() {
+    public RegistrationPage clickRegister() {
         wait.until(ExpectedConditions.visibilityOf(registerButton));
         wait.until(ExpectedConditions.elementToBeClickable(registerButton));
         registerButton.click();
+        return this;
     }
 
     public boolean checkIfAccountIsCreatedSucessfuly() {
-       return wait.until(ExpectedConditions.visibilityOf(registrationIsCompleteInfo)).isDisplayed();
+        return wait.until(ExpectedConditions.visibilityOf(registrationIsCompleteInfo)).isDisplayed();
+    }
+    public boolean checkIfRegisterButtonIsEnabled() {
+        wait.until(ExpectedConditions.visibilityOf(registerButton));
+        return registerButton.isEnabled();
     }
 }

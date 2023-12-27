@@ -21,6 +21,8 @@ public class LoginPage extends BasicPage {
     @FindBy(xpath = "//div[@id='newCustomerLink']")
     private WebElement createAccountButton;
 
+    public final String urlLogin = "http://localhost:3000/#/login";
+
     public LoginPage(WebDriver driver) {
         super(driver);
     }
@@ -61,7 +63,7 @@ public class LoginPage extends BasicPage {
         wait.until(ExpectedConditions.elementToBeClickable(emailField));
         emailField.clear();
         emailField.sendKeys(myEmail);
-        return new LoginPage(driver);
+        return this;
     }
 
     public LoginPage insertMyPassword(String myPassword) {
@@ -69,7 +71,7 @@ public class LoginPage extends BasicPage {
         wait.until(ExpectedConditions.elementToBeClickable(passwordField));
         passwordField.clear();
         passwordField.sendKeys(myPassword);
-        return new LoginPage(driver);
+        return this;
     }
 
     public HomePage goToHomePage() {

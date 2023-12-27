@@ -222,11 +222,11 @@
 //
 //
 //}
-//// TODO: 23.12.2023 Usunięcie deklaracji BasicPage oraz WebdriverWait
-//// TODO: 23.12.2023 Stworzyć paczkę Tests i wrzucać tam testy
-//// TODO: 23.12.2023 Nie użwyać innych testów w testach
-//// TODO: 23.12.2023 W deklaracjach dodać modyfikatory dostępu "Private"
-//// TODO: 23.12.2023 Poprawić przejścia między stronami w testach logowania
-//// TODO: 23.12.2023 Zrobić "negatywne ścieżki" np. Wpisanie loginu bez domeny itd.
-//// TODO: 23.12.2023 Każdy test powinien się kończyć asercją
-//// TODO: 23.12.2023 Metoda getText powinna być zawarta w Pagu
+//// TODO: 23.12.2023 Usunięcie deklaracji BasicPage oraz WebdriverWait (Zrobione)
+//// TODO: 23.12.2023 Stworzyć paczkę Tests i wrzucać tam testy (Zrobione)
+//// TODO: 23.12.2023 Nie użwyać innych testów w testach (Zrobione)
+//// TODO: 23.12.2023 W deklaracjach dodać modyfikatory dostępu "Private" (Zrobione)
+//// TODO: 23.12.2023 Poprawić przejścia między stronami w testach logowania (Zrobione)
+//// TODO: 23.12.2023 Zrobić "negatywne ścieżki" np. Wpisanie loginu bez domeny itd. (Zrobione)
+//// TODO: 23.12.2023 Każdy test powinien się kończyć asercją (Zrobione)
+//// TODO: 23.12.2023 Metoda getText powinna być zawarta w Pagu (Zrobione)

@@ -18,5 +18,5 @@ public class BasicPage {
         wait = new WebDriverWait(driver, TIMEOUT);
         PageFactory.initElements(driver, this);
     }
-}
+    }
 

@@ -7,9 +7,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class AfterLoginPage extends BasicPage {
     @FindBy(xpath = "//img[@alt='Apple Juice (1000ml)']/../../following-sibling::div/button")
-    WebElement AppleJuice;
+    WebElement appleJuice;
     @FindBy(xpath = "//img[@alt='Melon Bike (Comeback-Product 2018 Edition)']/../../following-sibling::div/button")
-    WebElement MelonBike;
+    WebElement melonBike;
     @FindBy(xpath = "//div[@id='price']")
     WebElement totalPriceLayout;
     @FindBy(xpath = "//span[@class='fa-layers-counter fa-layers-top-right fa-3x warn-notification']")
@@ -18,12 +18,13 @@ public class AfterLoginPage extends BasicPage {
         super(driver);
     }
 
-    public void addAppleJuiceToCart() {
-        wait.until(ExpectedConditions.visibilityOf(AppleJuice));
-        wait.until(ExpectedConditions.elementToBeClickable(AppleJuice));
-        AppleJuice.click();
+    public AfterLoginPage addAppleJuiceToCart() {
+        wait.until(ExpectedConditions.visibilityOf(appleJuice));
+        wait.until(ExpectedConditions.elementToBeClickable(appleJuice));
+        appleJuice.click();
+        return this;
     }
-    public boolean IsTotalPriceLayoutVisible() {
+    public boolean isTotalPriceLayoutVisible() {
         wait.until(ExpectedConditions.visibilityOf(totalPriceLayout));
         return totalPriceLayout.isDisplayed();
     }
@@ -33,8 +34,8 @@ public class AfterLoginPage extends BasicPage {
         cartLayout.click();
         return new CartPage(driver);
     }
-    public boolean IsCartLayoutVisible() {
+    public boolean isCartLayoutVisible() {
          wait.until(ExpectedConditions.visibilityOf(cartLayout));
-         return true;
+         return cartLayout.isDisplayed();
     }
 }

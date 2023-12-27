@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeMethod;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -17,11 +18,11 @@ import java.util.Random;
 
 public class Service {
 
-    WebDriver driver;
-    Service service;
-    WebDriverWait webDriverWait;
-    Random random = new Random();
-    Faker faker = new Faker();
+    protected WebDriver driver;
+    protected Service service;
+    protected WebDriverWait webDriverWait;
+    protected Random random = new Random();
+    protected Faker faker = new Faker();
 
     public Service(WebDriver driver) {
         this.driver = driver;
@@ -112,13 +113,14 @@ public class Service {
         surnameList.add("AmalMiranda");
         return surnameList;
     }
+
     public ArrayList<String> countriesList() {
-        ArrayList<String>countryList = new ArrayList<>();
+        ArrayList<String> countryList = new ArrayList<>();
         countryList.add("Poland");
         countryList.add("Germany");
         countryList.add("Greece");
         countryList.add("Spain");
-        return  countryList;
+        return countryList;
 
 
     }
@@ -156,8 +158,9 @@ public class Service {
         randomPasswordsList.add("1byW9mFq1PT");
         return randomPasswordsList;
     }
-    public ArrayList<String> randomzipCodes(){
-        ArrayList<String>zipCode = new ArrayList<>();
+
+    public ArrayList<String> randomzipCodes() {
+        ArrayList<String> zipCode = new ArrayList<>();
         zipCode.add("00-001");
         zipCode.add("00-064");
         zipCode.add("00-124");
@@ -167,8 +170,9 @@ public class Service {
         zipCode.add("52-231");
         return zipCode;
     }
-    public ArrayList<String>randomCities() {
-        ArrayList<String>randomCity = new ArrayList<>();
+
+    public ArrayList<String> randomCities() {
+        ArrayList<String> randomCity = new ArrayList<>();
         randomCity.add("Poznan");
         randomCity.add("Warsaw");
         randomCity.add("Glogow");
@@ -177,6 +181,7 @@ public class Service {
         randomCity.add("Glasgow");
         return randomCity;
     }
+
     public String getRandomValue(ArrayList<String> list) {
         int randomIndex = random.nextInt(list.size());
         return list.get(randomIndex);
@@ -185,8 +190,9 @@ public class Service {
 
     public String createEmailAddress(String name, String sureName, int number, String mailDomen) {
         return name + sureName + number + mailDomen;
-
-
+    }
+    public String createEmailAddress(String name, String sureName, int number) {
+        return name + sureName + number;
     }
 
     public String createEmailAdress(String name, String sureName) {
@@ -215,14 +221,22 @@ public class Service {
 
 
     }
+
     public String cellPhoneNumber() {
-        String contactNumber = String.valueOf(randomNumber(508, 895)) + String.valueOf(randomNumber(100,999)) + String.valueOf(randomNumber(100, 999));
+        String contactNumber = String.valueOf(randomNumber(508, 895)) + String.valueOf(randomNumber(100, 999)) + String.valueOf(randomNumber(100, 999));
         System.out.println("Contact number " + contactNumber);
         return contactNumber;
 
     }
+
     public String cardNumber() {
         String cardNumber = String.valueOf(randomNumber(1000, 9999)) + String.valueOf(randomNumber(1000, 9999)) + String.valueOf(randomNumber(1000, 9999)) + String.valueOf(randomNumber(1000, 9999));
+        System.out.println("Card Number ");
+        return cardNumber;
+    }
+
+    public String cardNumber2() {
+        String cardNumber = String.valueOf(randomNumber(1000, 9999)) + String.valueOf(randomNumber(1000, 9999)) + String.valueOf(randomNumber(1000, 9999));
         System.out.println("Card Number ");
         return cardNumber;
     }
