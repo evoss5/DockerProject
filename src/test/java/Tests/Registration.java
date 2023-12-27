@@ -25,6 +25,7 @@ public class Registration extends BaseTest {
         String password = service.getRandomValue(service.randomPasswordList());
         service.createRandomPassword(password, service.randomNumber());
         register.insertPassword(password);
+        register.insertRepeatPassword(password);
         register.clickSecurityQuestionField();
         String name2 = service.getRandomValue(service.namesList());
         register.setAnswerForSecurityQuestion(name2);
@@ -62,6 +63,7 @@ public class Registration extends BaseTest {
         String password = service.getRandomValue(service.randomPasswordList());
         service.createRandomPassword(password, service.randomNumber());
         register.insertPassword(password);
+        register.insertRepeatPassword(password);
         register.clickSecurityQuestionField();
         String name2 = service.getRandomValue(service.namesList());
         register.setAnswerForSecurityQuestion(name2);

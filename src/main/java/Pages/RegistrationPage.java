@@ -41,6 +41,11 @@ public class RegistrationPage extends BasicPage {
         wait.until(ExpectedConditions.elementToBeClickable(passwordField));
         passwordField.clear();
         passwordField.sendKeys(password);
+        return this;
+    }
+    public RegistrationPage insertRepeatPassword(String password) {
+        wait.until(ExpectedConditions.visibilityOf(repeatPasswordField));
+        wait.until(ExpectedConditions.elementToBeClickable(repeatPasswordField));
         repeatPasswordField.clear();
         repeatPasswordField.sendKeys(password);
         return this;
