@@ -7,13 +7,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class AfterLoginPage extends BasicPage {
     @FindBy(xpath = "//img[@alt='Apple Juice (1000ml)']/../../following-sibling::div/button")
-    WebElement appleJuice;
+    private WebElement appleJuice;
     @FindBy(xpath = "//img[@alt='Melon Bike (Comeback-Product 2018 Edition)']/../../following-sibling::div/button")
-    WebElement melonBike;
+    private WebElement melonBike;
     @FindBy(xpath = "//div[@id='price']")
-    WebElement totalPriceLayout;
+    private WebElement totalPriceLayout;
     @FindBy(xpath = "//span[@class='fa-layers-counter fa-layers-top-right fa-3x warn-notification']")
-    WebElement cartLayout;
+    private WebElement cartLayout;
     public AfterLoginPage(WebDriver driver) {
         super(driver);
     }

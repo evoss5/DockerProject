@@ -23,6 +23,8 @@ public class RegistrationPage extends BasicPage {
     WebElement registerButton;
     @FindBy(xpath = "//*[text()='Registration completed successfully. You can now log in.']")
     private WebElement registrationIsCompleteInfo;
+    @FindBy(xpath = "//mat-error[@id='mat-error-10']")
+    private WebElement passwordDoNotMatchMessage;
 
     public RegistrationPage(WebDriver driver) {
         super(driver);
@@ -84,5 +86,9 @@ public class RegistrationPage extends BasicPage {
     public boolean checkIfRegisterButtonIsEnabled() {
         wait.until(ExpectedConditions.visibilityOf(registerButton));
         return registerButton.isEnabled();
+    }
+    public boolean checkIfThereIsPasswordNoMatchMessage() {
+        wait.until(ExpectedConditions.visibilityOf(passwordDoNotMatchMessage));
+        return passwordDoNotMatchMessage.isDisplayed();
     }
 }

@@ -33,14 +33,12 @@ public class HomePage extends BasicPage {
     private WebElement checkIfLanguageisPolish;
     @FindBy(xpath = "//div[text()='Invalid email or password.']")
     private WebElement invalidEmailOrPasswordInfo;
+    @FindBy(xpath = "//button[@aria-label='Show the shopping cart']")
+    private WebElement yourBasketAfterLogin;
 
     public HomePage(WebDriver driver) {
         super(driver);
     }
-
-    @FindBy(xpath = "//button[@aria-label='Show the shopping cart']")
-    private WebElement yourBasketAfterLogin;
-
 
     public void sideNavButtonClick() {
         wait.until(ExpectedConditions.visibilityOf(sideNavButton));

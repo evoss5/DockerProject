@@ -14,8 +14,7 @@ public class Registration extends BaseTest {
     public void registerNewAccount() {
         Assertions.assertTrue(home.isWelcomeMessageDismissed(), "Welcome message is still there");
         login = home.goToLoginPage();
-        String loginPage = "http://localhost:3000/#/login";
-        Assertions.assertEquals(loginPage, driver.getCurrentUrl(), "The page is not login page");
+        Assertions.assertEquals(login.urlLogin, driver.getCurrentUrl(), "The page is not login page");
         register = login.goToRegistrationPage();
         Assertions.assertTrue(register.checkIfPageShowsEmailField(), "The page is not login page");
         String name = service.getRandomValue(service.namesList());
@@ -37,8 +36,7 @@ public class Registration extends BaseTest {
     public void registerNewAccountByCredentials() {
         Assertions.assertTrue(home.isWelcomeMessageDismissed(), "Welcome message is still there");
         login = home.goToLoginPage();
-        String loginPage = "http://localhost:3000/#/login";
-        Assertions.assertEquals(loginPage, driver.getCurrentUrl(), "The page is not login page");
+        Assertions.assertEquals(login.urlLogin, driver.getCurrentUrl(), "The page is not login page");
         register = login.goToRegistrationPage();
         Assertions.assertTrue(register.checkIfPageShowsEmailField(), "The page is not login page");
         register.insertEmail(service.getCredentialValue("myLogin"));
@@ -52,8 +50,7 @@ public class Registration extends BaseTest {
     public void unsucessfullRegistractionBecauseOfNoDomen() {
         Assertions.assertTrue(home.isWelcomeMessageDismissed(), "Welcome message is still there");
         login = home.goToLoginPage();
-        String loginPage = "http://localhost:3000/#/login";
-        Assertions.assertEquals(loginPage, driver.getCurrentUrl(), "The page is not login page");
+        Assertions.assertEquals(login.urlLogin, driver.getCurrentUrl(), "The page is not login page");
         register = login.goToRegistrationPage();
         Assertions.assertTrue(register.checkIfPageShowsEmailField(), "The page is not login page");
         String name = service.getRandomValue(service.namesList());
@@ -68,8 +65,29 @@ public class Registration extends BaseTest {
         String name2 = service.getRandomValue(service.namesList());
         register.setAnswerForSecurityQuestion(name2);
         Assertions.assertFalse(register.checkIfRegisterButtonIsEnabled());
+    }
 
-
+    @Test
+    public void unsucessfullRegistractionBecauseOfWrongRepeatedPassword() {
+        Assertions.assertTrue(home.isWelcomeMessageDismissed(), "Welcome message is still there");
+        login = home.goToLoginPage();
+        Assertions.assertEquals(login.urlLogin, driver.getCurrentUrl(), "The page is not login page");
+        register = login.goToRegistrationPage();
+        Assertions.assertTrue(register.checkIfPageShowsEmailField(), "The page is not login page");
+        String name = service.getRandomValue(service.namesList());
+        String surname = service.getRandomValue((service.surnamesList()));
+        String email = service.createEmailAddress(name, surname, service.randomNumber(), service.getRandomValue(service.eMailsDomenList()));
+        register.insertEmail(email);
+        String password = service.getRandomValue(service.randomPasswordList());
+        service.createRandomPassword(password, service.randomNumber());
+        register.insertPassword(password);
+        String password2 = service.getRandomValue(service.randomPasswordList());
+        register.insertRepeatPassword(password2);
+        register.clickSecurityQuestionField();
+        Assertions.assertTrue(register.checkIfThereIsPasswordNoMatchMessage());
+        String name2 = service.getRandomValue(service.namesList());
+        register.setAnswerForSecurityQuestion(name2);
+        Assertions.assertFalse(register.checkIfRegisterButtonIsEnabled());
     }
 }
 // TODO: 25.12.2023 Usunać home z testów (zrobione)
