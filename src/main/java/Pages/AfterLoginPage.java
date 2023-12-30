@@ -39,3 +39,4 @@ public class AfterLoginPage extends BasicPage {
          return cartLayout.isDisplayed();
     }
 }
+// TODO: 30.12.2023 Sprawdzić czy mogę zrobić reużywalną metodę

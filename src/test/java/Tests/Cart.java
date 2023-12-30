@@ -4,8 +4,6 @@ import Pages.AfterLoginPage;
 import Pages.CartPage;
 import Pages.LoginPage;
 import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 public class Cart extends BaseTest {
@@ -35,17 +33,18 @@ public class Cart extends BaseTest {
         String randomName = service.getRandomValue(service.namesList());
         cart.inputName(randomName);
         cart.phoneNumber(service.cellPhoneNumber());
-        cart.inputAdress(service.getRandomValue(service.randomCities()));
+        cart.inputAddress(service.getRandomValue(service.randomCities()));
         String zipCode = service.getRandomValue(service.randomzipCodes());
         cart.inputZipCode(zipCode);
         String city = service.getRandomValue(service.randomCities());
         cart.inputCityName(city);
         Assertions.assertTrue(cart.isSubmitButtonEnabled());
         cart.submitButtonClick();
-        cart.selectAdressClick();
+        cart.selectAddressClick();
         Assertions.assertTrue(cart.isContinueButtonClickable());
     }
 
+    // TODO: 30.12.2023 Dodać message do Assertów
     @Test
     public void choosingDeliveryOption() {
         page = new AfterLoginPage(driver);
@@ -66,20 +65,21 @@ public class Cart extends BaseTest {
         String randomName = service.getRandomValue(service.namesList());
         cart.inputName(randomName);
         cart.phoneNumber(service.cellPhoneNumber());
-        cart.inputAdress(service.getRandomValue(service.randomCities()));
+        cart.inputAddress(service.getRandomValue(service.randomCities()));
         String zipCode = service.getRandomValue(service.randomzipCodes());
         cart.inputZipCode(zipCode);
         String city = service.getRandomValue(service.randomCities());
         cart.inputCityName(city);
         Assertions.assertTrue(cart.isSubmitButtonEnabled());
         cart.submitButtonClick();
-        cart.selectRandomAdress();
+        cart.selectRandomAddress();
         Assertions.assertTrue(cart.isContinueButtonClickable());
         cart.continueButtonClick();
 //        Assertions.assertEquals("Delivery Address", cart.isDeliveryMessageVisible());
         Assertions.assertTrue(cart.isDeliveryMessageVisible());
         cart.randomDeliveryOption();
         Assertions.assertTrue(cart.isContinueButtonClickable());
+        // TODO: 30.12.2023 Zrobić asercję z selected
     }
 
     @Test
@@ -102,14 +102,14 @@ public class Cart extends BaseTest {
         String randomName = service.getRandomValue(service.namesList());
         cart.inputName(randomName);
         cart.phoneNumber(service.cellPhoneNumber());
-        cart.inputAdress(service.getRandomValue(service.randomCities()));
+        cart.inputAddress(service.getRandomValue(service.randomCities()));
         String zipCode = service.getRandomValue(service.randomzipCodes());
         cart.inputZipCode(zipCode);
         String city = service.getRandomValue(service.randomCities());
         cart.inputCityName(city);
         Assertions.assertTrue(cart.isSubmitButtonEnabled());
         cart.submitButtonClick();
-        cart.selectAdressClick();
+        cart.selectAddressClick();
         Assertions.assertTrue(cart.isContinueButtonClickable());
         cart.continueButtonClick();
         Assertions.assertTrue(cart.isDeliveryMessageVisible());
@@ -123,11 +123,11 @@ public class Cart extends BaseTest {
         cart.inputPurchaserName(randomName);
         cart.expiryMonthFieldClick();
         cart.randomItem();
-        cart.expiryYearPage();
         cart.randomExpiryYear();
         cart.submitButtonClick();
-        Assertions.assertTrue(cart.isThereMessageAboutSuccesfulAddedCard());
+        Assertions.assertTrue(cart.isThereMessageAboutSuccessfulAddedCard());
 //        cart.randomName();
+        // TODO: 30.12.2023 Asercja, że nowy numer karty widnieje na danej liście.
     }
 
     @Test
@@ -159,14 +159,15 @@ public class Cart extends BaseTest {
         String randomName = service.getRandomValue(service.namesList());
         cart.inputName(randomName);
         cart.phoneNumber(service.cellPhoneNumber());
-        cart.inputAdress(service.getRandomValue(service.randomCities()));
+        cart.inputAddress(service.getRandomValue(service.randomCities()));
         String zipCode = service.getRandomValue(service.randomzipCodes());
         cart.inputZipCode(zipCode);
         String city = service.getRandomValue(service.randomCities());
         cart.inputCityName(city);
         Assertions.assertTrue(cart.isSubmitButtonEnabled());
         cart.submitButtonClick();
-        cart.selectAdressClick();
+        //;
+        cart.selectRandomAddress();
         Assertions.assertTrue(cart.isContinueButtonClickable());
         cart.continueButtonClick();
         Assertions.assertTrue(cart.isDeliveryMessageVisible());
@@ -180,10 +181,9 @@ public class Cart extends BaseTest {
         cart.inputPurchaserName(randomName);
         cart.expiryMonthFieldClick();
         cart.randomItem();
-        cart.expiryYearPage();
         cart.randomExpiryYear();
         Assertions.assertFalse(cart.isSubmitButtonEnabled()); //checking if Submit Button is clickable after giving too short card number
-    }
+    }// TODO: 30.12.2023 zrobić asercję z tekstem
 }
 
 

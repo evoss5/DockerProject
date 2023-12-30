@@ -29,33 +29,18 @@ public class Service {
         PageFactory.initElements(driver, this);
     }
 
-    public String getDriver() {
+    public final String getDriver() {
         return "C:/driver/chromedriver.exe";
     }
 
-    public String getURL() {
+    public final String getURL() {
         return "http://localhost:3000/";
     }
 
-    public String getURL2() {
-        return "http://localhost:3000/";
-    }
-
-    public String chromeDriverURL() {
+    public final String chromeDriverURL() {
         return "webdriver.chrome.driver";
     }
 
-    @BeforeMethod
-    public void beforeTest() {
-
-        driver = new ChromeDriver();
-        service = new Service(driver);
-        System.setProperty(service.getDriver(), service.chromeDriverURL());
-        driver.get(service.getURL());
-        driver.manage().window().maximize();
-
-
-    }
 
     public String getCredentialValue(String credentialName) {
         String credentialValue = null;

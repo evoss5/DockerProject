@@ -15,12 +15,12 @@ public class RegistrationPage extends BasicPage {
     private WebElement repeatPasswordField;
     @FindBy(xpath = "//*[@id='mat-select-2']")
     private WebElement securityQuestionField;
-    @FindBy(xpath = ".//*[@id=\'mat-option-9\']")
+    @FindBy(xpath = ".//*[@id='mat-option-9']")
     private WebElement securityQuestionOption;
     @FindBy(xpath = "//input[@id='securityAnswerControl']")
     private WebElement answerForSecurityQuestion;
     @FindBy(xpath = "//button[@id='registerButton']")
-    WebElement registerButton;
+    private WebElement registerButton;
     @FindBy(xpath = "//*[text()='Registration completed successfully. You can now log in.']")
     private WebElement registrationIsCompleteInfo;
     @FindBy(xpath = "//mat-error[@id='mat-error-10']")
@@ -57,7 +57,7 @@ public class RegistrationPage extends BasicPage {
         return wait.until(ExpectedConditions.visibilityOf(emailField)).isDisplayed();
     }
 
-    public RegistrationPage clickSecurityQuestionField() {
+    public RegistrationPage clickSecurityQuestionField() {   //oddzielna metoda + dynamiczny xpath
         wait.until(ExpectedConditions.visibilityOf(securityQuestionField));
         securityQuestionField.click();
         wait.until(ExpectedConditions.visibilityOf(securityQuestionOption));
@@ -68,6 +68,7 @@ public class RegistrationPage extends BasicPage {
 
     public RegistrationPage setAnswerForSecurityQuestion(String name) {
         wait.until(ExpectedConditions.visibilityOf(answerForSecurityQuestion));
+        wait.until(ExpectedConditions.elementToBeClickable(answerForSecurityQuestion));
         answerForSecurityQuestion.clear();
         answerForSecurityQuestion.sendKeys(name);
         return this;

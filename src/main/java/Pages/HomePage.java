@@ -6,7 +6,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class HomePage extends BasicPage {
 
-
     @FindBy(xpath = "//*[@aria-label='Open Sidenav']")
     private WebElement sideNavButton;
     @FindBy(xpath = ".//*[@aria-label='Back to homepage']")
@@ -19,7 +18,7 @@ public class HomePage extends BasicPage {
     private WebElement languageSelectionMenu;
     @FindBy(xpath = ".//a[@aria-label = 'dismiss cookie message']")
     private WebElement dismissCookieMessage;
-    @FindBy(xpath = ".//*[@aria-label=\"Close Welcome Banner\"]")
+    @FindBy(xpath = ".//*[@aria-label='Close Welcome Banner']")
     private WebElement welcomeBannerDismiss;
     @FindBy(xpath = ".//span[text()=' GitHub ']")
     private WebElement gitHubRef;
@@ -30,7 +29,7 @@ public class HomePage extends BasicPage {
     @FindBy(xpath = ".//button[@id='navbarLoginButton']")
     private WebElement loginHomePage;
     @FindBy(xpath = ".//span[text()=' Konto ']")
-    private WebElement checkIfLanguageisPolish;
+    private WebElement checkIfLanguageIsPolish;
     @FindBy(xpath = "//div[text()='Invalid email or password.']")
     private WebElement invalidEmailOrPasswordInfo;
     @FindBy(xpath = "//button[@aria-label='Show the shopping cart']")
@@ -42,26 +41,37 @@ public class HomePage extends BasicPage {
 
     public void sideNavButtonClick() {
         wait.until(ExpectedConditions.visibilityOf(sideNavButton));
+        wait.until(ExpectedConditions.elementToBeClickable(sideNavButton));
         sideNavButton.click();
     }
 
     public void clickMainLogoPage() {
+        wait.until(ExpectedConditions.visibilityOf(mainPageLogo));
+        wait.until(ExpectedConditions.elementToBeClickable(mainPageLogo));
         mainPageLogo.click();
     }
 
     public void clickSearchIcon() {
+        wait.until(ExpectedConditions.visibilityOf(searchIcon));
+        wait.until(ExpectedConditions.elementToBeClickable(searchIcon));
         searchIcon.click();
     }
 
     public void clickAccountIcon() {
+        wait.until(ExpectedConditions.visibilityOf(accountIcon));
+        wait.until(ExpectedConditions.elementToBeClickable(accountIcon));
         accountIcon.click();
     }
 
     public void clickLanguageSelectionMenu() {
+        wait.until(ExpectedConditions.visibilityOf(languageSelectionMenu));
+        wait.until(ExpectedConditions.elementToBeClickable(languageSelectionMenu));
         languageSelectionMenu.click();
     }
 
     public void clickDismissCookieMessage() {
+        wait.until(ExpectedConditions.visibilityOf(dismissCookieMessage));
+        wait.until(ExpectedConditions.elementToBeClickable(dismissCookieMessage));
         dismissCookieMessage.click();
     }
 
@@ -109,11 +119,11 @@ public class HomePage extends BasicPage {
     }
 
     public boolean clickCheckIfLanguageIsPolish() {
-        wait.until(ExpectedConditions.visibilityOf(checkIfLanguageisPolish));
-        return checkIfLanguageisPolish.isDisplayed();
+        wait.until(ExpectedConditions.visibilityOf(checkIfLanguageIsPolish));
+        return checkIfLanguageIsPolish.isDisplayed();
     }
 
-    public boolean IsThereInfoAboutWrongLoginOrPassword() {
+    public boolean isThereInfoAboutWrongLoginOrPassword() {
         return wait.until(ExpectedConditions.visibilityOf(invalidEmailOrPasswordInfo)).isDisplayed();
     }
 
@@ -132,8 +142,7 @@ public class HomePage extends BasicPage {
     }
 }
 
-
-
+// TODO: 30.12.2023 Zapoznać się z loggerem (maven)
 
 
 

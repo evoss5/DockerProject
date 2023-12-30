@@ -31,24 +31,28 @@ public class LoginPage extends BasicPage {
         googleLoginButton.click();
     }
 
-    public void loginInByStandardButton() {
+    public void loginInByStandardButton() {   //poprawić
         standardLoginButton.click();
     }
 
-    public void inputLogin() {
+    public LoginPage inputLogin() {
         emailField.sendKeys("admin");
+        return this;
     }
 
-    public void inputPassword() {
+    public LoginPage inputPassword() {
         passwordField.sendKeys("admin");
+        return this;
     }
 
-    public void checkPassword() {
+    public LoginPage checkPassword() {
         showPassword.click();
+        return this;
     }
 
-    public void returnToHomePageClick() {
+    public LoginPage returnToHomePageClick() {
         returnToHomePage.click();
+        return this;
     }
 
     public RegistrationPage goToRegistrationPage() {
@@ -76,6 +80,7 @@ public class LoginPage extends BasicPage {
 
     public HomePage goToHomePage() {
         wait.until(ExpectedConditions.visibilityOf(standardLoginButton));
+        wait.until(ExpectedConditions.elementToBeClickable(standardLoginButton));
         loginInByStandardButton();
         return new HomePage(driver);
     }

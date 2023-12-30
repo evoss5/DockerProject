@@ -1,14 +1,11 @@
 package Pages;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.security.Provider;
-import java.time.Duration;
-
 public class BasicPage {
-
 
     protected WebDriver driver;
     protected WebDriverWait wait;
@@ -18,5 +15,10 @@ public class BasicPage {
         wait = new WebDriverWait(driver, TIMEOUT);
         PageFactory.initElements(driver, this);
     }
+    public void clickElement(WebElement webElement){
+
+    }
+    // TODO: 30.12.2023 Metody mające coś wspólnego click, sendkeys itd.
+    //
     }
 

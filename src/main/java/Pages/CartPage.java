@@ -1,6 +1,7 @@
 package Pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -27,14 +28,14 @@ public class CartPage extends BasicPage {
     @FindBy(xpath = "//input[@id='mat-input-8']")
     private WebElement cityField;
     @FindBy(xpath = "//textarea[@id='address']")
-    private WebElement adressField;
+    private WebElement addressField;
     @FindBy(xpath = "//button[@id='submitButton']")
     private WebElement submitButton;
     @FindBy(xpath = "//mat-table[@class='mat-table cdk-table //mat-row")  // to samo
-    private WebElement selectAdress;
+    private WebElement selectAddress;
     @FindBy(xpath = "//span[text()='Continue']")
     private WebElement continueButton;
-    @FindBy(xpath = "//mat-row")  // to samo
+    @FindBy(xpath = "//mat-row")
     private WebElement deliveryOption;
     @FindBy(xpath = "//input[@type='number']")
     private WebElement cardNumberField;
@@ -59,9 +60,9 @@ public class CartPage extends BasicPage {
     @FindBy(xpath = "//select[@id='mat-input-13']")
     private WebElement expiryYearField;
     @FindBy(xpath = "//*[starts-with(text(),'Your card ending with')]")
-    private WebElement succesfullAddedCardMessage;
+    private WebElement successfulAddedCardMessage;
 
-    Random random = new Random();
+    private final Random random = new Random();
 
     public CartPage(WebDriver driver) {
         super(driver);
@@ -85,7 +86,6 @@ public class CartPage extends BasicPage {
         wait.until(ExpectedConditions.visibilityOf(countryField));
         wait.until(ExpectedConditions.elementToBeClickable(countryField));
         countryField.sendKeys(country);
-        System.out.println("Country name " + country);
         return this;
     }
 
@@ -94,7 +94,6 @@ public class CartPage extends BasicPage {
         wait.until(ExpectedConditions.elementToBeClickable(nameField));
         nameField.clear();
         nameField.sendKeys(name);
-        System.out.println("Name " + name);
         return this;
     }
 
@@ -103,7 +102,7 @@ public class CartPage extends BasicPage {
         wait.until(ExpectedConditions.elementToBeClickable(phoneNumberField));
         phoneNumberField.clear();
         phoneNumberField.sendKeys(number);
-        return new CartPage(driver);
+        return this;
     }
 
     public CartPage inputZipCode(String zipCode) {
@@ -122,11 +121,11 @@ public class CartPage extends BasicPage {
         return this;
     }
 
-    public CartPage inputAdress(String adress) {
-        wait.until(ExpectedConditions.visibilityOf(adressField));
-        wait.until(ExpectedConditions.elementToBeClickable(adressField));
-        adressField.clear();
-        adressField.sendKeys(adress);
+    public CartPage inputAddress(String address) {
+        wait.until(ExpectedConditions.visibilityOf(addressField));
+        wait.until(ExpectedConditions.elementToBeClickable(addressField));
+        addressField.clear();
+        addressField.sendKeys(address);
         return this;
     }
 
@@ -141,10 +140,10 @@ public class CartPage extends BasicPage {
         return this;
     }
 
-    public CartPage selectAdressClick() {
-        wait.until(ExpectedConditions.visibilityOf(selectAdress));
-        wait.until(ExpectedConditions.elementToBeClickable(selectAdress));
-        selectAdress.click();
+    public CartPage selectAddressClick() {
+        wait.until(ExpectedConditions.visibilityOf(selectAddress));
+        wait.until(ExpectedConditions.elementToBeClickable(selectAddress));
+        selectAddress.click();
         return this;
     }
 
@@ -168,6 +167,7 @@ public class CartPage extends BasicPage {
 
     public CartPage inputCardNumber(String cardNumber) {
         wait.until(ExpectedConditions.visibilityOf(cardNumberField));
+        wait.until(ExpectedConditions.elementToBeClickable(cardNumberField));
         cardNumberField.clear();
         cardNumberField.sendKeys(cardNumber);
         return this;
@@ -204,6 +204,9 @@ public class CartPage extends BasicPage {
     }
 
     public CartPage inputPurchaserName(String name) {
+        wait.until(ExpectedConditions.visibilityOf(purchaserNameField));
+        wait.until(ExpectedConditions.elementToBeClickable(purchaserNameField));
+        purchaserNameField.clear();
         purchaserNameField.sendKeys(name);
         return this;
     }
@@ -217,6 +220,7 @@ public class CartPage extends BasicPage {
     }
 
     public CartPage randomExpiryYear() {
+        expiryYearDropdown();
         List<WebElement> expiryYearsOptions = driver.findElements(By.xpath("//option[@value>=2080]"));
         int yearsOptionsSize = expiryYearsOptions.size();
         int randomYearOption = random.nextInt(yearsOptionsSize);
@@ -262,26 +266,34 @@ public class CartPage extends BasicPage {
         return this;
     }
 
-    public CartPage expiryYearPage() {
+    private CartPage expiryYearDropdown() {
         wait.until(ExpectedConditions.visibilityOf(expiryYearField));
         wait.until(ExpectedConditions.elementToBeClickable(expiryYearField));
         expiryYearField.click();
         return this;
+        // TODO: 30.12.2023 Zrobić dwie metody w jednej. Jedną prywatną a drugą publiczną
     }
 
-    public boolean isThereMessageAboutSuccesfulAddedCard() {
-        wait.until(ExpectedConditions.visibilityOf(succesfullAddedCardMessage));
-        return succesfullAddedCardMessage.isDisplayed();
+    public boolean isThereMessageAboutSuccessfulAddedCard() {
+        wait.until(ExpectedConditions.visibilityOf(successfulAddedCardMessage));
+        return successfulAddedCardMessage.isDisplayed();
     }
 
-    public CartPage selectRandomAdress() {
-        List<WebElement> randomAdresses = driver.findElements(By.xpath("//label[@class='mat-radio-label']"));
-        int ranAdress = randomAdresses.size();
-        int randomAdress = random.nextInt(ranAdress);
-        randomAdresses.get(randomAdress).click();
-        return this;
+    public CartPage selectRandomAddress() {
+        List<WebElement> randomAdresses = driver.findElements(By.xpath("//label[@class='mat-radio-label']/.."));
+        int Adress = randomAdresses.size();
+        int randomAdress = random.nextInt(Adress);
+        try {
+            randomAdresses.get(randomAdress).click();
+            return this;
+        } catch (IllegalArgumentException | TimeoutException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
+
+
+
 
 
 

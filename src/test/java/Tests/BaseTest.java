@@ -20,6 +20,5 @@ public class BaseTest {
         driver.manage().window().maximize();
         home = new HomePage(driver);
         home.closeWelcomeBanner();
-
     }
 }

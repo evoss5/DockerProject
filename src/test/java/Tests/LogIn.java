@@ -22,9 +22,9 @@ public class LogIn extends BaseTest {
         login.inputPassword();
         login.checkPassword();
         login.loginInByStandardButton();
-        Assertions.assertTrue(home.IsThereInfoAboutWrongLoginOrPassword(), "The message is wrong");
+        Assertions.assertTrue(home.isThereInfoAboutWrongLoginOrPassword(), "The message is wrong");
+        // TODO: 30.12.2023 pozmieniać treści messagów
     }
-
     @Test
     public void LoginByGoogle() {
         login = new LoginPage(driver);

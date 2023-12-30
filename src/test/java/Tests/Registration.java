@@ -27,28 +27,28 @@ public class Registration extends BaseTest {
         register.insertRepeatPassword(password);
         register.clickSecurityQuestionField();
         String name2 = service.getRandomValue(service.namesList());
-        register.setAnswerForSecurityQuestion(name2);
+        register.setAnswerForSecurityQuestion(name2);//zwefykikować czemu name2
         register.clickRegister();
         Assertions.assertTrue(register.checkIfAccountIsCreatedSucessfuly(), "Account has not been created");
     }
 
     @Test
     public void registerNewAccountByCredentials() {
-        Assertions.assertTrue(home.isWelcomeMessageDismissed(), "Welcome message is still there");
         login = home.goToLoginPage();
         Assertions.assertEquals(login.urlLogin, driver.getCurrentUrl(), "The page is not login page");
         register = login.goToRegistrationPage();
         Assertions.assertTrue(register.checkIfPageShowsEmailField(), "The page is not login page");
         register.insertEmail(service.getCredentialValue("myLogin"));
         register.insertPassword(service.getCredentialValue("myPassword"));
+        register.insertRepeatPassword(service.getCredentialValue("myPassword"));
         register.clickSecurityQuestionField();
         register.setAnswerForSecurityQuestion(Faker.instance().internet().domainName());
         register.clickRegister();
+        // TODO: 30.12.2023 Asercja!
     }
 
     @Test
-    public void unsucessfullRegistractionBecauseOfNoDomen() {
-        Assertions.assertTrue(home.isWelcomeMessageDismissed(), "Welcome message is still there");
+    public void unsuccessfulRegistrastionBecauseOfNoDomen() {
         login = home.goToLoginPage();
         Assertions.assertEquals(login.urlLogin, driver.getCurrentUrl(), "The page is not login page");
         register = login.goToRegistrationPage();
@@ -68,7 +68,7 @@ public class Registration extends BaseTest {
     }
 
     @Test
-    public void unsucessfullRegistractionBecauseOfWrongRepeatedPassword() {
+    public void unsuccessfulRegistractionBecauseOfWrongRepeatedPassword() {
         Assertions.assertTrue(home.isWelcomeMessageDismissed(), "Welcome message is still there");
         login = home.goToLoginPage();
         Assertions.assertEquals(login.urlLogin, driver.getCurrentUrl(), "The page is not login page");
@@ -91,3 +91,4 @@ public class Registration extends BaseTest {
     }
 }
 // TODO: 25.12.2023 Usunać home z testów (zrobione)
+// TODO: 30.12.2023 Dynamiczny xpath
