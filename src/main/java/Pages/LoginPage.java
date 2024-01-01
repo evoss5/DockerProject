@@ -27,61 +27,48 @@ public class LoginPage extends BasicPage {
         super(driver);
     }
 
-    public void loginInByGoogle() {
-        googleLoginButton.click();
-    }
-
-    public void loginInByStandardButton() {   //poprawić
-        standardLoginButton.click();
+    public LoginPage loginInByGoogle() {
+        clickElement(googleLoginButton);
+        return this;
     }
 
     public LoginPage inputLogin() {
-        emailField.sendKeys("admin");
+        sendKeysElement(emailField, "admin");
         return this;
     }
 
     public LoginPage inputPassword() {
-        passwordField.sendKeys("admin");
+        sendKeysElement(passwordField, "admin");
         return this;
     }
 
     public LoginPage checkPassword() {
-        showPassword.click();
+        clickElement(showPassword);
         return this;
     }
 
     public LoginPage returnToHomePageClick() {
-        returnToHomePage.click();
+        clickElement(returnToHomePage);
         return this;
     }
 
     public RegistrationPage goToRegistrationPage() {
-        wait.until(ExpectedConditions.visibilityOf(createAccountButton));
-        wait.until(ExpectedConditions.elementToBeClickable(createAccountButton));
-        createAccountButton.click();
+        clickElement(createAccountButton);
         return new RegistrationPage(driver);
     }
 
     public LoginPage insertMyLogin(String myEmail) {
-        wait.until(ExpectedConditions.visibilityOf(emailField));
-        wait.until(ExpectedConditions.elementToBeClickable(emailField));
-        emailField.clear();
-        emailField.sendKeys(myEmail);
+        sendKeysElement(emailField, myEmail);
         return this;
     }
 
     public LoginPage insertMyPassword(String myPassword) {
-        wait.until(ExpectedConditions.visibilityOf(passwordField));
-        wait.until(ExpectedConditions.elementToBeClickable(passwordField));
-        passwordField.clear();
-        passwordField.sendKeys(myPassword);
+        sendKeysElement(passwordField, myPassword);
         return this;
     }
 
     public HomePage goToHomePage() {
-        wait.until(ExpectedConditions.visibilityOf(standardLoginButton));
-        wait.until(ExpectedConditions.elementToBeClickable(standardLoginButton));
-        loginInByStandardButton();
+        clickElement(standardLoginButton);
         return new HomePage(driver);
     }
 }

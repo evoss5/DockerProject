@@ -69,63 +69,42 @@ public class CartPage extends BasicPage {
     }
 
     public CartPage clickCheckoutButton() {
-        wait.until(ExpectedConditions.visibilityOf(checkoutButton));
-        wait.until(ExpectedConditions.elementToBeClickable(checkoutButton));
-        checkoutButton.click();
+        clickElement(checkoutButton);
         return this;
     }
 
     public CartPage addNewAdress() {
-        wait.until(ExpectedConditions.visibilityOf(newAdressButton));
-        wait.until(ExpectedConditions.elementToBeClickable(newAdressButton));
-        newAdressButton.click();
+        clickElement(newAdressButton);
         return this;
     }
 
     public CartPage inputCountryName(String country) {
-        wait.until(ExpectedConditions.visibilityOf(countryField));
-        wait.until(ExpectedConditions.elementToBeClickable(countryField));
-        countryField.sendKeys(country);
+        sendKeysElement(countryField, country);
         return this;
     }
 
     public CartPage inputName(String name) {
-        wait.until(ExpectedConditions.visibilityOf(nameField));
-        wait.until(ExpectedConditions.elementToBeClickable(nameField));
-        nameField.clear();
-        nameField.sendKeys(name);
+        sendKeysElement(nameField, name);
         return this;
     }
 
     public CartPage phoneNumber(String number) {
-        wait.until(ExpectedConditions.visibilityOf(phoneNumberField));
-        wait.until(ExpectedConditions.elementToBeClickable(phoneNumberField));
-        phoneNumberField.clear();
-        phoneNumberField.sendKeys(number);
+        sendKeysElement(phoneNumberField, number);
         return this;
     }
 
     public CartPage inputZipCode(String zipCode) {
-        wait.until(ExpectedConditions.visibilityOf(zipCodeField));
-        wait.until(ExpectedConditions.elementToBeClickable(zipCodeField));
-        zipCodeField.clear();
-        zipCodeField.sendKeys(zipCode);
+        sendKeysElement(zipCodeField, zipCode);
         return this;
     }
 
     public CartPage inputCityName(String city) {
-        wait.until(ExpectedConditions.visibilityOf(cityField));
-        wait.until(ExpectedConditions.elementToBeClickable(cityField));
-        cityField.clear();
-        cityField.sendKeys(city);
+        sendKeysElement(cityField, city);
         return this;
     }
 
     public CartPage inputAddress(String address) {
-        wait.until(ExpectedConditions.visibilityOf(addressField));
-        wait.until(ExpectedConditions.elementToBeClickable(addressField));
-        addressField.clear();
-        addressField.sendKeys(address);
+        sendKeysElement(addressField, address);
         return this;
     }
 
@@ -134,23 +113,17 @@ public class CartPage extends BasicPage {
     }
 
     public CartPage submitButtonClick() {
-        wait.until(ExpectedConditions.visibilityOf(submitButton));
-        wait.until(ExpectedConditions.elementToBeClickable(submitButton));
-        submitButton.click();
+        clickElement(submitButton);
         return this;
     }
 
     public CartPage selectAddressClick() {
-        wait.until(ExpectedConditions.visibilityOf(selectAddress));
-        wait.until(ExpectedConditions.elementToBeClickable(selectAddress));
-        selectAddress.click();
+        clickElement(selectAddress);
         return this;
     }
 
     public CartPage continueButtonClick() {
-        wait.until(ExpectedConditions.visibilityOf(continueButton));
-        wait.until(ExpectedConditions.elementToBeClickable(continueButton));
-        continueButton.click();
+        clickElement(continueButton);
         return this;
     }
 
@@ -159,31 +132,22 @@ public class CartPage extends BasicPage {
     }
 
     public CartPage chooseDeliveryOption() {
-        wait.until(ExpectedConditions.visibilityOf(deliveryOption));
-        wait.until(ExpectedConditions.elementToBeClickable(deliveryOption));
-        deliveryOption.click();
+        clickElement(deliveryOption);
         return this;
     }
 
     public CartPage inputCardNumber(String cardNumber) {
-        wait.until(ExpectedConditions.visibilityOf(cardNumberField));
-        wait.until(ExpectedConditions.elementToBeClickable(cardNumberField));
-        cardNumberField.clear();
-        cardNumberField.sendKeys(cardNumber);
+        sendKeysElement(cardNumberField, cardNumber);
         return this;
     }
 
     public CartPage addCreditCard() {
-        wait.until(ExpectedConditions.visibilityOf(creditCardPanel));
-        wait.until(ExpectedConditions.elementToBeClickable(creditCardPanel));
-        creditCardPanel.click();
+        clickElement(creditCardPanel);
         return this;
     }
 
     public CartPage chooseCreditCard() {
-        wait.until(ExpectedConditions.visibilityOf(creditCardCheckbox));
-        wait.until(ExpectedConditions.elementToBeClickable(creditCardCheckbox));
-        creditCardCheckbox.click();
+        clickElement(creditCardCheckbox);
         return this;
     }
 
@@ -192,9 +156,7 @@ public class CartPage extends BasicPage {
     }
 
     public CartPage purchaseProducts() {
-        wait.until(ExpectedConditions.visibilityOf(placeYourOrderButton));
-        wait.until(ExpectedConditions.elementToBeClickable(placeYourOrderButton));
-        placeYourOrderButton.click();
+        clickElement(placeYourOrderButton);
         return this;
     }
 
@@ -204,10 +166,7 @@ public class CartPage extends BasicPage {
     }
 
     public CartPage inputPurchaserName(String name) {
-        wait.until(ExpectedConditions.visibilityOf(purchaserNameField));
-        wait.until(ExpectedConditions.elementToBeClickable(purchaserNameField));
-        purchaserNameField.clear();
-        purchaserNameField.sendKeys(name);
+        sendKeysElement(purchaserNameField, name);
         return this;
     }
 
@@ -260,18 +219,14 @@ public class CartPage extends BasicPage {
     }
 
     public CartPage expiryMonthFieldClick() {
-        wait.until(ExpectedConditions.visibilityOf(expiryMonthField));
-        wait.until(ExpectedConditions.elementToBeClickable(expiryMonthField));
-        expiryMonthField.click();
+        clickElement(expiryMonthField);
         return this;
     }
 
     private CartPage expiryYearDropdown() {
-        wait.until(ExpectedConditions.visibilityOf(expiryYearField));
-        wait.until(ExpectedConditions.elementToBeClickable(expiryYearField));
-        expiryYearField.click();
+        clickElement(expiryYearField);
         return this;
-        // TODO: 30.12.2023 Zrobić dwie metody w jednej. Jedną prywatną a drugą publiczną
+        // TODO: 30.12.2023 Zrobić dwie metody w jednej. Jedną prywatną a drugą publiczną (zrobione)
     }
 
     public boolean isThereMessageAboutSuccessfulAddedCard() {

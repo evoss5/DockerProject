@@ -23,7 +23,8 @@ public class Cart extends BaseTest {
         login.insertMyPassword(myPassword);
         home = login.goToHomePage();
         Assertions.assertTrue(page.isCartLayoutVisible(), "You are not logged!");
-        page.addAppleJuiceToCart();
+//        page.addAppleJuiceToCart();
+        page.chooseProductToAdd("Green Smoothie");
         cart = page.goToCartPage();
         Assertions.assertTrue(page.isTotalPriceLayoutVisible());
         cart.clickCheckoutButton();

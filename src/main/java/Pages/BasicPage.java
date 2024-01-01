@@ -1,9 +1,13 @@
 package Pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
 
 public class BasicPage {
 
@@ -16,9 +20,19 @@ public class BasicPage {
         PageFactory.initElements(driver, this);
     }
     public void clickElement(WebElement webElement){
+        wait.until(ExpectedConditions.visibilityOf(webElement));
+        wait.until(ExpectedConditions.elementToBeClickable(webElement));
+        webElement.click();
 
     }
-    // TODO: 30.12.2023 Metody mające coś wspólnego click, sendkeys itd.
-    //
+    public void sendKeysElement(WebElement webElement, String text) {
+        wait.until(ExpectedConditions.visibilityOf(webElement));
+        wait.until(ExpectedConditions.elementToBeClickable(webElement));
+        webElement.clear();
+        webElement.sendKeys(text);
     }
+    }
+    // TODO: 30.12.2023 Metody mające coś wspólnego click, sendkeys itd.(zrobione)
+    //
+
 

@@ -39,49 +39,40 @@ public class HomePage extends BasicPage {
         super(driver);
     }
 
-    public void sideNavButtonClick() {
-        wait.until(ExpectedConditions.visibilityOf(sideNavButton));
-        wait.until(ExpectedConditions.elementToBeClickable(sideNavButton));
-        sideNavButton.click();
-    }
-
-    public void clickMainLogoPage() {
-        wait.until(ExpectedConditions.visibilityOf(mainPageLogo));
-        wait.until(ExpectedConditions.elementToBeClickable(mainPageLogo));
-        mainPageLogo.click();
-    }
-
-    public void clickSearchIcon() {
-        wait.until(ExpectedConditions.visibilityOf(searchIcon));
-        wait.until(ExpectedConditions.elementToBeClickable(searchIcon));
-        searchIcon.click();
-    }
-
-    public void clickAccountIcon() {
-        wait.until(ExpectedConditions.visibilityOf(accountIcon));
-        wait.until(ExpectedConditions.elementToBeClickable(accountIcon));
-        accountIcon.click();
-    }
-
-    public void clickLanguageSelectionMenu() {
-        wait.until(ExpectedConditions.visibilityOf(languageSelectionMenu));
-        wait.until(ExpectedConditions.elementToBeClickable(languageSelectionMenu));
-        languageSelectionMenu.click();
-    }
-
-    public void clickDismissCookieMessage() {
-        wait.until(ExpectedConditions.visibilityOf(dismissCookieMessage));
-        wait.until(ExpectedConditions.elementToBeClickable(dismissCookieMessage));
-        dismissCookieMessage.click();
-    }
-
-    public HomePage clickWelcomeBannerDismiss() {
-        wait.until(ExpectedConditions.visibilityOf(welcomeBannerDismiss));
-        wait.until(ExpectedConditions.elementToBeClickable(welcomeBannerDismiss));
-        welcomeBannerDismiss.click();
+    public HomePage sideNavButtonClick() {
+        clickElement(sideNavButton);
         return this;
     }
 
+    public HomePage clickMainLogoPage() {
+        clickElement(mainPageLogo);
+        return this;
+    }
+
+    public HomePage clickSearchIcon() {
+       clickElement(searchIcon);
+        return this;
+    }
+
+    public HomePage clickAccountIcon() {
+        clickElement(accountIcon);
+        return this;
+    }
+
+    public HomePage clickLanguageSelectionMenu() {
+        clickElement(languageSelectionMenu);
+        return this;
+    }
+
+    public HomePage clickDismissCookieMessage() {
+        clickElement(dismissCookieMessage);
+        return this;
+    }
+
+    public HomePage clickWelcomeBannerDismiss() {
+        clickElement(welcomeBannerDismiss);
+        return this;
+    }
     public boolean isWelcomeBannerVisible() {
         try {
             return wait.until(ExpectedConditions.visibilityOf(welcomeBannerDismiss)).isDisplayed();
@@ -98,23 +89,17 @@ public class HomePage extends BasicPage {
     }
 
     public HomePage clickGitHub() {
-        wait.until(ExpectedConditions.visibilityOf(gitHubRef));
-        wait.until(ExpectedConditions.elementToBeClickable(gitHubRef));
-        gitHubRef.click();
+        clickElement(gitHubRef);
         return this;
     }
 
     public HomePage clickChangeLanguageToPolish() {
-        wait.until(ExpectedConditions.visibilityOf(changeLanguageToPolish));
-        wait.until(ExpectedConditions.elementToBeClickable(changeLanguageToPolish));
-        changeLanguageToPolish.click();
+        clickElement(changeLanguageToPolish);
         return this;
     }
 
     public HomePage clickLoginHomePage() {
-        wait.until(ExpectedConditions.visibilityOf(loginHomePage));
-        wait.until(ExpectedConditions.elementToBeClickable(loginHomePage));
-        loginHomePage.click();
+        clickElement(loginHomePage);
         return this;
     }
 

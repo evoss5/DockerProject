@@ -31,25 +31,16 @@ public class RegistrationPage extends BasicPage {
     }
 
     public RegistrationPage insertEmail(String email) {
-        wait.until(ExpectedConditions.visibilityOf(emailField));
-        wait.until(ExpectedConditions.elementToBeClickable(emailField));
-        emailField.clear();
-        emailField.sendKeys(email);
+        sendKeysElement(emailField, email);
         return this;
     }
 
     public RegistrationPage insertPassword(String password) {
-        wait.until(ExpectedConditions.visibilityOf(passwordField));
-        wait.until(ExpectedConditions.elementToBeClickable(passwordField));
-        passwordField.clear();
-        passwordField.sendKeys(password);
+        sendKeysElement(passwordField, password);
         return this;
     }
     public RegistrationPage insertRepeatPassword(String password) {
-        wait.until(ExpectedConditions.visibilityOf(repeatPasswordField));
-        wait.until(ExpectedConditions.elementToBeClickable(repeatPasswordField));
-        repeatPasswordField.clear();
-        repeatPasswordField.sendKeys(password);
+        sendKeysElement(repeatPasswordField, password);
         return this;
     }
 
@@ -67,17 +58,12 @@ public class RegistrationPage extends BasicPage {
     }
 
     public RegistrationPage setAnswerForSecurityQuestion(String name) {
-        wait.until(ExpectedConditions.visibilityOf(answerForSecurityQuestion));
-        wait.until(ExpectedConditions.elementToBeClickable(answerForSecurityQuestion));
-        answerForSecurityQuestion.clear();
-        answerForSecurityQuestion.sendKeys(name);
+        sendKeysElement(answerForSecurityQuestion, name);
         return this;
     }
 
     public RegistrationPage clickRegister() {
-        wait.until(ExpectedConditions.visibilityOf(registerButton));
-        wait.until(ExpectedConditions.elementToBeClickable(registerButton));
-        registerButton.click();
+        clickElement(registerButton);
         return this;
     }
 

@@ -21,7 +21,7 @@ public class LogIn extends BaseTest {
         login.inputLogin();
         login.inputPassword();
         login.checkPassword();
-        login.loginInByStandardButton();
+        login.goToHomePage();
         Assertions.assertTrue(home.isThereInfoAboutWrongLoginOrPassword(), "The message is wrong");
         // TODO: 30.12.2023 pozmieniać treści messagów
     }
