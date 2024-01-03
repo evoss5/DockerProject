@@ -6,6 +6,8 @@ import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Assertions;
 import org.testng.annotations.Test;
 
+import java.util.logging.Logger;
+
 public class Registration extends BaseTest {
     private LoginPage login;
     private RegistrationPage register;
@@ -44,7 +46,9 @@ public class Registration extends BaseTest {
         register.clickSecurityQuestionField();
         register.setAnswerForSecurityQuestion(Faker.instance().internet().domainName());
         register.clickRegister();
-        // TODO: 30.12.2023 Asercja!
+        Assertions.assertTrue(register.checkIfAccountIsCreatedSucessfuly(), "Account has not been created");
+
+        // TODO: 30.12.2023 Asercja!(zrobione)
     }
 
     @Test
@@ -64,7 +68,7 @@ public class Registration extends BaseTest {
         register.clickSecurityQuestionField();
         String name2 = service.getRandomValue(service.namesList());
         register.setAnswerForSecurityQuestion(name2);
-        Assertions.assertFalse(register.checkIfRegisterButtonIsEnabled());
+        Assertions.assertTrue(register.checkIfEmailAddressIsValid(), "Email address is valid");
     }
 
     @Test
@@ -84,11 +88,12 @@ public class Registration extends BaseTest {
         String password2 = service.getRandomValue(service.randomPasswordList());
         register.insertRepeatPassword(password2);
         register.clickSecurityQuestionField();
+        register.chooseSecurityQuestion("Mother");
         Assertions.assertTrue(register.checkIfThereIsPasswordNoMatchMessage());
         String name2 = service.getRandomValue(service.namesList());
         register.setAnswerForSecurityQuestion(name2);
-        Assertions.assertFalse(register.checkIfRegisterButtonIsEnabled());
+        Assertions.assertTrue(register.checkIfThereIsMessageAboutPasswordsNotMatching());
     }
 }
 // TODO: 25.12.2023 Usunać home z testów (zrobione)
-// TODO: 30.12.2023 Dynamiczny xpath
+// TODO: 30.12.2023 Dynamiczny xpath (zrobione)

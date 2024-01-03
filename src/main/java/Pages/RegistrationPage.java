@@ -1,5 +1,6 @@
 package Pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -25,6 +26,12 @@ public class RegistrationPage extends BasicPage {
     private WebElement registrationIsCompleteInfo;
     @FindBy(xpath = "//mat-error[@id='mat-error-10']")
     private WebElement passwordDoNotMatchMessage;
+    @FindBy(xpath = "//mat-error[@id='mat-error-7']")
+    private WebElement emailAddressIsNotValidText;
+    @FindBy(xpath = "//mat-error[@id='mat-error-10']")
+    private WebElement passwordsDoNotMatchText;
+    @FindBy(xpath = "//mat-select[@aria-label='Selection list for the security question']/div/div/span/span[contains(text(),'Mother')]")
+    private WebElement optionForSecurityQuestion;
 
     public RegistrationPage(WebDriver driver) {
         super(driver);
@@ -51,10 +58,12 @@ public class RegistrationPage extends BasicPage {
     public RegistrationPage clickSecurityQuestionField() {   //oddzielna metoda + dynamiczny xpath
         wait.until(ExpectedConditions.visibilityOf(securityQuestionField));
         securityQuestionField.click();
+        return this;
+    }
+    public RegistrationPage chooseSecurityOption() {
         wait.until(ExpectedConditions.visibilityOf(securityQuestionOption));
         securityQuestionOption.click();
         return this;
-
     }
 
     public RegistrationPage setAnswerForSecurityQuestion(String name) {
@@ -77,5 +86,19 @@ public class RegistrationPage extends BasicPage {
     public boolean checkIfThereIsPasswordNoMatchMessage() {
         wait.until(ExpectedConditions.visibilityOf(passwordDoNotMatchMessage));
         return passwordDoNotMatchMessage.isDisplayed();
+    }
+    public boolean checkIfEmailAddressIsValid() {
+        wait.until(ExpectedConditions.visibilityOf(emailAddressIsNotValidText));
+        return emailAddressIsNotValidText.isDisplayed();
+    }
+    public boolean checkIfThereIsMessageAboutPasswordsNotMatching() {
+        wait.until(ExpectedConditions.visibilityOf(passwordDoNotMatchMessage));
+        return passwordDoNotMatchMessage.isDisplayed();
+    }
+    public void chooseSecurityQuestion(String question){
+        WebElement optionForSecurityQuestion = driver.findElement(By.xpath("//mat-select[@aria-label='Selection list for the security question']/div/div/span/span[contains(text(),'"+ question +"')]"));
+        wait.until(ExpectedConditions.visibilityOf(optionForSecurityQuestion));
+        wait.until(ExpectedConditions.elementToBeClickable(optionForSecurityQuestion));
+        optionForSecurityQuestion.click();
     }
 }

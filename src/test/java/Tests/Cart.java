@@ -56,7 +56,7 @@ public class Cart extends BaseTest {
         login.insertMyPassword(myPassword);
         home = login.goToHomePage();
         Assertions.assertTrue(page.isCartLayoutVisible(), "You are not logged!");
-        page.addAppleJuiceToCart();
+        page.chooseProductToAdd("Apple Juice");
         cart = page.goToCartPage();
         Assertions.assertTrue(page.isTotalPriceLayoutVisible());
         cart.clickCheckoutButton();
@@ -93,7 +93,7 @@ public class Cart extends BaseTest {
         login.insertMyPassword(myPassword);
         home = login.goToHomePage();
         Assertions.assertTrue(page.isCartLayoutVisible(), "You are not logged!");
-        page.addAppleJuiceToCart();
+        page.chooseProductToAdd("Apple Juice");
         cart = page.goToCartPage();
         Assertions.assertTrue(page.isTotalPriceLayoutVisible());
         cart.clickCheckoutButton();
@@ -150,7 +150,7 @@ public class Cart extends BaseTest {
         login.insertMyPassword(myPassword);
         home = login.goToHomePage();
         Assertions.assertTrue(page.isCartLayoutVisible(), "You are not logged!");
-        page.addAppleJuiceToCart();
+        page.chooseProductToAdd("Apple Juice");
         cart = page.goToCartPage();
         Assertions.assertTrue(page.isTotalPriceLayoutVisible());
         cart.clickCheckoutButton();
