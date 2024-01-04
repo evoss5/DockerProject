@@ -17,7 +17,7 @@ public class HomePage extends BasicPage {
     @FindBy(xpath = ".//*[@aria-label='Language selection menu']")
     private WebElement languageSelectionMenu;
     @FindBy(xpath = ".//a[@aria-label = 'dismiss cookie message']")
-    private WebElement dismissCookieMessage;
+    private WebElement cookieMessage;
     @FindBy(xpath = ".//*[@aria-label='Close Welcome Banner']")
     private WebElement welcomeBannerDismiss;
     @FindBy(xpath = ".//span[text()=' GitHub ']")
@@ -32,8 +32,8 @@ public class HomePage extends BasicPage {
     private WebElement checkIfLanguageIsPolish;
     @FindBy(xpath = "//div[text()='Invalid email or password.']")
     private WebElement invalidEmailOrPasswordInfo;
-    @FindBy(xpath = "//button[@aria-label='Show the shopping cart']")
-    private WebElement yourBasketAfterLogin;
+    @FindBy(xpath = "//button[@aria-label='Add to Basket']")
+    private WebElement addToCardButton;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -65,7 +65,7 @@ public class HomePage extends BasicPage {
     }
 
     public HomePage clickDismissCookieMessage() {
-        clickElement(dismissCookieMessage);
+        clickElement(cookieMessage);
         return this;
     }
 
@@ -80,6 +80,19 @@ public class HomePage extends BasicPage {
             return false;
         }
     }
+    public boolean isCookieMessageVisible() {
+        return wait.until(ExpectedConditions.visibilityOf(cookieMessage)).isDisplayed();
+    }
+    public boolean isCookieMessageNotVisible() {
+        return wait.until(ExpectedConditions.invisibilityOf(cookieMessage));
+    }
+    public HomePage closeCookieMessage() {
+        if (isCookieMessageVisible()) {
+            clickDismissCookieMessage();
+        }
+        return this;
+    }
+
 
     public HomePage closeWelcomeBanner() {
         if (isWelcomeBannerVisible()) {
@@ -123,7 +136,7 @@ public class HomePage extends BasicPage {
     }
 
     public boolean checkIfYouAreLoggedAndYouAreOnHomePage() {
-        return wait.until(ExpectedConditions.visibilityOf(yourBasketAfterLogin)).isDisplayed();
+        return wait.until(ExpectedConditions.visibilityOf(addToCardButton)).isDisplayed();
     }
 }
 

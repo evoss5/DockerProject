@@ -31,7 +31,7 @@ public class CartPage extends BasicPage {
     private WebElement addressField;
     @FindBy(xpath = "//button[@id='submitButton']")
     private WebElement submitButton;
-    @FindBy(xpath = "//mat-table[@class='mat-table cdk-table //mat-row")  // to samo
+    @FindBy(xpath = "//span[@class='mat-radio-container']")  // to samo
     private WebElement selectAddress;
     @FindBy(xpath = "//span[text()='Continue']")
     private WebElement continueButton;
@@ -245,6 +245,23 @@ public class CartPage extends BasicPage {
             throw new RuntimeException(e);
         }
     }
+    public boolean isAddressRadioButtonSelected() {
+        wait.until(ExpectedConditions.visibilityOf(selectAddress)).isSelected();
+        return true;
+    }
+    public boolean isDeliveryOptionSelected() {
+        wait.until(ExpectedConditions.visibilityOf(deliveryOption)).isSelected();
+        return true;
+    }
+    public boolean checkIfTheCardIsSelected() {
+        wait.until(ExpectedConditions.visibilityOf(creditCardCheckbox)).isSelected();
+        return true;
+    }
+    public boolean invalidSixteenDigitCardNumber() {
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//mat-error[text()=' Please enter a valid sixteen digit card number. ']")));
+        return driver.findElement(By.xpath("//mat-error[text()=' Please enter a valid sixteen digit card number. ']")).isDisplayed();
+    }
+
 }
 
 

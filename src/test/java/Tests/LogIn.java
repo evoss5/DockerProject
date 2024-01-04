@@ -15,16 +15,16 @@ public class LogIn extends BaseTest {
     @Test
     public void LoginPage() {
         login = new LoginPage(driver);
-        home.clickWelcomeBannerDismiss();
         home.clickAccountIcon();
         home.clickLoginHomePage();
         login.inputLogin();
         login.inputPassword();
         login.checkPassword();
         login.goToHomePage();
-        Assertions.assertTrue(home.isThereInfoAboutWrongLoginOrPassword(), "The message is wrong");
+        Assertions.assertTrue(home.isThereInfoAboutWrongLoginOrPassword(), "Invalid email or password.");
         // TODO: 30.12.2023 pozmieniać treści messagów
     }
+
     @Test
     public void LoginByGoogle() {
         login = new LoginPage(driver);
@@ -36,6 +36,7 @@ public class LogIn extends BaseTest {
         googlePage.clickCreateNewAccount();
         Assertions.assertTrue(googlePage.IsGoogleHeaderVisible());
     }
+
     @Test
     public void logInToThePageByCredentials() {
         login = home.goToLoginPage();
@@ -45,6 +46,19 @@ public class LogIn extends BaseTest {
         login.insertMyLogin(myLogin);
         login.insertMyPassword(myPassword);
         home = login.goToHomePage();
-        Assertions.assertTrue(page.isCartLayoutVisible(), "You are not logged!");
+        Assertions.assertTrue(home.checkIfYouAreLoggedAndYouAreOnHomePage());
+    }
+    @Test
+    public void dismissCookieMessage() {
+        login = home.goToLoginPage();
+        Assertions.assertEquals(login.urlLogin, driver.getCurrentUrl(), "The page is not login page");
+        String myLogin = service.getCredentialValue("myLogin");
+        String myPassword = service.getCredentialValue("myPassword");
+        login.insertMyLogin(myLogin);
+        login.insertMyPassword(myPassword);
+        home = login.goToHomePage();
+        Assertions.assertTrue(home.checkIfYouAreLoggedAndYouAreOnHomePage());
+        home.closeCookieMessage();
+        Assertions.assertTrue(home.isCookieMessageNotVisible());
     }
 }
