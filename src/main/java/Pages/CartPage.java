@@ -61,6 +61,8 @@ public class CartPage extends BasicPage {
     private WebElement expiryYearField;
     @FindBy(xpath = "//*[starts-with(text(),'Your card ending with')]")
     private WebElement successfulAddedCardMessage;
+    @FindBy(xpath = "//div[@id='price']")
+    private WebElement totalPriceText;
 
     private final Random random = new Random();
 
@@ -260,6 +262,10 @@ public class CartPage extends BasicPage {
     public boolean invalidSixteenDigitCardNumber() {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//mat-error[text()=' Please enter a valid sixteen digit card number. ']")));
         return driver.findElement(By.xpath("//mat-error[text()=' Please enter a valid sixteen digit card number. ']")).isDisplayed();
+    }
+    public boolean doesTotalPriceShowsProperPrice(String element) {
+        wait.until(ExpectedConditions.visibilityOf(totalPriceText));
+        return driver.findElement(By.xpath("//div[@id='price' and contains(text(),'Total Price: "+ element +"¤')]")).isDisplayed();
     }
 
 }

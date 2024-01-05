@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
         public static void main(String[] args) {
             LOGGER.info("This is an INFO level log message!");
             LOGGER.error("This is an ERROR level log message!");
+            LOGGER.info("Hello World!");
        }
     }
 

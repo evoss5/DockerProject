@@ -4,7 +4,10 @@ import Pages.AfterLoginPage;
 import Pages.CartPage;
 import Pages.LoginPage;
 import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.By;
 import org.testng.annotations.Test;
+
+import javax.swing.*;
 
 public class Cart extends BaseTest {
 
@@ -132,50 +135,50 @@ public class Cart extends BaseTest {
 
     @Test
     public void choosingPaymentOption() {
-            page = new AfterLoginPage(driver);
-            login = home.goToLoginPage();
-            String myLogin = service.getCredentialValue("myLogin");
-            String myPassword = service.getCredentialValue("myPassword");
-            login.insertMyLogin(myLogin);
-            login.insertMyPassword(myPassword);
-            home = login.goToHomePage();
-            Assertions.assertTrue(page.isCartLayoutVisible(), "You are not logged!");
-            page.chooseProductToAdd("Green Smoothie");
-            cart = page.goToCartPage();
-            Assertions.assertTrue(page.isTotalPriceLayoutVisible());
-            cart.clickCheckoutButton();
-            cart.addNewAdress();
-            String randomCountry = service.getRandomValue(service.countriesList());
-            cart.inputCountryName(randomCountry);
-            String randomName = service.getRandomValue(service.namesList());
-            cart.inputName(randomName);
-            cart.phoneNumber(service.cellPhoneNumber());
-            cart.inputAddress(service.getRandomValue(service.randomCities()));
-            String zipCode = service.getRandomValue(service.randomzipCodes());
-            cart.inputZipCode(zipCode);
-            String city = service.getRandomValue(service.randomCities());
-            cart.inputCityName(city);
-            Assertions.assertTrue(cart.isSubmitButtonEnabled());
-            cart.submitButtonClick();
-            cart.selectAddressClick();
-            Assertions.assertTrue(cart.isContinueButtonClickable());
-            cart.continueButtonClick();
-            Assertions.assertTrue(cart.isDeliveryMessageVisible());
-            cart.randomDeliveryOption();
-            Assertions.assertTrue(cart.isContinueButtonClickable());
-            cart.continueButtonClick();
-            cart.addCreditCard();
-            cart.inputCardNumber(service.cardNumber());
-            String digits = String.valueOf(service.cardNumber().length());
-            Assertions.assertEquals("16", digits, "The card number has different digits than expected");    //checking if card number has 16 digits
-            cart.inputPurchaserName(randomName);
-            cart.expiryMonthFieldClick();
-            cart.randomItem();
-            cart.randomExpiryYear();
-            cart.submitButtonClick();
-            Assertions.assertTrue(cart.isThereMessageAboutSuccessfulAddedCard());
-            cart.chooseCreditCard();
-            Assertions.assertTrue(cart.checkIfTheCardIsSelected());
+        page = new AfterLoginPage(driver);
+        login = home.goToLoginPage();
+        String myLogin = service.getCredentialValue("myLogin");
+        String myPassword = service.getCredentialValue("myPassword");
+        login.insertMyLogin(myLogin);
+        login.insertMyPassword(myPassword);
+        home = login.goToHomePage();
+        Assertions.assertTrue(page.isCartLayoutVisible(), "You are not logged!");
+        page.chooseProductToAdd("Green Smoothie");
+        cart = page.goToCartPage();
+        Assertions.assertTrue(page.isTotalPriceLayoutVisible());
+        cart.clickCheckoutButton();
+        cart.addNewAdress();
+        String randomCountry = service.getRandomValue(service.countriesList());
+        cart.inputCountryName(randomCountry);
+        String randomName = service.getRandomValue(service.namesList());
+        cart.inputName(randomName);
+        cart.phoneNumber(service.cellPhoneNumber());
+        cart.inputAddress(service.getRandomValue(service.randomCities()));
+        String zipCode = service.getRandomValue(service.randomzipCodes());
+        cart.inputZipCode(zipCode);
+        String city = service.getRandomValue(service.randomCities());
+        cart.inputCityName(city);
+        Assertions.assertTrue(cart.isSubmitButtonEnabled());
+        cart.submitButtonClick();
+        cart.selectAddressClick();
+        Assertions.assertTrue(cart.isContinueButtonClickable());
+        cart.continueButtonClick();
+        Assertions.assertTrue(cart.isDeliveryMessageVisible());
+        cart.randomDeliveryOption();
+        Assertions.assertTrue(cart.isContinueButtonClickable());
+        cart.continueButtonClick();
+        cart.addCreditCard();
+        cart.inputCardNumber(service.cardNumber());
+        String digits = String.valueOf(service.cardNumber().length());
+        Assertions.assertEquals("16", digits, "The card number has different digits than expected");    //checking if card number has 16 digits
+        cart.inputPurchaserName(randomName);
+        cart.expiryMonthFieldClick();
+        cart.randomItem();
+        cart.randomExpiryYear();
+        cart.submitButtonClick();
+        Assertions.assertTrue(cart.isThereMessageAboutSuccessfulAddedCard());
+        cart.chooseCreditCard();
+        Assertions.assertTrue(cart.checkIfTheCardIsSelected());
     }
 
     @Test
@@ -274,6 +277,56 @@ public class Cart extends BaseTest {
         cart.randomExpiryYear();
         Assertions.assertTrue(cart.invalidSixteenDigitCardNumber(), "Please enter a valid sixteen digit card number!");
     }// TODO: 30.12.2023 zrobić asercję z tekstem
+
+    @Test
+    public void isThePriceIsAppropriateAfterAddingProductToCart() {
+        page = new AfterLoginPage(driver);
+        login = home.goToLoginPage();
+        String myLogin = service.getCredentialValue("myLogin");
+        String myPassword = service.getCredentialValue("myPassword");
+        login.insertMyLogin(myLogin);
+        login.insertMyPassword(myPassword);
+        home = login.goToHomePage();
+        Assertions.assertTrue(page.isCartLayoutVisible(), "You are not logged!");
+        page.chooseProductToAdd("Green Smoothie");
+        cart = page.goToCartPage();
+        Assertions.assertTrue(cart.doesTotalPriceShowsProperPrice("1.99"), "Total Price is different than expected");
+    }
+
+    @Test
+    public void checkIfYouAreDeluxeMemberAlready() {
+        page = new AfterLoginPage(driver);
+        login = home.goToLoginPage();
+        String myLogin = service.getCredentialValue("myLogin");
+        String myPassword = service.getCredentialValue("myPassword");
+        login.insertMyLogin(myLogin);
+        login.insertMyPassword(myPassword);
+        home = login.goToHomePage();
+        Assertions.assertTrue(page.isCartLayoutVisible(), "You are not logged!");
+        home.sideNavButtonClick();
+        home.deluxeMembershipButtonClick();
+        Assertions.assertTrue(home.isDeluxeMembershipAlreadyPurchased(), "You are not Deluxe Member yet!");
+    }
+
+    @Test
+    public void choosingRateOnSliderForCustomerFeedback() {
+        page = new AfterLoginPage(driver);
+        login = home.goToLoginPage();
+        String myLogin = service.getCredentialValue("myLogin");
+        String myPassword = service.getCredentialValue("myPassword");
+        login.insertMyLogin(myLogin);
+        login.insertMyPassword(myPassword);
+        home = login.goToHomePage();
+        Assertions.assertTrue(page.isCartLayoutVisible(), "You are not logged!");
+        home.sideNavButtonClick();
+        home.customerFeedbackButtonClick();
+        home.clickignggg();
+        home.chooseSliderRating(4);
+        // TODO: 05.01.2024 dokończyć
+    }
 }
+
+
+
 
 

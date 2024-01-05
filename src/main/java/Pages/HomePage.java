@@ -34,6 +34,12 @@ public class HomePage extends BasicPage {
     private WebElement invalidEmailOrPasswordInfo;
     @FindBy(xpath = "//button[@aria-label='Add to Basket']")
     private WebElement addToCardButton;
+    @FindBy(xpath = "//span[text()=' Deluxe Membership ']")
+    private WebElement deluxeMembershipButton;
+    @FindBy(xpath = "//span[text()=' Customer Feedback ']")
+    private WebElement customerFeedbackButton;
+    @FindBy(xpath = "//mat-slider[@id='rating' and @aria-valuenow='3']")
+    private WebElement ratingSlider;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -50,7 +56,7 @@ public class HomePage extends BasicPage {
     }
 
     public HomePage clickSearchIcon() {
-       clickElement(searchIcon);
+        clickElement(searchIcon);
         return this;
     }
 
@@ -73,19 +79,23 @@ public class HomePage extends BasicPage {
         clickElement(welcomeBannerDismiss);
         return this;
     }
+
     public boolean isWelcomeBannerVisible() {
         try {
             return wait.until(ExpectedConditions.visibilityOf(welcomeBannerDismiss)).isDisplayed();
-        } catch (NoSuchElementException | TimeoutException e){
+        } catch (NoSuchElementException | TimeoutException e) {
             return false;
         }
     }
+
     public boolean isCookieMessageVisible() {
         return wait.until(ExpectedConditions.visibilityOf(cookieMessage)).isDisplayed();
     }
+
     public boolean isCookieMessageNotVisible() {
         return wait.until(ExpectedConditions.invisibilityOf(cookieMessage));
     }
+
     public HomePage closeCookieMessage() {
         if (isCookieMessageVisible()) {
             clickDismissCookieMessage();
@@ -138,7 +148,32 @@ public class HomePage extends BasicPage {
     public boolean checkIfYouAreLoggedAndYouAreOnHomePage() {
         return wait.until(ExpectedConditions.visibilityOf(addToCardButton)).isDisplayed();
     }
-}
+
+    public HomePage deluxeMembershipButtonClick() {
+        clickElement(deluxeMembershipButton);
+        return this;
+    }
+    public boolean isDeluxeMembershipAlreadyPurchased() {
+        wait.until(ExpectedConditions.visibilityOf(deluxeMembershipButton)).isDisplayed();
+        return true;
+    }
+    public HomePage customerFeedbackButtonClick() {
+        clickElement(customerFeedbackButton);
+        return this;
+    }
+    public HomePage chooseSliderRating(int rate) {
+        wait.until(ExpectedConditions.elementToBeClickable(ratingSlider));
+        WebElement slider =driver.findElement(By.xpath("//mat-slider[@aria-valuenow='"+rate+"']"));
+        slider.click();
+        return this;
+    }
+    public void clickignggg() {
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='mat-slider-thumb-label']")));
+        driver.findElement(By.xpath("//div[@class='mat-slider-thumb-label']")).click();
+
+    }
+    }
+
 
 // TODO: 30.12.2023 Zapoznać się z loggerem (maven)
 
