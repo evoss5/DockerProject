@@ -40,6 +40,8 @@ public class HomePage extends BasicPage {
     private WebElement customerFeedbackButton;
     @FindBy(xpath = "//mat-slider[@id='rating' and @aria-valuenow='3']")
     private WebElement ratingSlider;
+    @FindBy(xpath = "//span[text()='Become a member']")
+    private WebElement becomeAMemberButton;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -170,7 +172,10 @@ public class HomePage extends BasicPage {
     public void clickignggg() {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='mat-slider-thumb-label']")));
         driver.findElement(By.xpath("//div[@class='mat-slider-thumb-label']")).click();
-
+    }
+    public HomePage becomeAMemberButtonClick() {
+        clickElement(becomeAMemberButton);
+        return this;
     }
     }
 

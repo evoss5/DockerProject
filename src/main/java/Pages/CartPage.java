@@ -1,9 +1,6 @@
 package Pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -31,7 +28,7 @@ public class CartPage extends BasicPage {
     private WebElement addressField;
     @FindBy(xpath = "//button[@id='submitButton']")
     private WebElement submitButton;
-    @FindBy(xpath = "//span[@class='mat-radio-container']")  // to samo
+    @FindBy(xpath = "//span[@class='mat-radio-container']")
     private WebElement selectAddress;
     @FindBy(xpath = "//span[text()='Continue']")
     private WebElement continueButton;
@@ -63,6 +60,11 @@ public class CartPage extends BasicPage {
     private WebElement successfulAddedCardMessage;
     @FindBy(xpath = "//div[@id='price']")
     private WebElement totalPriceText;
+    @FindBy(xpath = "//input[@id='mat-input-3']")
+    private WebElement nameFieldForDeluxeMembership;
+    @FindBy(xpath = "//select[@id='mat-input-5']")
+    private WebElement expiryMonthFieldForDeluxeMembership;
+
 
     private final Random random = new Random();
 
@@ -152,7 +154,14 @@ public class CartPage extends BasicPage {
         clickElement(creditCardCheckbox);
         return this;
     }
-
+    public CartPage chooseCreditCard2() {
+        try {
+            clickElement(creditCardCheckbox);
+        } catch (StaleElementReferenceException e) {
+            clickElement(creditCardCheckbox);
+        }
+        return this;
+    }
     public boolean IsOrderSummarVisible() {
         return orderSummaryLayout.isDisplayed();
     }
@@ -181,7 +190,7 @@ public class CartPage extends BasicPage {
     }
 
     public CartPage randomExpiryYear() {
-        expiryYearDropdown();
+//        expiryYearDropdown();
         List<WebElement> expiryYearsOptions = driver.findElements(By.xpath("//option[@value>=2080]"));
         int yearsOptionsSize = expiryYearsOptions.size();
         int randomYearOption = random.nextInt(yearsOptionsSize);
@@ -247,27 +256,44 @@ public class CartPage extends BasicPage {
             throw new RuntimeException(e);
         }
     }
+
     public boolean isAddressRadioButtonSelected() {
         wait.until(ExpectedConditions.visibilityOf(selectAddress)).isSelected();
         return true;
     }
+
     public boolean isDeliveryOptionSelected() {
         wait.until(ExpectedConditions.visibilityOf(deliveryOption)).isSelected();
         return true;
     }
+
     public boolean checkIfTheCardIsSelected() {
         wait.until(ExpectedConditions.visibilityOf(creditCardCheckbox)).isSelected();
         return true;
     }
+
     public boolean invalidSixteenDigitCardNumber() {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//mat-error[text()=' Please enter a valid sixteen digit card number. ']")));
         return driver.findElement(By.xpath("//mat-error[text()=' Please enter a valid sixteen digit card number. ']")).isDisplayed();
     }
+
     public boolean doesTotalPriceShowsProperPrice(String element) {
         wait.until(ExpectedConditions.visibilityOf(totalPriceText));
-        return driver.findElement(By.xpath("//div[@id='price' and contains(text(),'Total Price: "+ element +"¤')]")).isDisplayed();
+        return driver.findElement(By.xpath("//div[@id='price' and contains(text(),'Total Price: " + element + "¤')]")).isDisplayed();
     }
 
+    public CartPage inputNameForDeluxeMembership(String name) {
+        sendKeysElement(nameFieldForDeluxeMembership, name);
+        return this;
+    }
+
+    public CartPage randomExpiryMonthForDeluxeMembership() {
+        List<WebElement> expiryMonthOptions = driver.findElements(By.xpath("//option[@value>'0' and @value<13]"));
+        int maxOptionsSize = expiryMonthOptions.size();
+        int randomOption = random.nextInt(maxOptionsSize);
+        expiryMonthOptions.get(randomOption).click();
+        return this;
+    }
 }
 
 

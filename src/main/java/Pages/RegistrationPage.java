@@ -97,8 +97,6 @@ public class RegistrationPage extends BasicPage {
     }
     public void chooseSecurityQuestion(String question){
         WebElement optionForSecurityQuestion = driver.findElement(By.xpath("//mat-select[@aria-label='Selection list for the security question']/div/div/span/span[contains(text(),'"+ question +"')]"));
-        wait.until(ExpectedConditions.visibilityOf(optionForSecurityQuestion));
-        wait.until(ExpectedConditions.elementToBeClickable(optionForSecurityQuestion));
-        optionForSecurityQuestion.click();
+        clickElement(optionForSecurityQuestion);
     }
 }
