@@ -28,8 +28,7 @@ public class Registration extends BaseTest {
         register.insertPassword(password);
         register.insertRepeatPassword(password);
         register.clickSecurityQuestionField();
-        String name2 = service.getRandomValue(service.namesList());
-        register.setAnswerForSecurityQuestion(name2);//zwefykikować czemu name2
+        register.setAnswerForSecurityQuestion(name);
         register.clickRegister();
         Assertions.assertTrue(register.checkIfAccountIsCreatedSucessfuly(), "Account has not been created");
     }
@@ -52,7 +51,7 @@ public class Registration extends BaseTest {
     }
 
     @Test
-    public void unsuccessfulRegistrastionBecauseOfNoDomen() {
+    public void unsuccessfulRegistrationBecauseOfNoDomen() {
         login = home.goToLoginPage();
         Assertions.assertEquals(login.urlLogin, driver.getCurrentUrl(), "The page is not login page");
         register = login.goToRegistrationPage();
@@ -66,13 +65,12 @@ public class Registration extends BaseTest {
         register.insertPassword(password);
         register.insertRepeatPassword(password);
         register.clickSecurityQuestionField();
-        String name2 = service.getRandomValue(service.namesList());
-        register.setAnswerForSecurityQuestion(name2);
-        Assertions.assertTrue(register.checkIfEmailAddressIsValid(), "Email address is valid");
+        register.setAnswerForSecurityQuestion(name);
+        Assertions.assertTrue(register.checkIfEmailAddressIsValid(), "Email address is invalid");
     }
 
     @Test
-    public void unsuccessfulRegistractionBecauseOfWrongRepeatedPassword() {
+    public void unsuccessfulRegistrationBecauseOfWrongRepeatedPassword() {
         Assertions.assertTrue(home.isWelcomeMessageDismissed(), "Welcome message is still there");
         login = home.goToLoginPage();
         Assertions.assertEquals(login.urlLogin, driver.getCurrentUrl(), "The page is not login page");
@@ -90,8 +88,7 @@ public class Registration extends BaseTest {
         register.clickSecurityQuestionField();
         register.chooseSecurityQuestion("Mother");
         Assertions.assertTrue(register.checkIfThereIsPasswordNoMatchMessage());
-        String name2 = service.getRandomValue(service.namesList());
-        register.setAnswerForSecurityQuestion(name2);
+        register.setAnswerForSecurityQuestion(name);
         Assertions.assertTrue(register.checkIfThereIsMessageAboutPasswordsNotMatching());
     }
 }

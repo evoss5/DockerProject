@@ -17,12 +17,23 @@ public class LogIn extends BaseTest {
         login = new LoginPage(driver);
         home.clickAccountIcon();
         home.clickLoginHomePage();
-        login.inputLogin();
+        login.inputLogin("admin");
         login.inputPassword();
         login.checkPassword();
         login.goToHomePage();
         Assertions.assertTrue(home.isThereInfoAboutWrongLoginOrPassword(), "Invalid email or password.");
         // TODO: 30.12.2023 pozmieniać treści messagów
+    }
+
+    @Test
+    public void unsuccessfulLogInBecauseThereIsNoPassword() {
+        login = new LoginPage(driver);
+        home.clickAccountIcon();
+        home.clickLoginHomePage();
+        login.inputLogin("admin");
+        login.passwordFieldClick();
+        login.logInButtonClick();
+        Assertions.assertTrue(login.IsThereNoPasswordInsert(), "Please provide a password");
     }
 
     @Test
@@ -48,6 +59,7 @@ public class LogIn extends BaseTest {
         home = login.goToHomePage();
         Assertions.assertTrue(home.checkIfYouAreLoggedAndYouAreOnHomePage());
     }
+
     @Test
     public void dismissCookieMessage() {
         login = home.goToLoginPage();
@@ -60,5 +72,37 @@ public class LogIn extends BaseTest {
         Assertions.assertTrue(home.checkIfYouAreLoggedAndYouAreOnHomePage());
         home.closeCookieMessage();
         Assertions.assertTrue(home.isCookieMessageNotVisible());
+    }
+
+    @Test
+    public void logOutFromAccount() {
+        login = home.goToLoginPage();
+        Assertions.assertEquals(login.urlLogin, driver.getCurrentUrl(), "The page is not login page");
+        String myLogin = service.getCredentialValue("myLogin");
+        String myPassword = service.getCredentialValue("myPassword");
+        login.insertMyLogin(myLogin);
+        login.insertMyPassword(myPassword);
+        home = login.goToHomePage();
+        Assertions.assertTrue(home.checkIfYouAreLoggedAndYouAreOnHomePage());
+        home.clickAccountIcon();
+        home.logOutFromAccount();
+        home.clickAccountIcon();
+        Assertions.assertTrue(home.isLogInButtonAvailable());
+    }
+    @Test
+    public void logInByRememberMeCheckbox() {
+        login = home.goToLoginPage();
+        Assertions.assertEquals(login.urlLogin, driver.getCurrentUrl(), "The page is not login page");
+        login.rememberMeCheckboxClick();
+        String myLogin = service.getCredentialValue("myLogin");
+        String myPassword = service.getCredentialValue("myPassword");
+        login.insertMyLogin(myLogin);
+        login.insertMyPassword(myPassword);
+        home = login.goToHomePage();
+        Assertions.assertTrue(home.checkIfYouAreLoggedAndYouAreOnHomePage());
+        home.clickAccountIcon();
+        home.logOutFromAccount();
+        login = home.goToLoginPage();
+        Assertions.assertTrue(login.IsTheRememberMeCheckoxTicked());
     }
 }

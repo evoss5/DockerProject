@@ -190,7 +190,6 @@ public class CartPage extends BasicPage {
     }
 
     public CartPage randomExpiryYear() {
-//        expiryYearDropdown();
         List<WebElement> expiryYearsOptions = driver.findElements(By.xpath("//option[@value>=2080]"));
         int yearsOptionsSize = expiryYearsOptions.size();
         int randomYearOption = random.nextInt(yearsOptionsSize);

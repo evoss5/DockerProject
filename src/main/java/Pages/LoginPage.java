@@ -20,6 +20,12 @@ public class LoginPage extends BasicPage {
     private WebElement returnToHomePage;
     @FindBy(xpath = "//div[@id='newCustomerLink']")
     private WebElement createAccountButton;
+    @FindBy(xpath = "//mat-error[@id='mat-error-1']")
+    private WebElement pleaseProvideAPasswordMessage;
+    @FindBy(xpath = "//mat-checkbox[@id='rememberMe']/label")
+    private WebElement rememberMeCheckbox;
+    @FindBy(xpath = "//input[@aria-checked='true']")
+    private WebElement rememberMeCheckboxTicked;
 
     public final String urlLogin = "http://localhost:3000/#/login";
 
@@ -32,8 +38,8 @@ public class LoginPage extends BasicPage {
         return this;
     }
 
-    public LoginPage inputLogin() {
-        sendKeysElement(emailField, "admin");
+    public LoginPage inputLogin(String login) {
+        sendKeysElement(emailField, login);
         return this;
     }
 
@@ -70,6 +76,26 @@ public class LoginPage extends BasicPage {
     public HomePage goToHomePage() {
         clickElement(standardLoginButton);
         return new HomePage(driver);
+    }
+    public LoginPage passwordFieldClick() {
+        clickElement(passwordField);
+        return this;
+    }
+    public LoginPage logInButtonClick() {
+        wait.until(ExpectedConditions.visibilityOf(standardLoginButton)).click();
+        return this;
+    }
+    public boolean IsThereNoPasswordInsert() {
+        wait.until(ExpectedConditions.visibilityOf(pleaseProvideAPasswordMessage)).isDisplayed();
+        return true;
+    }
+    public LoginPage rememberMeCheckboxClick() {
+        clickElement(rememberMeCheckbox);
+        return this;
+    }
+    public boolean IsTheRememberMeCheckoxTicked() {
+        wait.until(ExpectedConditions.visibilityOf(rememberMeCheckboxTicked)).isDisplayed();
+        return true;
     }
 }
 

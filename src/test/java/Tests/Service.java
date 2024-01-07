@@ -216,13 +216,11 @@ public class Service {
 
     public String cardNumber() {
         String cardNumber = String.valueOf(randomNumber(1000, 9999)) + String.valueOf(randomNumber(1000, 9999)) + String.valueOf(randomNumber(1000, 9999)) + String.valueOf(randomNumber(1000, 9999));
-        System.out.println("Card Number ");
         return cardNumber;
     }
 
     public String cardNumber2() {
         String cardNumber = String.valueOf(randomNumber(1000, 9999)) + String.valueOf(randomNumber(1000, 9999)) + String.valueOf(randomNumber(1000, 9999));
-        System.out.println("Card Number ");
         return cardNumber;
     }
 }

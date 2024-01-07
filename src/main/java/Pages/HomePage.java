@@ -42,6 +42,10 @@ public class HomePage extends BasicPage {
     private WebElement ratingSlider;
     @FindBy(xpath = "//span[text()='Become a member']")
     private WebElement becomeAMemberButton;
+    @FindBy(xpath = "//button[@id='navbarLogoutButton']")
+    private WebElement logOutButton;
+    @FindBy(xpath = "//button[@aria-label='Show the shopping cart']")
+    private WebElement shoppingCartButton;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -127,6 +131,11 @@ public class HomePage extends BasicPage {
         clickElement(loginHomePage);
         return this;
     }
+    public boolean isLogInButtonAvailable() {
+        wait.until(ExpectedConditions.visibilityOf(loginHomePage));
+        wait.until(ExpectedConditions.elementToBeClickable(loginHomePage)).isDisplayed();
+        return true;
+    }
 
     public boolean clickCheckIfLanguageIsPolish() {
         wait.until(ExpectedConditions.visibilityOf(checkIfLanguageIsPolish));
@@ -176,6 +185,15 @@ public class HomePage extends BasicPage {
     public HomePage becomeAMemberButtonClick() {
         clickElement(becomeAMemberButton);
         return this;
+    }
+    public HomePage logOutFromAccount() {
+        clickElement(logOutButton);
+        return this;
+    }
+    public boolean isShoppingCartButtonVisible() {
+//        wait.until(ExpectedConditions.visibilityOf(shoppingCartButton)).isDisplayed();
+        wait.until(ExpectedConditions.invisibilityOf(shoppingCartButton));
+        return true;
     }
     }
 
