@@ -38,16 +38,17 @@ public class RegistrationPage extends BasicPage {
     }
 
     public RegistrationPage insertEmail(String email) {
-        sendKeysElement(emailField, email);
+        sendKeysToElement(emailField, email);
         return this;
     }
 
     public RegistrationPage insertPassword(String password) {
-        sendKeysElement(passwordField, password);
+        sendKeysToElement(passwordField, password);
         return this;
     }
+
     public RegistrationPage insertRepeatPassword(String password) {
-        sendKeysElement(repeatPasswordField, password);
+        sendKeysToElement(repeatPasswordField, password);
         return this;
     }
 
@@ -60,6 +61,7 @@ public class RegistrationPage extends BasicPage {
         securityQuestionField.click();
         return this;
     }
+
     public RegistrationPage chooseSecurityOption() {
         wait.until(ExpectedConditions.visibilityOf(securityQuestionOption));
         securityQuestionOption.click();
@@ -67,7 +69,7 @@ public class RegistrationPage extends BasicPage {
     }
 
     public RegistrationPage setAnswerForSecurityQuestion(String name) {
-        sendKeysElement(answerForSecurityQuestion, name);
+        sendKeysToElement(answerForSecurityQuestion, name);
         return this;
     }
 
@@ -79,24 +81,29 @@ public class RegistrationPage extends BasicPage {
     public boolean checkIfAccountIsCreatedSucessfuly() {
         return wait.until(ExpectedConditions.visibilityOf(registrationIsCompleteInfo)).isDisplayed();
     }
+
     public boolean checkIfRegisterButtonIsEnabled() {
         wait.until(ExpectedConditions.visibilityOf(registerButton));
         return registerButton.isEnabled();
     }
+
     public boolean checkIfThereIsPasswordNoMatchMessage() {
         wait.until(ExpectedConditions.visibilityOf(passwordDoNotMatchMessage));
         return passwordDoNotMatchMessage.isDisplayed();
     }
+
     public boolean checkIfEmailAddressIsValid() {
         wait.until(ExpectedConditions.visibilityOf(emailAddressIsNotValidText));
         return emailAddressIsNotValidText.isDisplayed();
     }
+
     public boolean checkIfThereIsMessageAboutPasswordsNotMatching() {
         wait.until(ExpectedConditions.visibilityOf(passwordDoNotMatchMessage));
         return passwordDoNotMatchMessage.isDisplayed();
     }
-    public void chooseSecurityQuestion(String question){
-        WebElement optionForSecurityQuestion = driver.findElement(By.xpath("//mat-select[@aria-label='Selection list for the security question']/div/div/span/span[contains(text(),'"+ question +"')]"));
+
+    public void chooseSecurityQuestion(String question) {
+        WebElement optionForSecurityQuestion = driver.findElement(By.xpath("//div[@aria-label='Selection list for the security question']//span[contains(text(),'" + question + "')]"));
         clickElement(optionForSecurityQuestion);
     }
 }

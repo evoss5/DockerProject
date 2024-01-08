@@ -13,7 +13,7 @@ public class CartPage extends BasicPage {
     @FindBy(xpath = "//button[contains(@class, 'checkout-button')]")
     private WebElement checkoutButton;
     @FindBy(xpath = "//span[text()='Add New Address']")
-    private WebElement newAdressButton;
+    private WebElement newAddressButton;
     @FindBy(xpath = "//input[@placeholder='Please provide a country.']")
     private WebElement countryField;
     @FindBy(xpath = "//input[@placeholder='Please provide a name.']")
@@ -78,37 +78,38 @@ public class CartPage extends BasicPage {
     }
 
     public CartPage addNewAdress() {
-        clickElement(newAdressButton);
+        clickElement(newAddressButton);
         return this;
     }
+    // TODO: 08.01.2024 Pozmieniać nazwy metod, żeby były bardziej intuicyjne
 
     public CartPage inputCountryName(String country) {
-        sendKeysElement(countryField, country);
+        sendKeysToElement(countryField, country);
         return this;
     }
 
     public CartPage inputName(String name) {
-        sendKeysElement(nameField, name);
+        sendKeysToElement(nameField, name);
         return this;
     }
 
     public CartPage phoneNumber(String number) {
-        sendKeysElement(phoneNumberField, number);
+        sendKeysToElement(phoneNumberField, number);
         return this;
     }
 
     public CartPage inputZipCode(String zipCode) {
-        sendKeysElement(zipCodeField, zipCode);
+        sendKeysToElement(zipCodeField, zipCode);
         return this;
     }
 
     public CartPage inputCityName(String city) {
-        sendKeysElement(cityField, city);
+        sendKeysToElement(cityField, city);
         return this;
     }
 
     public CartPage inputAddress(String address) {
-        sendKeysElement(addressField, address);
+        sendKeysToElement(addressField, address);
         return this;
     }
 
@@ -135,13 +136,13 @@ public class CartPage extends BasicPage {
         return continueButton.isEnabled();
     }
 
-    public CartPage chooseDeliveryOption() {
+    public CartPage chooseDeliveryOptionButtonClick() {
         clickElement(deliveryOption);
         return this;
     }
 
     public CartPage inputCardNumber(String cardNumber) {
-        sendKeysElement(cardNumberField, cardNumber);
+        sendKeysToElement(cardNumberField, cardNumber);
         return this;
     }
 
@@ -154,15 +155,7 @@ public class CartPage extends BasicPage {
         clickElement(creditCardCheckbox);
         return this;
     }
-    public CartPage chooseCreditCard2() {
-        try {
-            clickElement(creditCardCheckbox);
-        } catch (StaleElementReferenceException e) {
-            clickElement(creditCardCheckbox);
-        }
-        return this;
-    }
-    public boolean IsOrderSummarVisible() {
+    public boolean isOrderSummaryVisible() {
         return orderSummaryLayout.isDisplayed();
     }
 
@@ -172,12 +165,12 @@ public class CartPage extends BasicPage {
     }
 
     public boolean checkIfConfirmationMessageIsVisible() {
-        wait.until(ExpectedConditions.visibilityOf(confirmationMessage));
-        return confirmationMessage.isDisplayed();
+        return isElementVisible(confirmationMessage);
     }
 
+    // TODO: 08.01.2024 Pozamieniac wszystkie metody visible
     public CartPage inputPurchaserName(String name) {
-        sendKeysElement(purchaserNameField, name);
+        sendKeysToElement(purchaserNameField, name);
         return this;
     }
 
@@ -221,6 +214,7 @@ public class CartPage extends BasicPage {
         int randomDelivery = random.nextInt(randomDeliveryOption);
         deliveryOptions.get(randomDelivery).click();
         return this;
+        // TODO: 08.01.2024 Spróbować to zrobić na dwie metody : Jedną prywatną na wyciągnięcie rozmaiaru, a drugą losową publiczną
     }
 
     public boolean isDeliveryMessageVisible() {
@@ -245,11 +239,11 @@ public class CartPage extends BasicPage {
     }
 
     public CartPage selectRandomAddress() {
-        List<WebElement> randomAdresses = driver.findElements(By.xpath("//label[@class='mat-radio-label']/.."));
-        int Adress = randomAdresses.size();
-        int randomAdress = random.nextInt(Adress);
+        List<WebElement> randomAddresses = driver.findElements(By.xpath("//label[@class='mat-radio-label']/.."));
+        int address = randomAddresses.size();
+        int randomAdress = random.nextInt(address);
         try {
-            randomAdresses.get(randomAdress).click();
+            randomAddresses.get(randomAdress).click();
             return this;
         } catch (IllegalArgumentException | TimeoutException e) {
             throw new RuntimeException(e);
@@ -274,6 +268,7 @@ public class CartPage extends BasicPage {
     public boolean invalidSixteenDigitCardNumber() {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//mat-error[text()=' Please enter a valid sixteen digit card number. ']")));
         return driver.findElement(By.xpath("//mat-error[text()=' Please enter a valid sixteen digit card number. ']")).isDisplayed();
+        // TODO: 08.01.2024 Do poprawy
     }
 
     public boolean doesTotalPriceShowsProperPrice(String element) {
@@ -282,7 +277,7 @@ public class CartPage extends BasicPage {
     }
 
     public CartPage inputNameForDeluxeMembership(String name) {
-        sendKeysElement(nameFieldForDeluxeMembership, name);
+        sendKeysToElement(nameFieldForDeluxeMembership, name);
         return this;
     }
 
@@ -296,12 +291,8 @@ public class CartPage extends BasicPage {
 }
 
 
-
-
-
-
-
 // TODO: 23.12.2023  Metody boolean = zmienić returny   (Zrobione)
 // TODO: 23.12.2023 Waity w metodach click i sendkeys   (Zrobione)
+// TODO: 08.01.2024 Użyć klasę select
 
 

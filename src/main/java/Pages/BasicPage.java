@@ -1,15 +1,16 @@
 package Pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.junit.platform.commons.logging.Logger;
+import org.junit.platform.commons.logging.LoggerFactory;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.List;
-
 public class BasicPage {
+
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(BasicPage.class);
 
     protected WebDriver driver;
     protected WebDriverWait wait;
@@ -22,19 +23,39 @@ public class BasicPage {
     }
 
     public void clickElement(WebElement webElement) {
-        wait.until(ExpectedConditions.visibilityOf(webElement));
-        wait.until(ExpectedConditions.elementToBeClickable(webElement));
-        webElement.click();
-
+        int i = 0;
+        while (true) {
+            try {
+                wait.until(ExpectedConditions.visibilityOf(webElement));
+                wait.until(ExpectedConditions.elementToBeClickable(webElement));
+                webElement.click();
+                break;
+            } catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+                i++;
+            }if (i>=2) {
+                throw new RuntimeException("Maximum tries reached!");
+            }
+        }
     }
-
-    public void sendKeysElement(WebElement webElement, String text) {
+    public void sendKeysToElement(WebElement webElement, String text) {
         wait.until(ExpectedConditions.visibilityOf(webElement));
         wait.until(ExpectedConditions.elementToBeClickable(webElement));
         webElement.clear();
         webElement.sendKeys(text);
+        // TODO: 08.01.2024 Zrobic while z powtorzeniami oraz odpowiednie wyjątkli, try catch
+    }
+
+    public boolean isElementVisible(WebElement element) {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(element));
+            return true;
+        }catch (NoSuchElementException | TimeoutException e) {
+            return false;
+        }
+
     }
 }
+
 // TODO: 30.12.2023 Metody mające coś wspólnego click, sendkeys itd.(zrobione)
 //
 

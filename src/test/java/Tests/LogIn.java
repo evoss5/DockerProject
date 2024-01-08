@@ -1,7 +1,6 @@
 package Tests;
 
 import Pages.AfterLoginPage;
-import Pages.GooglePage;
 import Pages.LoginPage;
 import org.junit.jupiter.api.Assertions;
 import org.testng.annotations.Test;
@@ -33,7 +32,7 @@ public class LogIn extends BaseTest {
         login.inputLogin("admin");
         login.passwordFieldClick();
         login.logInButtonClick();
-        Assertions.assertTrue(login.IsThereNoPasswordInsert(), "Please provide a password");
+        Assertions.assertTrue(login.isThereNoPasswordInsert(), "Please provide a password");
     }
 
     @Test
@@ -103,6 +102,6 @@ public class LogIn extends BaseTest {
         home.clickAccountIcon();
         home.logOutFromAccount();
         login = home.goToLoginPage();
-        Assertions.assertTrue(login.IsTheRememberMeCheckoxTicked());
+        Assertions.assertTrue(login.isTheRememberMeCheckoxTicked());
     }
 }

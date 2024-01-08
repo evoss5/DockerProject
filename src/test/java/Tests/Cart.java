@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-import javax.swing.*;
-
 public class Cart extends BaseTest {
 
     private LoginPage login;
@@ -182,7 +180,7 @@ public class Cart extends BaseTest {
     }
 
     @Test
-    public void finishPurchaseTest() {
+    public void finishPurchase() {
         page = new AfterLoginPage(driver);
         login = home.goToLoginPage();
         String myLogin = service.getCredentialValue("myLogin");
@@ -228,7 +226,7 @@ public class Cart extends BaseTest {
         cart.chooseCreditCard();
         Assertions.assertTrue(cart.checkIfTheCardIsSelected());
         cart.continueButtonClick();
-        Assertions.assertTrue(cart.IsOrderSummarVisible());
+        Assertions.assertTrue(cart.isOrderSummaryVisible());
         cart.purchaseProducts();
         Assertions.assertTrue(cart.checkIfConfirmationMessageIsVisible());
     }
@@ -331,7 +329,7 @@ public class Cart extends BaseTest {
         cart.randomItem();
         cart.randomExpiryYear();
         cart.submitButtonClick();
-        cart.chooseCreditCard2();
+        cart.chooseCreditCard();
         cart.continueButtonClick();
         Assertions.assertTrue(home.isDeluxeMembershipAlreadyPurchased(), "You are not Deluxe Member yet");
     }
@@ -351,9 +349,11 @@ public class Cart extends BaseTest {
         home.clickignggg();
         home.chooseSliderRating(4);
         // TODO: 05.01.2024 dokończyć
+       String sss =  driver.findElement(By.xpath("")).getText();
     }
-}
 
+}
+// TODO: 08.01.2024 Odpalać testy przez TestNG
 
 
 

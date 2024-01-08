@@ -39,14 +39,14 @@ public class LoginPage extends BasicPage {
     }
 
     public LoginPage inputLogin(String login) {
-        sendKeysElement(emailField, login);
+        sendKeysToElement(emailField, login);
         return this;
     }
 
     public LoginPage inputPassword() {
-        sendKeysElement(passwordField, "admin");
+        sendKeysToElement(passwordField, "admin");
         return this;
-    }
+    }// TODO: 08.01.2024 poprawić zmienną !
 
     public LoginPage checkPassword() {
         clickElement(showPassword);
@@ -64,12 +64,12 @@ public class LoginPage extends BasicPage {
     }
 
     public LoginPage insertMyLogin(String myEmail) {
-        sendKeysElement(emailField, myEmail);
+        sendKeysToElement(emailField, myEmail);
         return this;
     }
 
     public LoginPage insertMyPassword(String myPassword) {
-        sendKeysElement(passwordField, myPassword);
+        sendKeysToElement(passwordField, myPassword);
         return this;
     }
 
@@ -85,7 +85,7 @@ public class LoginPage extends BasicPage {
         wait.until(ExpectedConditions.visibilityOf(standardLoginButton)).click();
         return this;
     }
-    public boolean IsThereNoPasswordInsert() {
+    public boolean isThereNoPasswordInsert() {
         wait.until(ExpectedConditions.visibilityOf(pleaseProvideAPasswordMessage)).isDisplayed();
         return true;
     }
@@ -93,9 +93,13 @@ public class LoginPage extends BasicPage {
         clickElement(rememberMeCheckbox);
         return this;
     }
-    public boolean IsTheRememberMeCheckoxTicked() {
+    public boolean isTheRememberMeCheckoxTicked() {
         wait.until(ExpectedConditions.visibilityOf(rememberMeCheckboxTicked)).isDisplayed();
         return true;
+    }
+    public String passwordMessageText() {
+        return pleaseProvideAPasswordMessage.getText();
+        // TODO: 08.01.2024 zrobić metodę w basicpagu na gettext oraz try catch
     }
 }
 

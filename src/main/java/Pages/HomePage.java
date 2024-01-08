@@ -1,6 +1,7 @@
 package Pages;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -22,10 +23,8 @@ public class HomePage extends BasicPage {
     private WebElement welcomeBannerDismiss;
     @FindBy(xpath = ".//span[text()=' GitHub ']")
     private WebElement gitHubRef;
-    @FindBy(xpath = "//label//span//input[@aria-label='Język Polski']/ancestor::label")
+    @FindBy(xpath = "//label//span//input[@aria-label='Język Polski']/ancestor::label")  // TODO: 08.01.2024 Zrobić dynamiczny xpath na zmianę języka
     private WebElement changeLanguageToPolish;
-    @FindBy(xpath = "//label//span//input[@aria-label='Język Polski']/ancestor::label")
-    private WebElement changeLanguageToPolish2;
     @FindBy(xpath = ".//button[@id='navbarLoginButton']")
     private WebElement loginHomePage;
     @FindBy(xpath = ".//span[text()=' Konto ']")
@@ -108,8 +107,6 @@ public class HomePage extends BasicPage {
         }
         return this;
     }
-
-
     public HomePage closeWelcomeBanner() {
         if (isWelcomeBannerVisible()) {
             clickWelcomeBannerDismiss();
@@ -173,10 +170,13 @@ public class HomePage extends BasicPage {
         return this;
     }
     public HomePage chooseSliderRating(int rate) {
+        Actions actions = new Actions(driver);
+        actions.dragAndDrop(ratingSlider).perform();
         wait.until(ExpectedConditions.elementToBeClickable(ratingSlider));
-        WebElement slider =driver.findElement(By.xpath("//mat-slider[@aria-valuenow='"+rate+"']"));
+        WebElement slider =driver.findElement(By.xpath("//mat-slider[@aria-valuenow='" + rate + "']"));
         slider.click();
         return this;
+        // TODO: 08.01.2024 Poprawic slidera
     }
     public void clickignggg() {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='mat-slider-thumb-label']")));
