@@ -91,4 +91,18 @@ public class LogIn extends BaseTest {
         login = home.goToLoginPage();
         Assertions.assertTrue(login.isTheRememberMeCheckoxTicked());
     }
+    @Test
+    public void changeLanguage() {
+        login = home.goToLoginPage();
+        Assertions.assertEquals(login.urlLogin, driver.getCurrentUrl(), "The page is not login page");
+        login.rememberMeCheckboxClick();
+        String myLogin = service.getCredentialValue("myLogin");
+        String myPassword = service.getCredentialValue("myPassword");
+        login.insertMyLogin(myLogin);
+        login.insertMyPassword(myPassword);
+        home = login.goToHomePage();
+        home.clickLanguageSelectionMenu();
+        home.changeLanguage("Dansk");
+        Assertions.assertFalse(login.isLanguageChanged(), "You haven't changed language");
+    }
 }

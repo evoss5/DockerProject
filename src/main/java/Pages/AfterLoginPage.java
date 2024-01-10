@@ -8,11 +8,11 @@ import org.openqa.selenium.support.FindBy;
 public class AfterLoginPage extends BasicPage {
 
     @FindBy(xpath = "//button[@aria-label='Add to Basket']")
-    private WebElement testElement;
+    private WebElement addToBasketButton;
     @FindBy(xpath = "//div[@id='price']")
-    private WebElement totalPriceLayout;
+    private WebElement totalPriceField;
     @FindBy(xpath = "//span[@class='fa-layers-counter fa-layers-top-right fa-3x warn-notification']")
-    private WebElement cartLayout;
+    private WebElement cartButton;
     public AfterLoginPage(WebDriver driver) {
         super(driver);
     }
@@ -23,14 +23,14 @@ public class AfterLoginPage extends BasicPage {
        return this;
     }
     public boolean isTotalPriceLayoutVisible() {
-        return isElementVisible(totalPriceLayout);
+        return isElementVisible(totalPriceField);
     }
     public CartPage goToCartPage() {
-        clickElement(cartLayout);
+        clickElement(cartButton);
         return new CartPage(driver);
     }
     public boolean isCartLayoutVisible() {
-         return isElementVisible(cartLayout);
+         return isElementVisible(cartButton);
     }
 }
 // TODO: 30.12.2023 Sprawdzić czy mogę zrobić reużywalną metodę (zrobione)

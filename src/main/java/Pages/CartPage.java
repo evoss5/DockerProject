@@ -14,19 +14,19 @@ public class CartPage extends BasicPage {
     @FindBy(xpath = "//button[contains(@class, 'checkout-button')]")
     private WebElement checkoutButton;
     @FindBy(xpath = "//span[text()='Add New Address']")
-    private WebElement newAddressButton;
+    private WebElement addNewAddressButton;
     @FindBy(xpath = "//input[@placeholder='Please provide a country.']")
     private WebElement countryField;
     @FindBy(xpath = "//input[@placeholder='Please provide a name.']")
-    private WebElement nameField;
+    private WebElement inputName;
     @FindBy(xpath = "//input[@type='number']")
-    private WebElement phoneNumberField;
+    private WebElement inputPhoneNumber;
     @FindBy(xpath = "//input[@id='mat-input-6']")
-    private WebElement zipCodeField;
+    private WebElement inputZipCode;
     @FindBy(xpath = "//input[@id='mat-input-8']")
-    private WebElement cityField;
+    private WebElement inputCityName;
     @FindBy(xpath = "//textarea[@id='address']")
-    private WebElement addressField;
+    private WebElement inputAddress;
     @FindBy(xpath = "//button[@id='submitButton']")
     private WebElement submitButton;
     @FindBy(xpath = "//span[@class='mat-radio-container']")
@@ -36,7 +36,7 @@ public class CartPage extends BasicPage {
     @FindBy(xpath = "//mat-row")
     private WebElement deliveryOption;
     @FindBy(xpath = "//input[@type='number']")
-    private WebElement cardNumberField;
+    private WebElement inputCardNumber;
     @FindBy(xpath = "//mat-panel-description[text()=' Add a credit or debit card ']")
     private WebElement creditCardPanel;
     @FindBy(xpath = "//label[@class='mat-radio-label']")
@@ -55,7 +55,7 @@ public class CartPage extends BasicPage {
     private WebElement deliveryMessage;
     @FindBy(xpath = "//select[@id='mat-input-12']")
     private WebElement expiryMonthField;
-    @FindBy(xpath = "//select[@id='mat-input-13']")
+    @FindBy(xpath = "//select[@id='mat-input-6']")
     private WebElement expiryYearField;
     @FindBy(xpath = "//*[starts-with(text(),'Your card ending with')]")
     private WebElement successfulAddedCardMessage;
@@ -65,6 +65,8 @@ public class CartPage extends BasicPage {
     private WebElement nameFieldForDeluxeMembership;
     @FindBy(xpath = "//select[@id='mat-input-5']")
     private WebElement expiryMonthFieldForDeluxeMembership;
+    @FindBy(xpath = "//mat-error[@id='mat-error-19']")
+    private WebElement invalidCardNumberMessage;
 
 
     private final Random random = new Random();
@@ -79,7 +81,7 @@ public class CartPage extends BasicPage {
     }
 
     public CartPage addNewAdress() {
-        clickElement(newAddressButton);
+        clickElement(addNewAddressButton);
         return this;
     }
     // TODO: 08.01.2024 Pozmieniać nazwy metod, żeby były bardziej intuicyjne
@@ -90,27 +92,27 @@ public class CartPage extends BasicPage {
     }
 
     public CartPage inputName(String name) {
-        sendKeysToElement(nameField, name);
+        sendKeysToElement(inputName, name);
         return this;
     }
 
     public CartPage phoneNumber(String number) {
-        sendKeysToElement(phoneNumberField, number);
+        sendKeysToElement(inputPhoneNumber, number);
         return this;
     }
 
     public CartPage inputZipCode(String zipCode) {
-        sendKeysToElement(zipCodeField, zipCode);
+        sendKeysToElement(inputZipCode, zipCode);
         return this;
     }
 
     public CartPage inputCityName(String city) {
-        sendKeysToElement(cityField, city);
+        sendKeysToElement(inputCityName, city);
         return this;
     }
 
     public CartPage inputAddress(String address) {
-        sendKeysToElement(addressField, address);
+        sendKeysToElement(inputAddress, address);
         return this;
     }
 
@@ -143,7 +145,7 @@ public class CartPage extends BasicPage {
     }
 
     public CartPage inputCardNumber(String cardNumber) {
-        sendKeysToElement(cardNumberField, cardNumber);
+        sendKeysToElement(inputCardNumber, cardNumber);
         return this;
     }
 
@@ -176,7 +178,7 @@ public class CartPage extends BasicPage {
         return this;
     }
 
-    public CartPage randomItem() {
+    public CartPage randomExpiryMonth() {
         List<WebElement> expiryMonthOptions = driver.findElements(By.xpath("//option[@value>'0' and @value<13]"));
         int maxOptionsSize = expiryMonthOptions.size();
         int randomOption = random.nextInt(maxOptionsSize);
@@ -190,16 +192,6 @@ public class CartPage extends BasicPage {
         int randomYearOption = random.nextInt(yearsOptionsSize);
         expiryYearsOptions.get(randomYearOption).click();
         return this;
-    }
-
-    public CartPage randomCard() {
-        List<WebElement> cardOptions = driver.findElements(By.xpath("//input[contains(@id,'mat-radio')]"));
-        int cardOptionsSize = cardOptions.size();
-        int randomCardOption = random.nextInt(cardOptionsSize);
-        wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.xpath("//input[contains(@id,'mat-radio')]"), 0));
-        cardOptions.get(randomCardOption).click();
-        return this;
-
     }
 
     public CartPage randomName() {
@@ -228,26 +220,10 @@ public class CartPage extends BasicPage {
         return this;
     }
 
-    private CartPage expiryYearDropdown() {
-        clickElement(expiryYearField);
-        return this;
-        // TODO: 30.12.2023 Zrobić dwie metody w jednej. Jedną prywatną a drugą publiczną (zrobione)
-    }
+    // TODO: 30.12.2023 Zrobić dwie metody w jednej. Jedną prywatną a drugą publiczną (zrobione)
 
     public boolean isThereMessageAboutSuccessfulAddedCard() {
         return isElementVisible(successfulAddedCardMessage);
-    }
-
-    public CartPage selectRandomAddress() {
-        List<WebElement> randomAddresses = driver.findElements(By.xpath("//label[@class='mat-radio-label']/.."));
-        int address = randomAddresses.size();
-        int randomAdress = random.nextInt(address);
-        try {
-            randomAddresses.get(randomAdress).click();
-            return this;
-        } catch (IllegalArgumentException | TimeoutException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public boolean isAddressRadioButtonSelected() {
@@ -262,9 +238,9 @@ public class CartPage extends BasicPage {
         return isElementSelected(creditCardCheckbox);
     }
 
-    public boolean invalidSixteenDigitCardNumber() {
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//mat-error[text()=' Please enter a valid sixteen digit card number. ']")));
-        return driver.findElement(By.xpath("//mat-error[text()=' Please enter a valid sixteen digit card number. ']")).isDisplayed();
+    public String invalidSixteenDigitCardNumber() {
+        wait.until(ExpectedConditions.visibilityOf(invalidCardNumberMessage));
+        return invalidCardNumberMessage.getText();
         // TODO: 08.01.2024 Do poprawy
     }
 
@@ -278,27 +254,25 @@ public class CartPage extends BasicPage {
         return this;
     }
 
-    public CartPage randomExpiryMonthForDeluxeMembership() {
-        List<WebElement> expiryMonthOptions = driver.findElements(By.xpath("//option[@value>'0' and @value<13]"));
-        int maxOptionsSize = expiryMonthOptions.size();
-        int randomOption = random.nextInt(maxOptionsSize);
-        expiryMonthOptions.get(randomOption).click();
-        return this;
-    }
-    public CartPage randomExpiryMonthForDeluxeMembership2(int month) {
+    public CartPage randomExpiryMonthForDeluxeMembership(String month) {
         WebElement field = driver.findElement(By.xpath("//select[@id='mat-input-5']"));
         Select dropdown = new Select(field);
-        dropdown.selectByIndex(month);
+        dropdown.selectByValue(month);
         return this;
-
     }
 
-
+    public CartPage expiryYearDropdown(String year) {
+//        clickElement(expiryYearField);
+        Select dropdown = new Select(expiryYearField);
+        dropdown.selectByValue(year);
+        return this;
+    }
 }
 
 
 // TODO: 23.12.2023  Metody boolean = zmienić returny   (Zrobione)
 // TODO: 23.12.2023 Waity w metodach click i sendkeys   (Zrobione)
-// TODO: 08.01.2024 Użyć klasę select oraz action
+// TODO: 08.01.2024 Użyć klasę select oraz action (Zrobione)
+// TODO: 10.01.2024 Zrobić kolejnego paga do customer feedback
 
 

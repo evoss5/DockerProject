@@ -26,6 +26,8 @@ public class LoginPage extends BasicPage {
     private WebElement rememberMeCheckbox;
     @FindBy(xpath = "//input[@aria-checked='true']")
     private WebElement rememberMeCheckboxTicked;
+    @FindBy(xpath = "//span[text()=' Your Basket']")
+    private WebElement yourBasketText;
 
     public final String urlLogin = "http://localhost:3000/#/login";
 
@@ -98,6 +100,9 @@ public class LoginPage extends BasicPage {
     public String passwordMessageText() {
         return pleaseProvideAPasswordMessage.getText();
         // TODO: 08.01.2024 zrobić metodę w basicpagu na gettext oraz try catch
+    }
+    public boolean isLanguageChanged() {
+        return isElementVisible(yourBasketText);
     }
 }
 

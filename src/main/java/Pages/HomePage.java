@@ -23,9 +23,7 @@ public class HomePage extends BasicPage {
     private WebElement welcomeBannerDismiss;
     @FindBy(xpath = ".//span[text()=' GitHub ']")
     private WebElement gitHubRef;
-    @FindBy(xpath = "//label//span//input[@aria-label='Język Polski']/ancestor::label")
     // TODO: 08.01.2024 Zrobić dynamiczny xpath na zmianę języka
-    private WebElement changeLanguageToPolish;
     @FindBy(xpath = ".//button[@id='navbarLoginButton']")
     private WebElement loginHomePage;
     @FindBy(xpath = ".//span[text()=' Konto ']")
@@ -46,6 +44,7 @@ public class HomePage extends BasicPage {
     private WebElement logOutButton;
     @FindBy(xpath = "//button[@aria-label='Show the shopping cart']")
     private WebElement shoppingCartButton;
+
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -117,8 +116,9 @@ public class HomePage extends BasicPage {
         return this;
     }
 
-    public HomePage clickChangeLanguageToPolish() {
-        clickElement(changeLanguageToPolish);
+    public HomePage changeLanguage(String language) {
+        WebElement changeLanguageTo = driver.findElement(By.xpath("//label//span//input[@aria-label='" + language + "']/ancestor::label"));
+        clickElement(changeLanguageTo);
         return this;
     }
 
@@ -148,6 +148,11 @@ public class HomePage extends BasicPage {
         clickLoginHomePage();
         return new LoginPage(driver);
     }
+    public CustomerFeedbackPage goToCustomerPage() {
+        sideNavButtonClick();
+        customerFeedbackButtonClick();
+        return new CustomerFeedbackPage(driver);
+    }
 
     public boolean checkIfYouAreLoggedAndYouAreOnHomePage() {
         return isElementVisible(addToCardButton);
@@ -162,31 +167,14 @@ public class HomePage extends BasicPage {
         return isElementVisible(deluxeMembershipButton);
     }
 
-    public HomePage customerFeedbackButtonClick() {
+    private HomePage customerFeedbackButtonClick() {
         clickElement(customerFeedbackButton);
         return this;
     }
 
-    public HomePage chooseSliderRating() {
-        Actions action = new Actions(driver);
 
-        WebElement slider = driver.findElement(By.xpath("//mat-slider[@id='rating']"));
-        int sliderWidth = slider.getSize().getWidth();
-        int offSet = (int) (sliderWidth* 0.2);
-        slider.click();
-        action.clickAndHold(slider).moveByOffset(offSet,0).release().perform();
-
-
-
-        return this;
-    }
 //        // TODO: 08.01.2024 Poprawic slidera
-//
 
-    public void clickignggg() {
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='mat-slider-thumb-label']")));
-        driver.findElement(By.xpath("//div[@class='mat-slider-thumb-label']")).click();
-    }
 
     public HomePage becomeAMemberButtonClick() {
         clickElement(becomeAMemberButton);
@@ -202,6 +190,8 @@ public class HomePage extends BasicPage {
         wait.until(ExpectedConditions.invisibilityOf(shoppingCartButton));
         return true;
     }
+
+
 }
 
 

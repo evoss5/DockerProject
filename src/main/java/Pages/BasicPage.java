@@ -48,7 +48,7 @@ public class BasicPage {
                 webElement.clear();
                 webElement.sendKeys(text);
                 break;
-            } catch (ElementNotVisibleException | StaleElementReferenceException e) {
+            } catch (ElementNotInteractableException | StaleElementReferenceException e) {
                 i++;
             }
             if (i >= 2) {
@@ -70,9 +70,9 @@ public class BasicPage {
     public boolean isElementEnabled(WebElement element) {
         try {
             wait.until(ExpectedConditions.visibilityOf(element));
-            wait.until(ExpectedConditions.elementToBeClickable(element)).isEnabled();
-            return true;
-        } catch (ElementNotVisibleException | ElementClickInterceptedException e) {
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+            return element.isEnabled();
+        } catch (StaleElementReferenceException | ElementNotInteractableException | TimeoutException e) {
             return false;
         }
     }
@@ -80,9 +80,9 @@ public class BasicPage {
     public boolean isElementSelected(WebElement element) {
         try {
             wait.until(ExpectedConditions.visibilityOf(element));
-            wait.until(ExpectedConditions.elementToBeClickable(element)).isSelected();
-            return true;
-        } catch (ElementNotVisibleException | ElementNotSelectableException e) {
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+            return element.isSelected();
+        } catch (ElementNotVisibleException | ElementNotSelectableException | TimeoutException e) {
             return false;
         }
     }
