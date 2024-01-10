@@ -53,7 +53,7 @@ public class RegistrationPage extends BasicPage {
     }
 
     public boolean checkIfPageShowsEmailField() {
-        return wait.until(ExpectedConditions.visibilityOf(emailField)).isDisplayed();
+        return isElementVisible(emailField);
     }
 
     public RegistrationPage clickSecurityQuestionField() {   //oddzielna metoda + dynamiczny xpath
@@ -79,7 +79,7 @@ public class RegistrationPage extends BasicPage {
     }
 
     public boolean checkIfAccountIsCreatedSucessfuly() {
-        return wait.until(ExpectedConditions.visibilityOf(registrationIsCompleteInfo)).isDisplayed();
+        return isElementVisible(registrationIsCompleteInfo);
     }
 
     public boolean checkIfRegisterButtonIsEnabled() {
@@ -88,18 +88,15 @@ public class RegistrationPage extends BasicPage {
     }
 
     public boolean checkIfThereIsPasswordNoMatchMessage() {
-        wait.until(ExpectedConditions.visibilityOf(passwordDoNotMatchMessage));
-        return passwordDoNotMatchMessage.isDisplayed();
+        return isElementVisible(passwordDoNotMatchMessage);
     }
 
     public boolean checkIfEmailAddressIsValid() {
-        wait.until(ExpectedConditions.visibilityOf(emailAddressIsNotValidText));
-        return emailAddressIsNotValidText.isDisplayed();
+        return isElementVisible(passwordDoNotMatchMessage);
     }
 
     public boolean checkIfThereIsMessageAboutPasswordsNotMatching() {
-        wait.until(ExpectedConditions.visibilityOf(passwordDoNotMatchMessage));
-        return passwordDoNotMatchMessage.isDisplayed();
+        return isElementVisible(passwordDoNotMatchMessage);
     }
 
     public void chooseSecurityQuestion(String question) {

@@ -326,7 +326,7 @@ public class Cart extends BaseTest {
         Assertions.assertEquals("16", digits, "The card number has different digits than expected");
         String name = service.getRandomValue(service.namesList());
         cart.inputNameForDeluxeMembership(name);
-        cart.randomItem();
+        cart.randomExpiryMonthForDeluxeMembership2(9);
         cart.randomExpiryYear();
         cart.submitButtonClick();
         cart.chooseCreditCard();
@@ -346,10 +346,10 @@ public class Cart extends BaseTest {
         Assertions.assertTrue(page.isCartLayoutVisible(), "You are not logged!");
         home.sideNavButtonClick();
         home.customerFeedbackButtonClick();
-        home.clickignggg();
-        home.chooseSliderRating(4);
+        driver.findElement(By.xpath("//mat-slider[@id='rating']")).isDisplayed();
+        home.chooseSliderRating();
         // TODO: 05.01.2024 dokończyć
-       String sss =  driver.findElement(By.xpath("")).getText();
+
     }
 
 }

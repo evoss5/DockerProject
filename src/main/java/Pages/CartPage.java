@@ -3,6 +3,7 @@ package Pages;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 import java.util.Random;
@@ -133,7 +134,7 @@ public class CartPage extends BasicPage {
     }
 
     public boolean isContinueButtonClickable() {
-        return continueButton.isEnabled();
+        return isElementEnabled(continueButton);
     }
 
     public CartPage chooseDeliveryOptionButtonClick() {
@@ -155,8 +156,9 @@ public class CartPage extends BasicPage {
         clickElement(creditCardCheckbox);
         return this;
     }
+
     public boolean isOrderSummaryVisible() {
-        return orderSummaryLayout.isDisplayed();
+        return isElementVisible(orderSummaryLayout);
     }
 
     public CartPage purchaseProducts() {
@@ -168,7 +170,7 @@ public class CartPage extends BasicPage {
         return isElementVisible(confirmationMessage);
     }
 
-    // TODO: 08.01.2024 Pozamieniac wszystkie metody visible
+    // TODO: 08.01.2024 Pozamieniac wszystkie metody visible(zrobione)
     public CartPage inputPurchaserName(String name) {
         sendKeysToElement(purchaserNameField, name);
         return this;
@@ -218,8 +220,7 @@ public class CartPage extends BasicPage {
     }
 
     public boolean isDeliveryMessageVisible() {
-        wait.until(ExpectedConditions.visibilityOf(deliveryMessage));
-        return deliveryMessage.isDisplayed();
+        return isElementVisible(deliveryMessage);
     }
 
     public CartPage expiryMonthFieldClick() {
@@ -234,8 +235,7 @@ public class CartPage extends BasicPage {
     }
 
     public boolean isThereMessageAboutSuccessfulAddedCard() {
-        wait.until(ExpectedConditions.visibilityOf(successfulAddedCardMessage));
-        return successfulAddedCardMessage.isDisplayed();
+        return isElementVisible(successfulAddedCardMessage);
     }
 
     public CartPage selectRandomAddress() {
@@ -251,18 +251,15 @@ public class CartPage extends BasicPage {
     }
 
     public boolean isAddressRadioButtonSelected() {
-        wait.until(ExpectedConditions.visibilityOf(selectAddress)).isSelected();
-        return true;
+        return isElementSelected(selectAddress);
     }
 
     public boolean isDeliveryOptionSelected() {
-        wait.until(ExpectedConditions.visibilityOf(deliveryOption)).isSelected();
-        return true;
+        return isElementSelected(deliveryOption);
     }
 
     public boolean checkIfTheCardIsSelected() {
-        wait.until(ExpectedConditions.visibilityOf(creditCardCheckbox)).isSelected();
-        return true;
+        return isElementSelected(creditCardCheckbox);
     }
 
     public boolean invalidSixteenDigitCardNumber() {
@@ -288,11 +285,20 @@ public class CartPage extends BasicPage {
         expiryMonthOptions.get(randomOption).click();
         return this;
     }
+    public CartPage randomExpiryMonthForDeluxeMembership2(int month) {
+        WebElement field = driver.findElement(By.xpath("//select[@id='mat-input-5']"));
+        Select dropdown = new Select(field);
+        dropdown.selectByIndex(month);
+        return this;
+
+    }
+
+
 }
 
 
 // TODO: 23.12.2023  Metody boolean = zmienić returny   (Zrobione)
 // TODO: 23.12.2023 Waity w metodach click i sendkeys   (Zrobione)
-// TODO: 08.01.2024 Użyć klasę select
+// TODO: 08.01.2024 Użyć klasę select oraz action
 
 

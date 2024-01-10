@@ -43,8 +43,8 @@ public class LoginPage extends BasicPage {
         return this;
     }
 
-    public LoginPage inputPassword() {
-        sendKeysToElement(passwordField, "admin");
+    public LoginPage inputPassword(String passwsord) {
+        sendKeysToElement(passwordField, passwsord);
         return this;
     }// TODO: 08.01.2024 poprawić zmienną !
 
@@ -86,16 +86,14 @@ public class LoginPage extends BasicPage {
         return this;
     }
     public boolean isThereNoPasswordInsert() {
-        wait.until(ExpectedConditions.visibilityOf(pleaseProvideAPasswordMessage)).isDisplayed();
-        return true;
+        return isElementVisible(pleaseProvideAPasswordMessage);
     }
     public LoginPage rememberMeCheckboxClick() {
         clickElement(rememberMeCheckbox);
         return this;
     }
     public boolean isTheRememberMeCheckoxTicked() {
-        wait.until(ExpectedConditions.visibilityOf(rememberMeCheckboxTicked)).isDisplayed();
-        return true;
+        return isElementVisible(rememberMeCheckboxTicked);
     }
     public String passwordMessageText() {
         return pleaseProvideAPasswordMessage.getText();

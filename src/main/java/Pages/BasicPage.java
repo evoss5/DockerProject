@@ -32,31 +32,63 @@ public class BasicPage {
                 break;
             } catch (StaleElementReferenceException | ElementClickInterceptedException e) {
                 i++;
-            }if (i>=2) {
+            }
+            if (i >= 2) {
                 throw new RuntimeException("Maximum tries reached!");
             }
         }
     }
+
     public void sendKeysToElement(WebElement webElement, String text) {
-        wait.until(ExpectedConditions.visibilityOf(webElement));
-        wait.until(ExpectedConditions.elementToBeClickable(webElement));
-        webElement.clear();
-        webElement.sendKeys(text);
-        // TODO: 08.01.2024 Zrobic while z powtorzeniami oraz odpowiednie wyjątkli, try catch
+        int i = 0;
+        while (true) {
+            try {
+                wait.until(ExpectedConditions.visibilityOf(webElement));
+                wait.until(ExpectedConditions.elementToBeClickable(webElement));
+                webElement.clear();
+                webElement.sendKeys(text);
+                break;
+            } catch (ElementNotVisibleException | StaleElementReferenceException e) {
+                i++;
+            }
+            if (i >= 2) {
+                throw new RuntimeException("Maximum tries reached");
+            }
+        }
     }
 
     public boolean isElementVisible(WebElement element) {
         try {
             wait.until(ExpectedConditions.visibilityOf(element));
             return true;
-        }catch (NoSuchElementException | TimeoutException e) {
+        } catch (NoSuchElementException | TimeoutException e) {
             return false;
         }
 
+    }
+
+    public boolean isElementEnabled(WebElement element) {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(element));
+            wait.until(ExpectedConditions.elementToBeClickable(element)).isEnabled();
+            return true;
+        } catch (ElementNotVisibleException | ElementClickInterceptedException e) {
+            return false;
+        }
+    }
+
+    public boolean isElementSelected(WebElement element) {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(element));
+            wait.until(ExpectedConditions.elementToBeClickable(element)).isSelected();
+            return true;
+        } catch (ElementNotVisibleException | ElementNotSelectableException e) {
+            return false;
+        }
     }
 }
 
 // TODO: 30.12.2023 Metody mające coś wspólnego click, sendkeys itd.(zrobione)
 //
-
+// TODO: 08.01.2024 Zrobic while z powtorzeniami oraz odpowiednie wyjątkli, try catch (zrobione)
 

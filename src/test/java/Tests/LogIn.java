@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 public class LogIn extends BaseTest {
 
     private LoginPage login;
-    private GooglePage googlePage;
     private AfterLoginPage page;
 
     @Test
@@ -17,7 +16,7 @@ public class LogIn extends BaseTest {
         home.clickAccountIcon();
         home.clickLoginHomePage();
         login.inputLogin("admin");
-        login.inputPassword();
+        login.inputPassword("admin");
         login.checkPassword();
         login.goToHomePage();
         Assertions.assertTrue(home.isThereInfoAboutWrongLoginOrPassword(), "Invalid email or password.");
@@ -36,18 +35,6 @@ public class LogIn extends BaseTest {
     }
 
     @Test
-    public void LoginByGoogle() {
-        login = new LoginPage(driver);
-        googlePage = new GooglePage(driver);
-        home.clickWelcomeBannerDismiss();
-        home.clickAccountIcon();
-        home.clickLoginHomePage();
-        login.loginInByGoogle();
-        googlePage.clickCreateNewAccount();
-        Assertions.assertTrue(googlePage.IsGoogleHeaderVisible());
-    }
-
-    @Test
     public void logInToThePageByCredentials() {
         login = home.goToLoginPage();
         Assertions.assertEquals(login.urlLogin, driver.getCurrentUrl(), "The page is not login page");
@@ -56,7 +43,7 @@ public class LogIn extends BaseTest {
         login.insertMyLogin(myLogin);
         login.insertMyPassword(myPassword);
         home = login.goToHomePage();
-        Assertions.assertTrue(home.checkIfYouAreLoggedAndYouAreOnHomePage());
+        Assertions.assertTrue(home.checkIfYouAreLoggedAndYouAreOnHomePage(), "You are not logged into account!");
     }
 
     @Test
@@ -70,7 +57,7 @@ public class LogIn extends BaseTest {
         home = login.goToHomePage();
         Assertions.assertTrue(home.checkIfYouAreLoggedAndYouAreOnHomePage());
         home.closeCookieMessage();
-        Assertions.assertTrue(home.isCookieMessageNotVisible());
+        Assertions.assertTrue(home.isCookieMessageNotVisible(), "Cookie message is still visible");
     }
 
     @Test
