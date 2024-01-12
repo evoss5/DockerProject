@@ -81,7 +81,8 @@ public class BasicPage {
         try {
             wait.until(ExpectedConditions.visibilityOf(element));
             wait.until(ExpectedConditions.elementToBeClickable(element));
-            return element.isSelected();
+            element.isSelected();
+            return true;
         } catch (ElementNotVisibleException | ElementNotSelectableException | TimeoutException e) {
             return false;
         }

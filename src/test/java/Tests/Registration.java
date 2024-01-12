@@ -89,7 +89,7 @@ public class Registration extends BaseTest {
         register.chooseSecurityQuestion("Mother");
         Assertions.assertTrue(register.checkIfThereIsPasswordNoMatchMessage());
         register.setAnswerForSecurityQuestion(name);
-        Assertions.assertTrue(register.checkIfThereIsMessageAboutPasswordsNotMatching());
+        Assertions.assertTrue(register.checkIfThereIsMessageAboutPasswordsNotMatching(), "Passwords do not match!");
     }
 }
 // TODO: 25.12.2023 Usunać home z testów (zrobione)

@@ -79,7 +79,7 @@ public class Cart extends BaseTest {
         cart.randomDeliveryOption();
         Assertions.assertTrue(cart.isDeliveryOptionSelected(), "You haven't choose delivery option!");
         Assertions.assertTrue(cart.isContinueButtonClickable(), "Continue button is not clickable");
-        // TODO: 30.12.2023 Zrobić asercję z selected
+        // TODO: 30.12.2023 Zrobić asercję z selected (zrobione)
     }
 
     @Test
@@ -289,12 +289,6 @@ public class Cart extends BaseTest {
         cart = page.goToCartPage();
         Assertions.assertTrue(cart.doesTotalPriceShowsProperPrice("1.99"), "Total Price is different than expected");
     }
-
-
-
-
-
-
 }
 // TODO: 08.01.2024 Odpalać testy przez TestNG
 

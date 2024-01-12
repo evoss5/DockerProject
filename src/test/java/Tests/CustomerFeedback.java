@@ -35,7 +35,6 @@ public class CustomerFeedback extends BaseTest {
         String name = service.getRandomValue(service.namesList());
         cart.inputNameForDeluxeMembership(name);
         cart.randomExpiryMonthForDeluxeMembership("2");
-//        cart.randomExpiryYear();
         cart.expiryYearDropdown("2082");
         cart.submitButtonClick();
         cart.chooseCreditCard();
@@ -72,5 +71,4 @@ public class CustomerFeedback extends BaseTest {
         Assertions.assertNotEquals("0", customer.getRatingFromSliderBar(), "You haven't rated our page");
         // TODO: 05.01.2024 dokończyć (zrobione)
     }
-
 }

@@ -9,10 +9,6 @@ public class HomePage extends BasicPage {
 
     @FindBy(xpath = "//*[@aria-label='Open Sidenav']")
     private WebElement sideNavButton;
-    @FindBy(xpath = ".//*[@aria-label='Back to homepage']")
-    private WebElement mainPageLogo;
-    @FindBy(xpath = ".//span/mat-icon[2]")
-    private WebElement searchIcon;
     @FindBy(xpath = ".//*[@aria-label='Show/hide account menu']")
     private WebElement accountIcon;
     @FindBy(xpath = ".//*[@aria-label='Language selection menu']")
@@ -21,13 +17,9 @@ public class HomePage extends BasicPage {
     private WebElement cookieMessage;
     @FindBy(xpath = ".//*[@aria-label='Close Welcome Banner']")
     private WebElement welcomeBannerDismiss;
-    @FindBy(xpath = ".//span[text()=' GitHub ']")
-    private WebElement gitHubRef;
-    // TODO: 08.01.2024 Zrobić dynamiczny xpath na zmianę języka
+    // TODO: 08.01.2024 Zrobić dynamiczny xpath na zmianę języka (zrobione)
     @FindBy(xpath = ".//button[@id='navbarLoginButton']")
     private WebElement loginHomePage;
-    @FindBy(xpath = ".//span[text()=' Konto ']")
-    private WebElement checkIfLanguageIsPolish;
     @FindBy(xpath = "//div[text()='Invalid email or password.']")
     private WebElement invalidEmailOrPasswordInfo;
     @FindBy(xpath = "//button[@aria-label='Add to Basket']")
@@ -36,14 +28,11 @@ public class HomePage extends BasicPage {
     private WebElement deluxeMembershipButton;
     @FindBy(xpath = "//span[text()=' Customer Feedback ']")
     private WebElement customerFeedbackButton;
-    @FindBy(xpath = "//mat-slider[@id='rating' and @aria-valuenow='3']")
-    private WebElement ratingSlider;
     @FindBy(xpath = "//span[text()='Become a member']")
     private WebElement becomeAMemberButton;
     @FindBy(xpath = "//button[@id='navbarLogoutButton']")
     private WebElement logOutButton;
-    @FindBy(xpath = "//button[@aria-label='Show the shopping cart']")
-    private WebElement shoppingCartButton;
+
 
 
     public HomePage(WebDriver driver) {
@@ -52,16 +41,6 @@ public class HomePage extends BasicPage {
 
     public HomePage sideNavButtonClick() {
         clickElement(sideNavButton);
-        return this;
-    }
-
-    public HomePage clickMainLogoPage() {
-        clickElement(mainPageLogo);
-        return this;
-    }
-
-    public HomePage clickSearchIcon() {
-        clickElement(searchIcon);
         return this;
     }
 
@@ -110,12 +89,6 @@ public class HomePage extends BasicPage {
         }
         return this;
     }
-
-    public HomePage clickGitHub() {
-        clickElement(gitHubRef);
-        return this;
-    }
-
     public HomePage changeLanguage(String language) {
         WebElement changeLanguageTo = driver.findElement(By.xpath("//label//span//input[@aria-label='" + language + "']/ancestor::label"));
         clickElement(changeLanguageTo);
@@ -131,9 +104,6 @@ public class HomePage extends BasicPage {
         return isElementVisible(loginHomePage);
     }
 
-    public boolean clickCheckIfLanguageIsPolish() {
-        return isElementVisible(checkIfLanguageIsPolish);
-    }
 
     public boolean isThereInfoAboutWrongLoginOrPassword() {
         return isElementVisible(invalidEmailOrPasswordInfo);
@@ -148,6 +118,7 @@ public class HomePage extends BasicPage {
         clickLoginHomePage();
         return new LoginPage(driver);
     }
+
     public CustomerFeedbackPage goToCustomerPage() {
         sideNavButtonClick();
         customerFeedbackButtonClick();
@@ -171,11 +142,6 @@ public class HomePage extends BasicPage {
         clickElement(customerFeedbackButton);
         return this;
     }
-
-
-//        // TODO: 08.01.2024 Poprawic slidera
-
-
     public HomePage becomeAMemberButtonClick() {
         clickElement(becomeAMemberButton);
         return this;
@@ -185,13 +151,6 @@ public class HomePage extends BasicPage {
         clickElement(logOutButton);
         return this;
     }
-
-    public boolean isShoppingCartButtonVisible() {
-        wait.until(ExpectedConditions.invisibilityOf(shoppingCartButton));
-        return true;
-    }
-
-
 }
 
 

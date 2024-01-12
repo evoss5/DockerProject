@@ -49,8 +49,6 @@ public class CartPage extends BasicPage {
     private WebElement confirmationMessage;
     @FindBy(xpath = "//input[@id='mat-input-10']")
     private WebElement purchaserNameField;
-    @FindBy(xpath = "//option[@value>'0' and @value<13]")
-    private WebElement expiryMonthDate;
     @FindBy(xpath = "//h1[text()='Delivery Address']")
     private WebElement deliveryMessage;
     @FindBy(xpath = "//select[@id='mat-input-12']")
@@ -84,7 +82,6 @@ public class CartPage extends BasicPage {
         clickElement(addNewAddressButton);
         return this;
     }
-    // TODO: 08.01.2024 Pozmieniać nazwy metod, żeby były bardziej intuicyjne
 
     public CartPage inputCountryName(String country) {
         sendKeysToElement(countryField, country);
@@ -139,11 +136,6 @@ public class CartPage extends BasicPage {
         return isElementEnabled(continueButton);
     }
 
-    public CartPage chooseDeliveryOptionButtonClick() {
-        clickElement(deliveryOption);
-        return this;
-    }
-
     public CartPage inputCardNumber(String cardNumber) {
         sendKeysToElement(inputCardNumber, cardNumber);
         return this;
@@ -194,14 +186,6 @@ public class CartPage extends BasicPage {
         return this;
     }
 
-    public CartPage randomName() {
-        List<WebElement> nameOptions = driver.findElements(CELL_NAME);
-        int randomNameOption = nameOptions.size();
-        int randomName2 = random.nextInt(randomNameOption);
-        nameOptions.get(randomName2).click();
-        return this;
-    }
-
     public CartPage randomDeliveryOption() {
         List<WebElement> deliveryOptions = driver.findElements(By.xpath("//mat-row"));
         int randomDeliveryOption = deliveryOptions.size();
@@ -241,7 +225,7 @@ public class CartPage extends BasicPage {
     public String invalidSixteenDigitCardNumber() {
         wait.until(ExpectedConditions.visibilityOf(invalidCardNumberMessage));
         return invalidCardNumberMessage.getText();
-        // TODO: 08.01.2024 Do poprawy
+        // TODO: 08.01.2024 Do poprawy (zrobione)
     }
 
     public boolean doesTotalPriceShowsProperPrice(String element) {
@@ -255,14 +239,12 @@ public class CartPage extends BasicPage {
     }
 
     public CartPage randomExpiryMonthForDeluxeMembership(String month) {
-        WebElement field = driver.findElement(By.xpath("//select[@id='mat-input-5']"));
-        Select dropdown = new Select(field);
+        Select dropdown = new Select(expiryMonthFieldForDeluxeMembership);
         dropdown.selectByValue(month);
         return this;
     }
 
     public CartPage expiryYearDropdown(String year) {
-//        clickElement(expiryYearField);
         Select dropdown = new Select(expiryYearField);
         dropdown.selectByValue(year);
         return this;
@@ -273,6 +255,6 @@ public class CartPage extends BasicPage {
 // TODO: 23.12.2023  Metody boolean = zmienić returny   (Zrobione)
 // TODO: 23.12.2023 Waity w metodach click i sendkeys   (Zrobione)
 // TODO: 08.01.2024 Użyć klasę select oraz action (Zrobione)
-// TODO: 10.01.2024 Zrobić kolejnego paga do customer feedback
+// TODO: 10.01.2024 Zrobić kolejnego paga do customer feedback (Zrobione)
 
 

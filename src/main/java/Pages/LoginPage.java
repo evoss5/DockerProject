@@ -6,8 +6,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LoginPage extends BasicPage {
-    @FindBy(xpath = ".//button[@id='loginButtonGoogle']")
-    private WebElement googleLoginButton;
     @FindBy(xpath = ".//button[@id='loginButton']")
     private WebElement standardLoginButton;
     @FindBy(xpath = ".//input[@id='email']")
@@ -16,8 +14,6 @@ public class LoginPage extends BasicPage {
     private WebElement passwordField;
     @FindBy(xpath = ".//*[@aria-label='Eye']")
     private WebElement showPassword;
-    @FindBy(xpath = ".//button[@aria-label='Back to homepage']")
-    private WebElement returnToHomePage;
     @FindBy(xpath = "//div[@id='newCustomerLink']")
     private WebElement createAccountButton;
     @FindBy(xpath = "//mat-error[@id='mat-error-1']")
@@ -35,10 +31,6 @@ public class LoginPage extends BasicPage {
         super(driver);
     }
 
-    public LoginPage loginInByGoogle() {
-        clickElement(googleLoginButton);
-        return this;
-    }
 
     public LoginPage inputLogin(String login) {
         sendKeysToElement(emailField, login);
@@ -52,11 +44,6 @@ public class LoginPage extends BasicPage {
 
     public LoginPage checkPassword() {
         clickElement(showPassword);
-        return this;
-    }
-
-    public LoginPage returnToHomePageClick() {
-        clickElement(returnToHomePage);
         return this;
     }
 

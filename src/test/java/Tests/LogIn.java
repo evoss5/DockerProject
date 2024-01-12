@@ -73,7 +73,7 @@ public class LogIn extends BaseTest {
         home.clickAccountIcon();
         home.logOutFromAccount();
         home.clickAccountIcon();
-        Assertions.assertTrue(home.isLogInButtonAvailable());
+        Assertions.assertTrue(home.isLogInButtonAvailable(), "You are still logged! Logout.");
     }
     @Test
     public void logInByRememberMeCheckbox() {
@@ -89,7 +89,7 @@ public class LogIn extends BaseTest {
         home.clickAccountIcon();
         home.logOutFromAccount();
         login = home.goToLoginPage();
-        Assertions.assertTrue(login.isTheRememberMeCheckoxTicked());
+        Assertions.assertTrue(login.isTheRememberMeCheckoxTicked(), "You are not logged! Try to login again");
     }
     @Test
     public void changeLanguage() {

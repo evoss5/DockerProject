@@ -26,12 +26,8 @@ public class RegistrationPage extends BasicPage {
     private WebElement registrationIsCompleteInfo;
     @FindBy(xpath = "//mat-error[@id='mat-error-10']")
     private WebElement passwordDoNotMatchMessage;
-    @FindBy(xpath = "//mat-error[@id='mat-error-7']")
-    private WebElement emailAddressIsNotValidText;
-    @FindBy(xpath = "//mat-error[@id='mat-error-10']")
-    private WebElement passwordsDoNotMatchText;
-    @FindBy(xpath = "//mat-select[@aria-label='Selection list for the security question']/div/div/span/span[contains(text(),'Mother')]")
-    private WebElement optionForSecurityQuestion;
+
+
 
     public RegistrationPage(WebDriver driver) {
         super(driver);
@@ -62,11 +58,6 @@ public class RegistrationPage extends BasicPage {
         return this;
     }
 
-    public RegistrationPage chooseSecurityOption() {
-        wait.until(ExpectedConditions.visibilityOf(securityQuestionOption));
-        securityQuestionOption.click();
-        return this;
-    }
 
     public RegistrationPage setAnswerForSecurityQuestion(String name) {
         sendKeysToElement(answerForSecurityQuestion, name);
@@ -80,11 +71,6 @@ public class RegistrationPage extends BasicPage {
 
     public boolean checkIfAccountIsCreatedSucessfuly() {
         return isElementVisible(registrationIsCompleteInfo);
-    }
-
-    public boolean checkIfRegisterButtonIsEnabled() {
-        wait.until(ExpectedConditions.visibilityOf(registerButton));
-        return registerButton.isEnabled();
     }
 
     public boolean checkIfThereIsPasswordNoMatchMessage() {
