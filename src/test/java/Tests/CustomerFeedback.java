@@ -22,10 +22,10 @@ public class CustomerFeedback extends BaseTest {
         String myPassword = service.getCredentialValue("myPassword");
         login.insertMyLogin(myLogin);
         login.insertMyPassword(myPassword);
-        home = login.goToHomePage();
-        Assertions.assertTrue(page.isCartLayoutVisible(), "You are not logged!");
-        home.sideNavButtonClick();
-        home.deluxeMembershipButtonClick();
+        home = login.clickLoginButton();
+        Assertions.assertTrue(page.isCartButtonVisible(), "You are not logged!");
+//        home.sideNavButtonClick();
+        home.clickDeluxeMembershipButton();
         home.becomeAMemberButtonClick();
         cart = new CartPage(driver);
         cart.addCreditCard();
@@ -39,7 +39,7 @@ public class CustomerFeedback extends BaseTest {
         cart.submitButtonClick();
         cart.chooseCreditCard();
         cart.continueButtonClick();
-        Assertions.assertTrue(home.isDeluxeMembershipAlreadyPurchased(), "You are not Deluxe Member yet");
+        Assertions.assertTrue(home.isDeluxeMembershipButtonVisible(), "You are not Deluxe Member yet");
     }
     @Test
     public void checkIfYouAreDeluxeMemberAlready() {
@@ -49,11 +49,11 @@ public class CustomerFeedback extends BaseTest {
         String myPassword = service.getCredentialValue("myPassword");
         login.insertMyLogin(myLogin);
         login.insertMyPassword(myPassword);
-        home = login.goToHomePage();
-        Assertions.assertTrue(page.isCartLayoutVisible(), "You are not logged!");
+        home = login.clickLoginButton();
+        Assertions.assertTrue(page.isCartButtonVisible(), "You are not logged!");
         home.sideNavButtonClick();
-        home.deluxeMembershipButtonClick();
-        Assertions.assertTrue(home.isDeluxeMembershipAlreadyPurchased(), "You are not Deluxe Member yet!");
+        home.clickDeluxeMembershipButton();
+        Assertions.assertTrue(home.isDeluxeMembershipButtonVisible(), "You are not Deluxe Member yet!");
     }
     @Test
     public void choosingRateOnSliderForCustomerFeedback() throws InterruptedException {
@@ -63,12 +63,13 @@ public class CustomerFeedback extends BaseTest {
         String myPassword = service.getCredentialValue("myPassword");
         login.insertMyLogin(myLogin);
         login.insertMyPassword(myPassword);
-        home = login.goToHomePage();
-        Assertions.assertTrue(page.isCartLayoutVisible(), "You are not logged!");
+        home = login.clickLoginButton();
+        Assertions.assertTrue(page.isCartButtonVisible(), "You are not logged!");
         customer = home.goToCustomerPage();
-        customer.commentTextArea("Hello!");
-        customer.chooseSliderRating();
-        Assertions.assertNotEquals("0", customer.getRatingFromSliderBar(), "You haven't rated our page");
+        customer.commentField("Hello!");
+        int rating = 2;
+        customer.chooseRating(rating);
+        Assertions.assertEquals(String.valueOf(rating), customer.getRatingFromSliderBar(), "You haven't rated our page");
         // TODO: 05.01.2024 dokończyć (zrobione)
     }
 }

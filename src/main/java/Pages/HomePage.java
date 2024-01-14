@@ -1,9 +1,9 @@
 package Pages;
 
-import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class HomePage extends BasicPage {
 
@@ -12,16 +12,15 @@ public class HomePage extends BasicPage {
     @FindBy(xpath = ".//*[@aria-label='Show/hide account menu']")
     private WebElement accountIcon;
     @FindBy(xpath = ".//*[@aria-label='Language selection menu']")
-    private WebElement languageSelectionMenu;
+    private WebElement languageSelectionMenuButton;
     @FindBy(xpath = ".//a[@aria-label = 'dismiss cookie message']")
-    private WebElement cookieMessage;
+    private WebElement cookieMessageButton;
     @FindBy(xpath = ".//*[@aria-label='Close Welcome Banner']")
-    private WebElement welcomeBannerDismiss;
-    // TODO: 08.01.2024 Zrobić dynamiczny xpath na zmianę języka (zrobione)
+    private WebElement welcomeBannerDismissButton;
     @FindBy(xpath = ".//button[@id='navbarLoginButton']")
-    private WebElement loginHomePage;
+    private WebElement loginHomePageButton;
     @FindBy(xpath = "//div[text()='Invalid email or password.']")
-    private WebElement invalidEmailOrPasswordInfo;
+    private WebElement invalidEmailOrPasswordMessage;
     @FindBy(xpath = "//button[@aria-label='Add to Basket']")
     private WebElement addToCardButton;
     @FindBy(xpath = "//span[text()=' Deluxe Membership ']")
@@ -32,7 +31,6 @@ public class HomePage extends BasicPage {
     private WebElement becomeAMemberButton;
     @FindBy(xpath = "//button[@id='navbarLogoutButton']")
     private WebElement logOutButton;
-
 
 
     public HomePage(WebDriver driver) {
@@ -49,68 +47,62 @@ public class HomePage extends BasicPage {
         return this;
     }
 
-    public HomePage clickLanguageSelectionMenu() {
-        clickElement(languageSelectionMenu);
+    public HomePage clickLanguageSelectionMenuButton() {
+        clickElement(languageSelectionMenuButton);
         return this;
     }
 
-    public HomePage clickDismissCookieMessage() {
-        clickElement(cookieMessage);
+    public HomePage clickDismissCookieMessageButton() {
+        clickElement(cookieMessageButton);
         return this;
     }
 
-    public HomePage clickWelcomeBannerDismiss() {
-        clickElement(welcomeBannerDismiss);
+    public HomePage clickWelcomeBannerDismissButton() {
+        clickElement(welcomeBannerDismissButton);
         return this;
     }
 
-    public boolean isWelcomeBannerVisible() {
-        return isElementVisible(welcomeBannerDismiss);
+    public boolean isWelcomeBannerOkButtonVisible() {
+        return isElementVisible(welcomeBannerDismissButton);
     }
 
-    public boolean isCookieMessageVisible() {
-        return isElementVisible(cookieMessage);
+    public boolean isCookieAcceptButtonVisible() {
+        return isElementVisible(cookieMessageButton);
     }
 
-    public boolean isCookieMessageNotVisible() {
-        return wait.until(ExpectedConditions.invisibilityOf(cookieMessage));
-    }
-
-    public HomePage closeCookieMessage() {
-        if (isCookieMessageVisible()) {
-            clickDismissCookieMessage();
+    public HomePage clickAcceptCookieButton() {
+        if (isCookieAcceptButtonVisible()) {
+            clickDismissCookieMessageButton();
         }
         return this;
     }
 
-    public HomePage closeWelcomeBanner() {
-        if (isWelcomeBannerVisible()) {
-            clickWelcomeBannerDismiss();
+    public HomePage clickWelcomeBannerOkButton() {
+        if (isWelcomeBannerOkButtonVisible()) {
+            clickWelcomeBannerDismissButton();
         }
         return this;
     }
-    public HomePage changeLanguage(String language) {
+
+    public HomePage selectLanguage(String language) {
         WebElement changeLanguageTo = driver.findElement(By.xpath("//label//span//input[@aria-label='" + language + "']/ancestor::label"));
         clickElement(changeLanguageTo);
         return this;
     }
 
-    public HomePage clickLoginHomePage() {
-        clickElement(loginHomePage);
+    private HomePage clickLoginHomePage() {
+        clickElement(loginHomePageButton);
         return this;
     }
 
-    public boolean isLogInButtonAvailable() {
-        return isElementVisible(loginHomePage);
+    public boolean isLogInButtonVisible() {
+        return isElementVisible(loginHomePageButton);
     }
 
 
     public boolean isThereInfoAboutWrongLoginOrPassword() {
-        return isElementVisible(invalidEmailOrPasswordInfo);
-    }
-
-    public boolean isWelcomeMessageDismissed() {
-        return isElementVisible(welcomeBannerDismiss);
+        return isElementVisible(invalidEmailOrPasswordMessage);
+        // TODO: 14.01.2024 Poprawić !
     }
 
     public LoginPage goToLoginPage() {
@@ -121,33 +113,34 @@ public class HomePage extends BasicPage {
 
     public CustomerFeedbackPage goToCustomerPage() {
         sideNavButtonClick();
-        customerFeedbackButtonClick();
+        clickCustomerFeedbackButton();
         return new CustomerFeedbackPage(driver);
     }
 
-    public boolean checkIfYouAreLoggedAndYouAreOnHomePage() {
+    public boolean isAddToCartButtonVisible() {
         return isElementVisible(addToCardButton);
     }
 
-    public HomePage deluxeMembershipButtonClick() {
+    public HomePage clickDeluxeMembershipButton() {
         clickElement(deluxeMembershipButton);
         return this;
     }
 
-    public boolean isDeluxeMembershipAlreadyPurchased() {
+    public boolean isDeluxeMembershipButtonVisible() {
         return isElementVisible(deluxeMembershipButton);
     }
 
-    private HomePage customerFeedbackButtonClick() {
+    private HomePage clickCustomerFeedbackButton() {
         clickElement(customerFeedbackButton);
         return this;
     }
+
     public HomePage becomeAMemberButtonClick() {
         clickElement(becomeAMemberButton);
         return this;
     }
 
-    public HomePage logOutFromAccount() {
+    public HomePage clickLogOutButton() {
         clickElement(logOutButton);
         return this;
     }

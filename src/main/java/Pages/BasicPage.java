@@ -1,17 +1,14 @@
 package Pages;
 
-import org.junit.platform.commons.logging.Logger;
-import org.junit.platform.commons.logging.LoggerFactory;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.log4testng.Logger;
 
 public class BasicPage {
 
-    private static final Logger LOGGER =
-            LoggerFactory.getLogger(BasicPage.class);
-
+    private static final Logger LOGGER = Logger.getLogger(BasicPage.class);
     protected WebDriver driver;
     protected WebDriverWait wait;
     private static final int TIMEOUT = 5;
@@ -62,6 +59,8 @@ public class BasicPage {
             wait.until(ExpectedConditions.visibilityOf(element));
             return true;
         } catch (NoSuchElementException | TimeoutException e) {
+
+            LOGGER.error("Element is not visible  " + e.getMessage());
             return false;
         }
 
@@ -73,6 +72,7 @@ public class BasicPage {
             wait.until(ExpectedConditions.elementToBeClickable(element));
             return element.isEnabled();
         } catch (StaleElementReferenceException | ElementNotInteractableException | TimeoutException e) {
+            LOGGER.error("Element is not enabled " + e.getMessage());
             return false;
         }
     }
@@ -81,15 +81,22 @@ public class BasicPage {
         try {
             wait.until(ExpectedConditions.visibilityOf(element));
             wait.until(ExpectedConditions.elementToBeClickable(element));
-            element.isSelected();
-            return true;
+            return element.isSelected();
         } catch (ElementNotVisibleException | ElementNotSelectableException | TimeoutException e) {
+            LOGGER.error("Element is not selected " + e.getMessage());
             return false;
         }
     }
+    public boolean isRadioButtonSelected(WebElement element) {
+        wait.until(ExpectedConditions.visibilityOf(element));
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+        return element.getAttribute("class").contains("mat-radio-checked");
+    }
+
 }
 
 // TODO: 30.12.2023 Metody mające coś wspólnego click, sendkeys itd.(zrobione)
 //
 // TODO: 08.01.2024 Zrobic while z powtorzeniami oraz odpowiednie wyjątkli, try catch (zrobione)
 
+// TODO: 14.01.2024 Zrobić metode do cheboxow na selected tak samo jak to radio buttonów.

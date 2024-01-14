@@ -34,15 +34,15 @@ public class CartPage extends BasicPage {
     @FindBy(xpath = "//span[text()='Continue']")
     private WebElement continueButton;
     @FindBy(xpath = "//mat-row")
-    private WebElement deliveryOption;
+    private WebElement deliveryOptionRadioButton;
     @FindBy(xpath = "//input[@type='number']")
     private WebElement inputCardNumber;
     @FindBy(xpath = "//mat-panel-description[text()=' Add a credit or debit card ']")
-    private WebElement creditCardPanel;
-    @FindBy(xpath = "//label[@class='mat-radio-label']")
+    private WebElement creditCardDropdown;
+    @FindBy(xpath = "//span[@class='mat-radio-container']/../..")
     private WebElement creditCardCheckbox;
     @FindBy(xpath = "//div[@class='order-summary']")
-    private WebElement orderSummaryLayout;
+    private WebElement orderSummaryField;
     @FindBy(xpath = "//button[@id='checkoutButton']")
     private WebElement placeYourOrderButton;
     @FindBy(xpath = "//h1[@class='confirmation']")
@@ -50,7 +50,7 @@ public class CartPage extends BasicPage {
     @FindBy(xpath = "//input[@id='mat-input-10']")
     private WebElement purchaserNameField;
     @FindBy(xpath = "//h1[text()='Delivery Address']")
-    private WebElement deliveryMessage;
+    private WebElement deliveryAddressPageHeader;
     @FindBy(xpath = "//select[@id='mat-input-12']")
     private WebElement expiryMonthField;
     @FindBy(xpath = "//select[@id='mat-input-6']")
@@ -58,11 +58,11 @@ public class CartPage extends BasicPage {
     @FindBy(xpath = "//*[starts-with(text(),'Your card ending with')]")
     private WebElement successfulAddedCardMessage;
     @FindBy(xpath = "//div[@id='price']")
-    private WebElement totalPriceText;
+    private WebElement totalPriceValue;
     @FindBy(xpath = "//input[@id='mat-input-3']")
-    private WebElement nameFieldForDeluxeMembership;
+    private WebElement cardOwnerNameField;
     @FindBy(xpath = "//select[@id='mat-input-5']")
-    private WebElement expiryMonthFieldForDeluxeMembership;
+    private WebElement cardExpiryDateField;
     @FindBy(xpath = "//mat-error[@id='mat-error-19']")
     private WebElement invalidCardNumberMessage;
 
@@ -142,7 +142,7 @@ public class CartPage extends BasicPage {
     }
 
     public CartPage addCreditCard() {
-        clickElement(creditCardPanel);
+        clickElement(creditCardDropdown);
         return this;
     }
 
@@ -152,7 +152,7 @@ public class CartPage extends BasicPage {
     }
 
     public boolean isOrderSummaryVisible() {
-        return isElementVisible(orderSummaryLayout);
+        return isElementVisible(orderSummaryField);
     }
 
     public CartPage purchaseProducts() {
@@ -196,7 +196,7 @@ public class CartPage extends BasicPage {
     }
 
     public boolean isDeliveryMessageVisible() {
-        return isElementVisible(deliveryMessage);
+        return isElementVisible(deliveryAddressPageHeader);
     }
 
     public CartPage expiryMonthFieldClick() {
@@ -215,11 +215,11 @@ public class CartPage extends BasicPage {
     }
 
     public boolean isDeliveryOptionSelected() {
-        return isElementSelected(deliveryOption);
+        return isElementSelected(deliveryOptionRadioButton);
     }
 
     public boolean checkIfTheCardIsSelected() {
-        return isElementSelected(creditCardCheckbox);
+        return isRadioButtonSelected(creditCardCheckbox);
     }
 
     public String invalidSixteenDigitCardNumber() {
@@ -229,17 +229,17 @@ public class CartPage extends BasicPage {
     }
 
     public boolean doesTotalPriceShowsProperPrice(String element) {
-        wait.until(ExpectedConditions.visibilityOf(totalPriceText));
+        wait.until(ExpectedConditions.visibilityOf(totalPriceValue));
         return driver.findElement(By.xpath("//div[@id='price' and contains(text(),'Total Price: " + element + "¤')]")).isDisplayed();
     }
 
     public CartPage inputNameForDeluxeMembership(String name) {
-        sendKeysToElement(nameFieldForDeluxeMembership, name);
+        sendKeysToElement(cardOwnerNameField, name);
         return this;
     }
 
     public CartPage randomExpiryMonthForDeluxeMembership(String month) {
-        Select dropdown = new Select(expiryMonthFieldForDeluxeMembership);
+        Select dropdown = new Select(cardExpiryDateField);
         dropdown.selectByValue(month);
         return this;
     }

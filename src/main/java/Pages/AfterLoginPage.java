@@ -17,12 +17,12 @@ public class AfterLoginPage extends BasicPage {
     }
 
     public AfterLoginPage chooseProductToAdd(String product) {
-        WebElement element = driver.findElement(By.xpath("//button[@aria-label='Add to Basket']/../../div/div/img[@alt='" + product + "']/../../following-sibling::div/button"));
-        element.click();
+        WebElement productName = driver.findElement(By.xpath("//button[@aria-label='Add to Basket']/../../div/div/img[@alt='" + product + "']/../../following-sibling::div/button"));
+        clickElement(productName);
         return this;
     }
 
-    public boolean isTotalPriceLayoutVisible() {
+    public boolean isTotalPriceFieldVisible() {
         return isElementVisible(totalPriceField);
     }
 
@@ -31,7 +31,7 @@ public class AfterLoginPage extends BasicPage {
         return new CartPage(driver);
     }
 
-    public boolean isCartLayoutVisible() {
+    public boolean isCartButtonVisible() {
         return isElementVisible(cartButton);
     }
 }

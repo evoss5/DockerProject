@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
-public class CustomerFeedbackPage extends BasicPage{
+public class CustomerFeedbackPage extends BasicPage {
 
     @FindBy(xpath = "//div[@class='mat-slider-thumb']")
     private WebElement sliderThumb;
@@ -13,6 +13,7 @@ public class CustomerFeedbackPage extends BasicPage{
     private WebElement sliderBar;
     @FindBy(xpath = "//textarea[@id='comment']")
     private WebElement commentTextArea;
+
     public CustomerFeedbackPage(WebDriver driver) {
         super(driver);
     }
@@ -38,15 +39,16 @@ public class CustomerFeedbackPage extends BasicPage{
         actions.dragAndDropBy(sliderThumb, calculateOffset(slider, desiredValue), 0).perform();
     }
 
-    public CustomerFeedbackPage commentTextArea(String text) {
-        sendKeysToElement(commentTextArea, "text");
+    public CustomerFeedbackPage commentField(String text) {
+        sendKeysToElement(commentTextArea, text);
         return this;
     }
-    public String getRatingFromSliderBar(){
+
+    public String getRatingFromSliderBar() {
         return sliderBar.getAttribute("aria-valuenow");
     }
-    public void chooseSliderRating() throws InterruptedException {
-        Thread.sleep(3000);
-        moveSlider(sliderThumb, sliderBar, 2);
+
+    public void chooseRating(int rating) {
+        moveSlider(sliderThumb, sliderBar, rating);
     }
 }

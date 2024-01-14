@@ -15,15 +15,13 @@ public class RegistrationPage extends BasicPage {
     @FindBy(xpath = "//input[@id='repeatPasswordControl']")
     private WebElement repeatPasswordField;
     @FindBy(xpath = "//*[@id='mat-select-2']")
-    private WebElement securityQuestionField;
-    @FindBy(xpath = ".//*[@id='mat-option-9']")
-    private WebElement securityQuestionOption;
+    private WebElement securityQuestionDropdownButton;
     @FindBy(xpath = "//input[@id='securityAnswerControl']")
-    private WebElement answerForSecurityQuestion;
+    private WebElement answerQuestionField;
     @FindBy(xpath = "//button[@id='registerButton']")
     private WebElement registerButton;
     @FindBy(xpath = "//*[text()='Registration completed successfully. You can now log in.']")
-    private WebElement registrationIsCompleteInfo;
+    private WebElement registrationCompletedMessage;
     @FindBy(xpath = "//mat-error[@id='mat-error-10']")
     private WebElement passwordDoNotMatchMessage;
 
@@ -48,45 +46,40 @@ public class RegistrationPage extends BasicPage {
         return this;
     }
 
-    public boolean checkIfPageShowsEmailField() {
+    public boolean isEmailFieldVisible() {
         return isElementVisible(emailField);
     }
 
-    public RegistrationPage clickSecurityQuestionField() {   //oddzielna metoda + dynamiczny xpath
-        wait.until(ExpectedConditions.visibilityOf(securityQuestionField));
-        securityQuestionField.click();
+    public RegistrationPage clickSecurityQuestionField() {
+        wait.until(ExpectedConditions.visibilityOf(securityQuestionDropdownButton));
+        securityQuestionDropdownButton.click();
         return this;
+        // TODO: 14.01.2024 Oddzielna metoda i dynamiczny xpath
     }
 
 
-    public RegistrationPage setAnswerForSecurityQuestion(String name) {
-        sendKeysToElement(answerForSecurityQuestion, name);
+    public RegistrationPage fillAnswerForSecurityQuestion(String answer) {
+        sendKeysToElement(answerQuestionField, answer);
         return this;
     }
 
     public RegistrationPage clickRegister() {
         clickElement(registerButton);
         return this;
+        // TODO: 14.01.2024 Przekierowanie do LoginPage
     }
 
-    public boolean checkIfAccountIsCreatedSucessfuly() {
-        return isElementVisible(registrationIsCompleteInfo);
+    public boolean isRegistrationCompletedMessageVisible() {
+        return isElementVisible(registrationCompletedMessage);
     }
 
-    public boolean checkIfThereIsPasswordNoMatchMessage() {
+    public boolean isPasswordDoNotMatchMessageVisible() {
         return isElementVisible(passwordDoNotMatchMessage);
     }
 
-    public boolean checkIfEmailAddressIsValid() {
-        return isElementVisible(passwordDoNotMatchMessage);
-    }
-
-    public boolean checkIfThereIsMessageAboutPasswordsNotMatching() {
-        return isElementVisible(passwordDoNotMatchMessage);
-    }
-
-    public void chooseSecurityQuestion(String question) {
-        WebElement optionForSecurityQuestion = driver.findElement(By.xpath("//div[@aria-label='Selection list for the security question']//span[contains(text(),'" + question + "')]"));
-        clickElement(optionForSecurityQuestion);
+    public RegistrationPage chooseSecurityQuestion(String question) {
+        WebElement option = driver.findElement(By.xpath("//div[@aria-label='Selection list for the security question']//span[contains(text(),'" + question + "')]"));
+        clickElement(option);
+        return this;
     }
 }

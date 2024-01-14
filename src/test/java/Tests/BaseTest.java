@@ -3,7 +3,6 @@ package Tests;
 import Pages.HomePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 public class BaseTest {
@@ -20,11 +19,11 @@ public class BaseTest {
         driver.get(service.getURL());
         driver.manage().window().maximize();
         home = new HomePage(driver);
-        home.closeWelcomeBanner();
+        home.clickWelcomeBannerOkButton();
     }
-    @AfterMethod
-    public void afterTest(){
-        driver.close();
-        driver.quit();
-    }
+//    @AfterMethod
+//    public void afterTest(){
+//        driver.close();
+//        driver.quit();
+//    }
 }
