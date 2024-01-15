@@ -19,7 +19,7 @@ public class BaseTest {
         driver.get(service.getURL());
         driver.manage().window().maximize();
         home = new HomePage(driver);
-        home.clickWelcomeBannerOkButton();
+        home.welcomeBannerOkButtonClick();
     }
 //    @AfterMethod
 //    public void afterTest(){

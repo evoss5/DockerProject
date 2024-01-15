@@ -18,15 +18,15 @@ public class CartPage extends BasicPage {
     @FindBy(xpath = "//input[@placeholder='Please provide a country.']")
     private WebElement countryField;
     @FindBy(xpath = "//input[@placeholder='Please provide a name.']")
-    private WebElement inputName;
+    private WebElement nameField;
     @FindBy(xpath = "//input[@type='number']")
-    private WebElement inputPhoneNumber;
+    private WebElement phoneNumberField;
     @FindBy(xpath = "//input[@id='mat-input-6']")
-    private WebElement inputZipCode;
+    private WebElement zipCodeField;
     @FindBy(xpath = "//input[@id='mat-input-8']")
-    private WebElement inputCityName;
+    private WebElement cityNameField;
     @FindBy(xpath = "//textarea[@id='address']")
-    private WebElement inputAddress;
+    private WebElement addressField;
     @FindBy(xpath = "//button[@id='submitButton']")
     private WebElement submitButton;
     @FindBy(xpath = "//span[@class='mat-radio-container']")
@@ -36,7 +36,7 @@ public class CartPage extends BasicPage {
     @FindBy(xpath = "//mat-row")
     private WebElement deliveryOptionRadioButton;
     @FindBy(xpath = "//input[@type='number']")
-    private WebElement inputCardNumber;
+    private WebElement cardNumberField;
     @FindBy(xpath = "//mat-panel-description[text()=' Add a credit or debit card ']")
     private WebElement creditCardDropdown;
     @FindBy(xpath = "//span[@class='mat-radio-container']/../..")
@@ -73,7 +73,7 @@ public class CartPage extends BasicPage {
         super(driver);
     }
 
-    public CartPage clickCheckoutButton() {
+    public CartPage checkoutButtonClick() {
         clickElement(checkoutButton);
         return this;
     }
@@ -83,33 +83,33 @@ public class CartPage extends BasicPage {
         return this;
     }
 
-    public CartPage inputCountryName(String country) {
+    public CartPage fillCountryNameField(String country) {
         sendKeysToElement(countryField, country);
         return this;
     }
 
-    public CartPage inputName(String name) {
-        sendKeysToElement(inputName, name);
+    public CartPage fillNameField(String name) {
+        sendKeysToElement(nameField, name);
         return this;
     }
 
-    public CartPage phoneNumber(String number) {
-        sendKeysToElement(inputPhoneNumber, number);
+    public CartPage fillPhoneNumberField(String number) {
+        sendKeysToElement(phoneNumberField, number);
         return this;
     }
 
-    public CartPage inputZipCode(String zipCode) {
-        sendKeysToElement(inputZipCode, zipCode);
+    public CartPage fillZipCodeField(String zipCode) {
+        sendKeysToElement(zipCodeField, zipCode);
         return this;
     }
 
-    public CartPage inputCityName(String city) {
-        sendKeysToElement(inputCityName, city);
+    public CartPage fillCityNameField(String city) {
+        sendKeysToElement(cityNameField, city);
         return this;
     }
 
-    public CartPage inputAddress(String address) {
-        sendKeysToElement(inputAddress, address);
+    public CartPage fillAddressField(String address) {
+        sendKeysToElement(addressField, address);
         return this;
     }
 
@@ -136,17 +136,17 @@ public class CartPage extends BasicPage {
         return isElementEnabled(continueButton);
     }
 
-    public CartPage inputCardNumber(String cardNumber) {
-        sendKeysToElement(inputCardNumber, cardNumber);
+    public CartPage fillCardNumberField(String cardNumber) {
+        sendKeysToElement(cardNumberField, cardNumber);
         return this;
     }
 
-    public CartPage addCreditCard() {
+    public CartPage creditCardDropdownClick() {
         clickElement(creditCardDropdown);
         return this;
     }
 
-    public CartPage chooseCreditCard() {
+    public CartPage creditCardCheckoxCheck() {
         clickElement(creditCardCheckbox);
         return this;
     }
@@ -155,7 +155,7 @@ public class CartPage extends BasicPage {
         return isElementVisible(orderSummaryField);
     }
 
-    public CartPage purchaseProducts() {
+    public CartPage purchaseProductsButtonClick() {
         clickElement(placeYourOrderButton);
         return this;
     }
@@ -165,7 +165,7 @@ public class CartPage extends BasicPage {
     }
 
     // TODO: 08.01.2024 Pozamieniac wszystkie metody visible(zrobione)
-    public CartPage inputPurchaserName(String name) {
+    public CartPage fillPurchaserNameField(String name) {
         sendKeysToElement(purchaserNameField, name);
         return this;
     }
@@ -206,7 +206,7 @@ public class CartPage extends BasicPage {
 
     // TODO: 30.12.2023 Zrobić dwie metody w jednej. Jedną prywatną a drugą publiczną (zrobione)
 
-    public boolean isThereMessageAboutSuccessfulAddedCard() {
+    public boolean isSuccessfullyAddedCardMessageVisible() {
         return isElementVisible(successfulAddedCardMessage);
     }
 
@@ -218,7 +218,7 @@ public class CartPage extends BasicPage {
         return isElementSelected(deliveryOptionRadioButton);
     }
 
-    public boolean checkIfTheCardIsSelected() {
+    public boolean isCreditCardCheckboxSelected() {
         return isRadioButtonSelected(creditCardCheckbox);
     }
 
@@ -233,7 +233,7 @@ public class CartPage extends BasicPage {
         return driver.findElement(By.xpath("//div[@id='price' and contains(text(),'Total Price: " + element + "¤')]")).isDisplayed();
     }
 
-    public CartPage inputNameForDeluxeMembership(String name) {
+    public CartPage fillNameForDeluxeMembershipField(String name) {
         sendKeysToElement(cardOwnerNameField, name);
         return this;
     }
@@ -244,7 +244,7 @@ public class CartPage extends BasicPage {
         return this;
     }
 
-    public CartPage expiryYearDropdown(String year) {
+    public CartPage expiryYearDropdownSelect(String year) {
         Select dropdown = new Select(expiryYearField);
         dropdown.selectByValue(year);
         return this;

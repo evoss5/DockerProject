@@ -15,7 +15,6 @@ public class AfterLoginPage extends BasicPage {
     public AfterLoginPage(WebDriver driver) {
         super(driver);
     }
-
     public AfterLoginPage chooseProductToAdd(String product) {
         WebElement productName = driver.findElement(By.xpath("//button[@aria-label='Add to Basket']/../../div/div/img[@alt='" + product + "']/../../following-sibling::div/button"));
         clickElement(productName);
@@ -35,4 +34,3 @@ public class AfterLoginPage extends BasicPage {
         return isElementVisible(cartButton);
     }
 }
-// TODO: 30.12.2023 Sprawdzić czy mogę zrobić reużywalną metodę (zrobione)

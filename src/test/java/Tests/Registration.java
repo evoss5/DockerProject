@@ -20,14 +20,15 @@ public class Registration extends BaseTest {
         String name = service.getRandomValue(service.namesList());
         String surname = service.getRandomValue((service.surnamesList()));
         String email = service.createEmailAddress(name, surname, service.randomNumber(), service.getRandomValue(service.eMailsDomenList()));
-        register.insertEmail(email);
+        register.fillEmailField(email);
         String password = service.getRandomValue(service.randomPasswordList());
         service.createRandomPassword(password, service.randomNumber());
-        register.insertPassword(password);
-        register.insertRepeatPassword(password);
-        register.clickSecurityQuestionField();
-        register.fillAnswerForSecurityQuestion(name);
-        register.clickRegister();
+        register.fillPasswordField(password);
+        register.fillRepeatPasswordField(password);
+        register.securityQuestionFieldClick();
+        register.securityQuestionChooseClick("Your eldest siblings middle name?");
+        register.fillAnswerForSecurityQuestion("Evo");
+        login = register.goToLoginPage();
         Assertions.assertTrue(register.isRegistrationCompletedMessageVisible(), "Account has not been created");
     }
 
@@ -37,12 +38,13 @@ public class Registration extends BaseTest {
         Assertions.assertEquals(login.urlLogin, driver.getCurrentUrl(), "The page is not login page");
         register = login.goToRegistrationPage();
         Assertions.assertTrue(register.isEmailFieldVisible(), "The page is not login page");
-        register.insertEmail(service.getCredentialValue("myLogin"));
-        register.insertPassword(service.getCredentialValue("myPassword"));
-        register.insertRepeatPassword(service.getCredentialValue("myPassword"));
-        register.clickSecurityQuestionField();
+        register.fillEmailField(service.getCredentialValue("myLogin"));
+        register.fillPasswordField(service.getCredentialValue("myPassword"));
+        register.fillRepeatPasswordField(service.getCredentialValue("myPassword"));
+        register.securityQuestionFieldClick();
+        register.securityQuestionChooseClick("Your eldest siblings middle name?");
         register.fillAnswerForSecurityQuestion(Faker.instance().internet().domainName());
-        register.clickRegister();
+        login = register.goToLoginPage();
         Assertions.assertTrue(register.isRegistrationCompletedMessageVisible(), "Account has not been created");
 
         // TODO: 30.12.2023 Asercja!(zrobione)
@@ -57,12 +59,12 @@ public class Registration extends BaseTest {
         String name = service.getRandomValue(service.namesList());
         String surname = service.getRandomValue((service.surnamesList()));
         String email = service.createEmailAddress(name, surname, service.randomNumber());
-        register.insertEmail(email);
+        register.fillEmailField(email);
         String password = service.getRandomValue(service.randomPasswordList());
         service.createRandomPassword(password, service.randomNumber());
-        register.insertPassword(password);
-        register.insertRepeatPassword(password);
-        register.clickSecurityQuestionField();
+        register.fillPasswordField(password);
+        register.fillRepeatPasswordField(password);
+        register.securityQuestionFieldClick();
         register.fillAnswerForSecurityQuestion(name);
         Assertions.assertTrue(register.isPasswordDoNotMatchMessageVisible(), "Email address is invalid");
     }
@@ -77,13 +79,13 @@ public class Registration extends BaseTest {
         String name = service.getRandomValue(service.namesList());
         String surname = service.getRandomValue((service.surnamesList()));
         String email = service.createEmailAddress(name, surname, service.randomNumber(), service.getRandomValue(service.eMailsDomenList()));
-        register.insertEmail(email);
+        register.fillEmailField(email);
         String password = service.getRandomValue(service.randomPasswordList());
         service.createRandomPassword(password, service.randomNumber());
-        register.insertPassword(password);
-        register.insertRepeatPassword(password);
-        register.clickSecurityQuestionField();
-        register.chooseSecurityQuestion("Mother");
+        register.fillPasswordField(password);
+        register.fillRepeatPasswordField(password);
+        register.securityQuestionFieldClick();
+        register.securityQuestionChooseClick("Mother");
         Assertions.assertTrue(register.isPasswordDoNotMatchMessageVisible());
         register.fillAnswerForSecurityQuestion(name);
         Assertions.assertTrue(register.isPasswordDoNotMatchMessageVisible(), "Passwords do not match!");

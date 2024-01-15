@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends BasicPage {
+    @FindBy(xpath = "//div[text()='Invalid email or password.']")
+    private WebElement invalidEmailOrPasswordMessage;
     @FindBy(xpath = ".//button[@id='loginButton']")
     private WebElement loginButton;
     @FindBy(xpath = ".//input[@id='email']")
@@ -33,19 +35,18 @@ public class LoginPage extends BasicPage {
     }
 
 
-    public LoginPage inputLogin(String login) {
+    public LoginPage fillLoginField(String login) {
         sendKeysToElement(emailField, login);
         return this;
         // TODO: 14.01.2024 Do zweryfikowania czy potrzbna metoda i nie powiela się
 
     }
 
-    public LoginPage inputPassword(String password) {
+    public LoginPage fillPasswordField(String password) {
         sendKeysToElement(passwordField, password);
         return this;
-    }// TODO: 08.01.2024 poprawić zmienną !
-
-    public LoginPage clickShowHidePasswordButton() {
+    }
+    public LoginPage showHidePasswordButtonClick() {
         clickElement(showPasswordButton);
         return this;
     }
@@ -55,17 +56,17 @@ public class LoginPage extends BasicPage {
         return new RegistrationPage(driver);
     }
 
-    public LoginPage insertMyLogin(String myEmail) {
+    public LoginPage fillMyLoginField(String myEmail) {
         sendKeysToElement(emailField, myEmail);
         return this;
     }
 
-    public LoginPage insertMyPassword(String myPassword) {
+    public LoginPage fillMyPasswordField(String myPassword) {
         sendKeysToElement(passwordField, myPassword);
         return this;
     }
 
-    public HomePage clickLoginButton() {
+    public HomePage loginButtonClick() {
         clickElement(loginButton);
         return new HomePage(driver);
     }
@@ -90,10 +91,12 @@ public class LoginPage extends BasicPage {
         // TODO: 08.01.2024 zrobić metodę w basicpagu na gettext oraz try catch
     }
 
-    public boolean isLanguageChanged() {
-        return isElementVisible(yourBasketText);
-    }
+
     // TODO: 14.01.2024 przykład isAllProductsVisible i wrzucić do klasy enum + dynamiczny xpath
 
+    public boolean isInvalidEmailOrPasswordMessageVisible() {
+        return isElementVisible(invalidEmailOrPasswordMessage);
+        // TODO: 14.01.2024 Poprawić ! (zrobione)
+    }
 }
 

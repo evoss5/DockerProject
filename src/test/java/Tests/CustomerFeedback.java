@@ -20,24 +20,24 @@ public class CustomerFeedback extends BaseTest {
         login = home.goToLoginPage();
         String myLogin = service.getCredentialValue("myLogin");
         String myPassword = service.getCredentialValue("myPassword");
-        login.insertMyLogin(myLogin);
-        login.insertMyPassword(myPassword);
-        home = login.clickLoginButton();
+        login.fillMyLoginField(myLogin);
+        login.fillMyPasswordField(myPassword);
+        home = login.loginButtonClick();
         Assertions.assertTrue(page.isCartButtonVisible(), "You are not logged!");
 //        home.sideNavButtonClick();
-        home.clickDeluxeMembershipButton();
+        home.deluxeMembershipButtonClick();
         home.becomeAMemberButtonClick();
         cart = new CartPage(driver);
-        cart.addCreditCard();
-        cart.inputCardNumber(service.cardNumber());
+        cart.creditCardDropdownClick();
+        cart.fillCardNumberField(service.cardNumber());
         String digits = String.valueOf(service.cardNumber().length());
         Assertions.assertEquals("16", digits, "The card number has different digits than expected");
         String name = service.getRandomValue(service.namesList());
-        cart.inputNameForDeluxeMembership(name);
+        cart.fillNameForDeluxeMembershipField(name);
         cart.randomExpiryMonthForDeluxeMembership("2");
-        cart.expiryYearDropdown("2082");
+        cart.expiryYearDropdownSelect("2082");
         cart.submitButtonClick();
-        cart.chooseCreditCard();
+        cart.creditCardCheckoxCheck();
         cart.continueButtonClick();
         Assertions.assertTrue(home.isDeluxeMembershipButtonVisible(), "You are not Deluxe Member yet");
     }
@@ -47,12 +47,12 @@ public class CustomerFeedback extends BaseTest {
         login = home.goToLoginPage();
         String myLogin = service.getCredentialValue("myLogin");
         String myPassword = service.getCredentialValue("myPassword");
-        login.insertMyLogin(myLogin);
-        login.insertMyPassword(myPassword);
-        home = login.clickLoginButton();
+        login.fillMyLoginField(myLogin);
+        login.fillMyPasswordField(myPassword);
+        home = login.loginButtonClick();
         Assertions.assertTrue(page.isCartButtonVisible(), "You are not logged!");
         home.sideNavButtonClick();
-        home.clickDeluxeMembershipButton();
+        home.deluxeMembershipButtonClick();
         Assertions.assertTrue(home.isDeluxeMembershipButtonVisible(), "You are not Deluxe Member yet!");
     }
     @Test
@@ -61,12 +61,12 @@ public class CustomerFeedback extends BaseTest {
         login = home.goToLoginPage();
         String myLogin = service.getCredentialValue("myLogin");
         String myPassword = service.getCredentialValue("myPassword");
-        login.insertMyLogin(myLogin);
-        login.insertMyPassword(myPassword);
-        home = login.clickLoginButton();
+        login.fillMyLoginField(myLogin);
+        login.fillMyPasswordField(myPassword);
+        home = login.loginButtonClick();
         Assertions.assertTrue(page.isCartButtonVisible(), "You are not logged!");
         customer = home.goToCustomerPage();
-        customer.commentField("Hello!");
+        customer.fillCommentField("Hello!");
         int rating = 2;
         customer.chooseRating(rating);
         Assertions.assertEquals(String.valueOf(rating), customer.getRatingFromSliderBar(), "You haven't rated our page");

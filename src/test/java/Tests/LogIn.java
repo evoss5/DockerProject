@@ -11,11 +11,11 @@ public class LogIn extends BaseTest {
     @Test
     public void LoginPage() {
         login = home.goToLoginPage();
-        login.inputLogin("admin");
-        login.inputPassword("admin");
-        login.clickShowHidePasswordButton();
-        login.clickLoginButton();
-        Assertions.assertTrue(home.isThereInfoAboutWrongLoginOrPassword(), "Invalid email or password.");
+        login.fillLoginField("admin");
+        login.fillPasswordField("admin");
+        login.showHidePasswordButtonClick();
+        login.loginButtonClick();
+        Assertions.assertTrue(login.isInvalidEmailOrPasswordMessageVisible(), "Invalid email or password.");
         // TODO: 14.01.2024 Sprawdzić czy  invalid message or password" się nie powtarza w innym Pagu i przenieść do Login Page
         // TODO: 14.01.2024 Użyć metodę do
 
@@ -24,8 +24,8 @@ public class LogIn extends BaseTest {
     @Test
     public void unsuccessfulLogInBecauseThereIsNoPassword() {
         login = home.goToLoginPage();
-        login.inputPassword("");
-        login.inputLogin("admin");
+        login.fillPasswordField("");
+        login.fillLoginField("admin");
         Assertions.assertTrue(login.isProvidePasswordMessageVisible(), "Please provide a password");
     }
 
@@ -35,9 +35,9 @@ public class LogIn extends BaseTest {
         Assertions.assertEquals(login.urlLogin, driver.getCurrentUrl(), "The page is not login page");
         String myLogin = service.getCredentialValue("myLogin");
         String myPassword = service.getCredentialValue("myPassword");
-        login.insertMyLogin(myLogin);
-        login.insertMyPassword(myPassword);
-        home = login.clickLoginButton();
+        login.fillMyLoginField(myLogin);
+        login.fillMyPasswordField(myPassword);
+        home = login.loginButtonClick();
         Assertions.assertTrue(home.isAddToCartButtonVisible(), "You are not logged into account!");
     }
 
@@ -47,11 +47,11 @@ public class LogIn extends BaseTest {
         Assertions.assertEquals(login.urlLogin, driver.getCurrentUrl(), "The page is not login page");
         String myLogin = service.getCredentialValue("myLogin");
         String myPassword = service.getCredentialValue("myPassword");
-        login.insertMyLogin(myLogin);
-        login.insertMyPassword(myPassword);
-        home = login.clickLoginButton();
+        login.fillMyLoginField(myLogin);
+        login.fillMyPasswordField(myPassword);
+        home = login.loginButtonClick();
         Assertions.assertTrue(home.isAddToCartButtonVisible());
-        home.clickAcceptCookieButton();
+        home.acceptCookieButtonClick();
         Assertions.assertFalse(home.isCookieAcceptButtonVisible(), "Cookie message is still visible");
     }
 
@@ -61,13 +61,13 @@ public class LogIn extends BaseTest {
         Assertions.assertEquals(login.urlLogin, driver.getCurrentUrl(), "The page is not login page");
         String myLogin = service.getCredentialValue("myLogin");
         String myPassword = service.getCredentialValue("myPassword");
-        login.insertMyLogin(myLogin);
-        login.insertMyPassword(myPassword);
-        home = login.clickLoginButton();
+        login.fillMyLoginField(myLogin);
+        login.fillMyPasswordField(myPassword);
+        home = login.loginButtonClick();
         Assertions.assertTrue(home.isAddToCartButtonVisible());
-        home.clickAccountIcon();
-        home.clickLogOutButton();
-        home.clickAccountIcon();
+        home.accountIconClick();
+        home.logOutButtonClick();
+        home.accountIconClick();
         Assertions.assertTrue(home.isLogInButtonVisible(), "You are still logged! Logout.");
     }
     @Test
@@ -77,12 +77,12 @@ public class LogIn extends BaseTest {
         login.rememberMeCheckboxCheck();
         String myLogin = service.getCredentialValue("myLogin");
         String myPassword = service.getCredentialValue("myPassword");
-        login.insertMyLogin(myLogin);
-        login.insertMyPassword(myPassword);
-        home = login.clickLoginButton();
+        login.fillMyLoginField(myLogin);
+        login.fillMyPasswordField(myPassword);
+        home = login.loginButtonClick();
         Assertions.assertTrue(home.isAddToCartButtonVisible());
-        home.clickAccountIcon();
-        home.clickLogOutButton();
+        home.accountIconClick();
+        home.logOutButtonClick();
         login = home.goToLoginPage();
         Assertions.assertTrue(login.isTheRememberMeCheckoxChecked(), "You are not logged! Try to login again");
     }
@@ -93,11 +93,11 @@ public class LogIn extends BaseTest {
         login.rememberMeCheckboxCheck();
         String myLogin = service.getCredentialValue("myLogin");
         String myPassword = service.getCredentialValue("myPassword");
-        login.insertMyLogin(myLogin);
-        login.insertMyPassword(myPassword);
-        home = login.clickLoginButton();
-        home.clickLanguageSelectionMenuButton();
+        login.fillMyLoginField(myLogin);
+        login.fillMyPasswordField(myPassword);
+        home = login.loginButtonClick();
+        home.languageSelectionMenuButtonClick();
         home.selectLanguage("Dansk");
-        Assertions.assertFalse(login.isLanguageChanged(), "You haven't changed language");
+        Assertions.assertFalse(home.isLanguageChanged(), "You haven't changed language");
     }
 }

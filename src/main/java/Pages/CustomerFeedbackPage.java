@@ -12,7 +12,7 @@ public class CustomerFeedbackPage extends BasicPage {
     @FindBy(xpath = "//mat-slider[@id='rating']")
     private WebElement sliderBar;
     @FindBy(xpath = "//textarea[@id='comment']")
-    private WebElement commentTextArea;
+    private WebElement commentField;
 
     public CustomerFeedbackPage(WebDriver driver) {
         super(driver);
@@ -39,8 +39,8 @@ public class CustomerFeedbackPage extends BasicPage {
         actions.dragAndDropBy(sliderThumb, calculateOffset(slider, desiredValue), 0).perform();
     }
 
-    public CustomerFeedbackPage commentField(String text) {
-        sendKeysToElement(commentTextArea, text);
+    public CustomerFeedbackPage fillCommentField(String text) {
+        sendKeysToElement(commentField, text);
         return this;
     }
 

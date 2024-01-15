@@ -19,8 +19,7 @@ public class HomePage extends BasicPage {
     private WebElement welcomeBannerDismissButton;
     @FindBy(xpath = ".//button[@id='navbarLoginButton']")
     private WebElement loginHomePageButton;
-    @FindBy(xpath = "//div[text()='Invalid email or password.']")
-    private WebElement invalidEmailOrPasswordMessage;
+
     @FindBy(xpath = "//button[@aria-label='Add to Basket']")
     private WebElement addToCardButton;
     @FindBy(xpath = "//span[text()=' Deluxe Membership ']")
@@ -31,6 +30,8 @@ public class HomePage extends BasicPage {
     private WebElement becomeAMemberButton;
     @FindBy(xpath = "//button[@id='navbarLogoutButton']")
     private WebElement logOutButton;
+    @FindBy (xpath = "//div[@class='heading mat-elevation-z6']/div[text()='All Products']")
+    private WebElement allProductsHeader;
 
 
     public HomePage(WebDriver driver) {
@@ -42,22 +43,22 @@ public class HomePage extends BasicPage {
         return this;
     }
 
-    public HomePage clickAccountIcon() {
+    public HomePage accountIconClick() {
         clickElement(accountIcon);
         return this;
     }
 
-    public HomePage clickLanguageSelectionMenuButton() {
+    public HomePage languageSelectionMenuButtonClick() {
         clickElement(languageSelectionMenuButton);
         return this;
     }
 
-    public HomePage clickDismissCookieMessageButton() {
+    public HomePage dismissCookieMessageButtonClick() {
         clickElement(cookieMessageButton);
         return this;
     }
 
-    public HomePage clickWelcomeBannerDismissButton() {
+    public HomePage welcomeBannerDismissButtonClick() {
         clickElement(welcomeBannerDismissButton);
         return this;
     }
@@ -70,16 +71,16 @@ public class HomePage extends BasicPage {
         return isElementVisible(cookieMessageButton);
     }
 
-    public HomePage clickAcceptCookieButton() {
+    public HomePage acceptCookieButtonClick() {
         if (isCookieAcceptButtonVisible()) {
-            clickDismissCookieMessageButton();
+            dismissCookieMessageButtonClick();
         }
         return this;
     }
 
-    public HomePage clickWelcomeBannerOkButton() {
+    public HomePage welcomeBannerOkButtonClick() {
         if (isWelcomeBannerOkButtonVisible()) {
-            clickWelcomeBannerDismissButton();
+            welcomeBannerDismissButtonClick();
         }
         return this;
     }
@@ -90,7 +91,7 @@ public class HomePage extends BasicPage {
         return this;
     }
 
-    private HomePage clickLoginHomePage() {
+    private HomePage loginHomePageButtonClick() {
         clickElement(loginHomePageButton);
         return this;
     }
@@ -100,20 +101,15 @@ public class HomePage extends BasicPage {
     }
 
 
-    public boolean isThereInfoAboutWrongLoginOrPassword() {
-        return isElementVisible(invalidEmailOrPasswordMessage);
-        // TODO: 14.01.2024 Poprawić !
-    }
-
     public LoginPage goToLoginPage() {
-        clickAccountIcon();
-        clickLoginHomePage();
+        accountIconClick();
+        loginHomePageButtonClick();
         return new LoginPage(driver);
     }
 
     public CustomerFeedbackPage goToCustomerPage() {
         sideNavButtonClick();
-        clickCustomerFeedbackButton();
+        customerFeedbackButtonClick();
         return new CustomerFeedbackPage(driver);
     }
 
@@ -121,7 +117,7 @@ public class HomePage extends BasicPage {
         return isElementVisible(addToCardButton);
     }
 
-    public HomePage clickDeluxeMembershipButton() {
+    public HomePage deluxeMembershipButtonClick() {
         clickElement(deluxeMembershipButton);
         return this;
     }
@@ -130,7 +126,7 @@ public class HomePage extends BasicPage {
         return isElementVisible(deluxeMembershipButton);
     }
 
-    private HomePage clickCustomerFeedbackButton() {
+    private HomePage customerFeedbackButtonClick() {
         clickElement(customerFeedbackButton);
         return this;
     }
@@ -140,14 +136,15 @@ public class HomePage extends BasicPage {
         return this;
     }
 
-    public HomePage clickLogOutButton() {
+    public HomePage logOutButtonClick() {
         clickElement(logOutButton);
         return this;
     }
+    public boolean isLanguageChanged() {
+        return isElementVisible(allProductsHeader);
+    }
 }
 
-
-// TODO: 30.12.2023 Zapoznać się z loggerem (maven)
 
 
 
