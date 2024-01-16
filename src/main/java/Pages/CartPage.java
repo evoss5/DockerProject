@@ -164,7 +164,6 @@ public class CartPage extends BasicPage {
         return isElementVisible(confirmationMessage);
     }
 
-    // TODO: 08.01.2024 Pozamieniac wszystkie metody visible(zrobione)
     public CartPage fillPurchaserNameField(String name) {
         sendKeysToElement(purchaserNameField, name);
         return this;
@@ -251,10 +250,5 @@ public class CartPage extends BasicPage {
     }
 }
 
-
-// TODO: 23.12.2023  Metody boolean = zmienić returny   (Zrobione)
-// TODO: 23.12.2023 Waity w metodach click i sendkeys   (Zrobione)
-// TODO: 08.01.2024 Użyć klasę select oraz action (Zrobione)
-// TODO: 10.01.2024 Zrobić kolejnego paga do customer feedback (Zrobione)
 
 

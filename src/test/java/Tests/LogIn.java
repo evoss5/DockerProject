@@ -16,9 +16,6 @@ public class LogIn extends BaseTest {
         login.showHidePasswordButtonClick();
         login.loginButtonClick();
         Assertions.assertTrue(login.isInvalidEmailOrPasswordMessageVisible(), "Invalid email or password.");
-        // TODO: 14.01.2024 Sprawdzić czy  invalid message or password" się nie powtarza w innym Pagu i przenieść do Login Page
-        // TODO: 14.01.2024 Użyć metodę do
-
     }
 
     @Test
@@ -50,7 +47,7 @@ public class LogIn extends BaseTest {
         login.fillMyLoginField(myLogin);
         login.fillMyPasswordField(myPassword);
         home = login.loginButtonClick();
-        Assertions.assertTrue(home.isAddToCartButtonVisible());
+        Assertions.assertTrue(home.isAddToCartButtonVisible(), "Add to cart button is not visible.");
         home.acceptCookieButtonClick();
         Assertions.assertFalse(home.isCookieAcceptButtonVisible(), "Cookie message is still visible");
     }
@@ -64,7 +61,7 @@ public class LogIn extends BaseTest {
         login.fillMyLoginField(myLogin);
         login.fillMyPasswordField(myPassword);
         home = login.loginButtonClick();
-        Assertions.assertTrue(home.isAddToCartButtonVisible());
+        Assertions.assertTrue(home.isAddToCartButtonVisible(), "Add to cart button is not visible.");
         home.accountIconClick();
         home.logOutButtonClick();
         home.accountIconClick();
@@ -80,7 +77,7 @@ public class LogIn extends BaseTest {
         login.fillMyLoginField(myLogin);
         login.fillMyPasswordField(myPassword);
         home = login.loginButtonClick();
-        Assertions.assertTrue(home.isAddToCartButtonVisible());
+        Assertions.assertTrue(home.isAddToCartButtonVisible(), "Add to cart button is not visible.");
         home.accountIconClick();
         home.logOutButtonClick();
         login = home.goToLoginPage();

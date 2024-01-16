@@ -2,10 +2,8 @@ package Tests;
 
 import com.github.javafaker.Faker;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.BeforeMethod;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -54,11 +52,9 @@ public class Service {
         return credentialValue;
     }
 
-
     public int randomNumber(int min, int max) {
         return random.nextInt(max - min + 1) + min;
     }
-
 
     public int randomNumber() {
         return random.nextInt(9999 - 1000 + 1) + 1000;
@@ -106,8 +102,6 @@ public class Service {
         countryList.add("Greece");
         countryList.add("Spain");
         return countryList;
-
-
     }
 
     public ArrayList<String> eMailsDomenList() {
@@ -124,8 +118,6 @@ public class Service {
         eMailDomensList.add("@onet.eu");
         eMailDomensList.add("@tlen.pl");
         return eMailDomensList;
-
-
     }
 
     public ArrayList<String> randomPasswordList() {
@@ -172,7 +164,6 @@ public class Service {
         return list.get(randomIndex);
     }
 
-
     public String createEmailAddress(String name, String sureName, int number, String mailDomen) {
         return name + sureName + number + mailDomen;
     }
@@ -203,15 +194,12 @@ public class Service {
     public String randomValueFromDomain() {
         getRandomLineFromFile("domainList.txt");
         return getRandomLineFromFile("domainList.txt");
-
-
     }
 
     public String cellPhoneNumber() {
         String contactNumber = String.valueOf(randomNumber(508, 895)) + String.valueOf(randomNumber(100, 999)) + String.valueOf(randomNumber(100, 999));
         System.out.println("Contact number " + contactNumber);
         return contactNumber;
-
     }
 
     public String cardNumber() {

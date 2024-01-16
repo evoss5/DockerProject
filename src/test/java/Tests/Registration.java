@@ -46,8 +46,6 @@ public class Registration extends BaseTest {
         register.fillAnswerForSecurityQuestion(Faker.instance().internet().domainName());
         login = register.goToLoginPage();
         Assertions.assertTrue(register.isRegistrationCompletedMessageVisible(), "Account has not been created");
-
-        // TODO: 30.12.2023 Asercja!(zrobione)
     }
 
     @Test
@@ -91,5 +89,3 @@ public class Registration extends BaseTest {
         Assertions.assertTrue(register.isPasswordDoNotMatchMessageVisible(), "Passwords do not match!");
     }
 }
-// TODO: 25.12.2023 Usunać home z testów (zrobione)
-// TODO: 30.12.2023 Dynamiczny xpath (zrobione)

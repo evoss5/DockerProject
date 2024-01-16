@@ -70,6 +70,5 @@ public class CustomerFeedback extends BaseTest {
         int rating = 2;
         customer.chooseRating(rating);
         Assertions.assertEquals(String.valueOf(rating), customer.getRatingFromSliderBar(), "You haven't rated our page");
-        // TODO: 05.01.2024 dokończyć (zrobione)
     }
 }

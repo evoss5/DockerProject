@@ -59,11 +59,9 @@ public class BasicPage {
             wait.until(ExpectedConditions.visibilityOf(element));
             return true;
         } catch (NoSuchElementException | TimeoutException e) {
-
             LOGGER.error("Element is not visible  " + e.getMessage());
             return false;
         }
-
     }
 
     public boolean isElementEnabled(WebElement element) {
@@ -87,16 +85,13 @@ public class BasicPage {
             return false;
         }
     }
+
     public boolean isRadioButtonSelected(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
         wait.until(ExpectedConditions.elementToBeClickable(element));
         return element.getAttribute("class").contains("mat-radio-checked");
     }
-
 }
 
-// TODO: 30.12.2023 Metody mające coś wspólnego click, sendkeys itd.(zrobione)
-//
-// TODO: 08.01.2024 Zrobic while z powtorzeniami oraz odpowiednie wyjątkli, try catch (zrobione)
 
 // TODO: 14.01.2024 Zrobić metode do cheboxow na selected tak samo jak to radio buttonów.

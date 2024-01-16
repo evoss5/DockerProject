@@ -1,6 +1,5 @@
 package Pages;
 
-import com.sun.tools.javac.comp.Todo;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -54,7 +53,6 @@ public class RegistrationPage extends BasicPage {
         wait.until(ExpectedConditions.visibilityOf(securityQuestionDropdownButton));
         securityQuestionDropdownButton.click();
         return this;
-        // TODO: 14.01.2024 Oddzielna metoda i dynamiczny xpath (zrobione)
     }
 
 
@@ -63,13 +61,10 @@ public class RegistrationPage extends BasicPage {
         return this;
     }
 
-        // TODO: 14.01.2024 Przekierowanie do LoginPage (zrobione)
-
     public LoginPage goToLoginPage() {
         clickElement(registerButton);
         return new LoginPage(driver);
     }
-
 
     public boolean isRegistrationCompletedMessageVisible() {
         return isElementVisible(registrationCompletedMessage);
@@ -77,7 +72,6 @@ public class RegistrationPage extends BasicPage {
 
     public boolean isPasswordDoNotMatchMessageVisible() {
         return isElementVisible(passwordDoNotMatchMessage);
-        // TODO: 15.01.2024 Poprawić! (zrobione)
     }
 
     public RegistrationPage securityQuestionChooseClick(String question) {

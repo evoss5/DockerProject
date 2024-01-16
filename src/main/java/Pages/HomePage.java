@@ -19,7 +19,6 @@ public class HomePage extends BasicPage {
     private WebElement welcomeBannerDismissButton;
     @FindBy(xpath = ".//button[@id='navbarLoginButton']")
     private WebElement loginHomePageButton;
-
     @FindBy(xpath = "//button[@aria-label='Add to Basket']")
     private WebElement addToCardButton;
     @FindBy(xpath = "//span[text()=' Deluxe Membership ']")

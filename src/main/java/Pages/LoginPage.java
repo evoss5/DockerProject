@@ -24,9 +24,6 @@ public class LoginPage extends BasicPage {
     @FindBy(xpath = "//input[@aria-checked='true']")
     private WebElement rememberMeCheckboxTicked;
     // TODO: 14.01.2024 Zrobić metodę checked w BasiccPage
-    @FindBy(xpath = "//span[text()=' Your Basket']")
-    private WebElement yourBasketText;
-    // TODO: 14.01.2024 Przenieść basketHEADER to innego paga i nazwać webelement "allProductHeader" !
 
     public final String urlLogin = "http://localhost:3000/#/login";
 
@@ -38,8 +35,6 @@ public class LoginPage extends BasicPage {
     public LoginPage fillLoginField(String login) {
         sendKeysToElement(emailField, login);
         return this;
-        // TODO: 14.01.2024 Do zweryfikowania czy potrzbna metoda i nie powiela się
-
     }
 
     public LoginPage fillPasswordField(String password) {
@@ -83,20 +78,11 @@ public class LoginPage extends BasicPage {
     public boolean isTheRememberMeCheckoxChecked() {
         return isElementVisible(rememberMeCheckboxTicked);
     }
-
-    // TODO: 14.01.2024 Zrobić metodę ktora zaznacza checkboxa i odznacza, oraz wyciągnać atrybut aria checked
-
-    public String passwordMessageText() {
-        return pleaseProvidePasswordMessage.getText();
-        // TODO: 08.01.2024 zrobić metodę w basicpagu na gettext oraz try catch
-    }
-
-
-    // TODO: 14.01.2024 przykład isAllProductsVisible i wrzucić do klasy enum + dynamiczny xpath
-
     public boolean isInvalidEmailOrPasswordMessageVisible() {
         return isElementVisible(invalidEmailOrPasswordMessage);
-        // TODO: 14.01.2024 Poprawić ! (zrobione)
     }
 }
+// TODO: 14.01.2024 Zrobić metodę ktora zaznacza checkboxa i odznacza, oraz wyciągnać atrybut aria checked
+
+// TODO: 14.01.2024 przykład isAllProductsVisible i wrzucić do klasy enum + dynamiczny xpath
 

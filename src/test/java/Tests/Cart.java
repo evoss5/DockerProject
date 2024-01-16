@@ -25,7 +25,7 @@ public class Cart extends BaseTest {
         Assertions.assertTrue(page.isCartButtonVisible(), "You are not logged!");
         page.chooseProductToAdd("Green Smoothie");
         cart = page.goToCartPage();
-        Assertions.assertTrue(page.isTotalPriceFieldVisible());
+        Assertions.assertTrue(page.isTotalPriceFieldVisible(), "Total Price is not visible.");
         cart.checkoutButtonClick();
         cart.addNewAdress();
         String randomCountry = service.getRandomValue(service.countriesList());
@@ -38,13 +38,12 @@ public class Cart extends BaseTest {
         cart.fillZipCodeField(zipCode);
         String city = service.getRandomValue(service.randomCities());
         cart.fillCityNameField(city);
-        Assertions.assertTrue(cart.isSubmitButtonEnabled());
+        Assertions.assertTrue(cart.isSubmitButtonEnabled(), "Submit Button is not Enabled.");
         cart.submitButtonClick();
         cart.selectAddressClick();
         Assertions.assertTrue(cart.isAddressRadioButtonSelected());
     }
 
-    // TODO: 30.12.2023 Dodać message do Assertów
     @Test
     public void choosingDeliveryOption() {
         page = new AfterLoginPage(driver);
@@ -57,7 +56,7 @@ public class Cart extends BaseTest {
         Assertions.assertTrue(page.isCartButtonVisible(), "You are not logged!");
         page.chooseProductToAdd("Green Smoothie");
         cart = page.goToCartPage();
-        Assertions.assertTrue(page.isTotalPriceFieldVisible());
+        Assertions.assertTrue(page.isTotalPriceFieldVisible(), "Total Price is not visible.");
         cart.checkoutButtonClick();
         cart.addNewAdress();
         String randomCountry = service.getRandomValue(service.countriesList());
@@ -70,16 +69,15 @@ public class Cart extends BaseTest {
         cart.fillZipCodeField(zipCode);
         String city = service.getRandomValue(service.randomCities());
         cart.fillCityNameField(city);
-        Assertions.assertTrue(cart.isSubmitButtonEnabled());
+        Assertions.assertTrue(cart.isSubmitButtonEnabled(), "Submit Button is not visible.");
         cart.submitButtonClick();
         cart.selectAddressClick();
-        Assertions.assertTrue(cart.isContinueButtonClickable());
+        Assertions.assertTrue(cart.isContinueButtonClickable(), "Continue button is not clickable.");
         cart.continueButtonClick();
-        Assertions.assertTrue(cart.isDeliveryMessageVisible());
+        Assertions.assertTrue(cart.isDeliveryMessageVisible(), "Delivery message is not visible.");
         cart.randomDeliveryOption();
         Assertions.assertTrue(cart.isDeliveryOptionSelected(), "You haven't choose delivery option!");
         Assertions.assertTrue(cart.isContinueButtonClickable(), "Continue button is not clickable");
-        // TODO: 30.12.2023 Zrobić asercję z selected (zrobione)
     }
 
     @Test
@@ -94,7 +92,7 @@ public class Cart extends BaseTest {
         Assertions.assertTrue(page.isCartButtonVisible(), "You are not logged!");
         page.chooseProductToAdd("Green Smoothie");
         cart = page.goToCartPage();
-        Assertions.assertTrue(page.isTotalPriceFieldVisible());
+        Assertions.assertTrue(page.isTotalPriceFieldVisible(), "Total price is not visible.");
         cart.checkoutButtonClick();
         cart.addNewAdress();
         String randomCountry = service.getRandomValue(service.countriesList());
@@ -107,14 +105,14 @@ public class Cart extends BaseTest {
         cart.fillZipCodeField(zipCode);
         String city = service.getRandomValue(service.randomCities());
         cart.fillCityNameField(city);
-        Assertions.assertTrue(cart.isSubmitButtonEnabled());
+        Assertions.assertTrue(cart.isSubmitButtonEnabled(), "Submit button is not enabled.");
         cart.submitButtonClick();
         cart.selectAddressClick();
-        Assertions.assertTrue(cart.isContinueButtonClickable());
+        Assertions.assertTrue(cart.isContinueButtonClickable(), "Continue button is not clickable.");
         cart.continueButtonClick();
-        Assertions.assertTrue(cart.isDeliveryMessageVisible());
+        Assertions.assertTrue(cart.isDeliveryMessageVisible(), "Delivery message is not visible.");
         cart.randomDeliveryOption();
-        Assertions.assertTrue(cart.isContinueButtonClickable());
+        Assertions.assertTrue(cart.isContinueButtonClickable(), "Continue button is not clickable.");
         cart.continueButtonClick();
         cart.creditCardDropdownClick();
         cart.fillCardNumberField(service.cardNumber());
@@ -125,9 +123,7 @@ public class Cart extends BaseTest {
         cart.randomExpiryMonth();
         cart.randomExpiryYear();
         cart.submitButtonClick();
-        Assertions.assertTrue(cart.isSuccessfullyAddedCardMessageVisible());
-//        cart.randomName();
-        // TODO: 30.12.2023 Asercja, że nowy numer karty widnieje na danej liście.
+        Assertions.assertTrue(cart.isSuccessfullyAddedCardMessageVisible(), "Successfully added card message is not visible.");
     }
 
     @Test
@@ -155,14 +151,14 @@ public class Cart extends BaseTest {
         cart.fillZipCodeField(zipCode);
         String city = service.getRandomValue(service.randomCities());
         cart.fillCityNameField(city);
-        Assertions.assertTrue(cart.isSubmitButtonEnabled());
+        Assertions.assertTrue(cart.isSubmitButtonEnabled(), "Submit button is not enabled.");
         cart.submitButtonClick();
         cart.selectAddressClick();
-        Assertions.assertTrue(cart.isContinueButtonClickable());
+        Assertions.assertTrue(cart.isContinueButtonClickable(), "Continue button is not clickable.");
         cart.continueButtonClick();
-        Assertions.assertTrue(cart.isDeliveryMessageVisible());
+        Assertions.assertTrue(cart.isDeliveryMessageVisible(), "Delivery message is not visible.");
         cart.randomDeliveryOption();
-        Assertions.assertTrue(cart.isContinueButtonClickable());
+        Assertions.assertTrue(cart.isContinueButtonClickable(), "Continue button is not clickable.");
         cart.continueButtonClick();
         cart.creditCardDropdownClick();
         cart.fillCardNumberField(service.cardNumber());
@@ -173,9 +169,9 @@ public class Cart extends BaseTest {
         cart.randomExpiryMonth();
         cart.randomExpiryYear();
         cart.submitButtonClick();
-        Assertions.assertTrue(cart.isSuccessfullyAddedCardMessageVisible());
+        Assertions.assertTrue(cart.isSuccessfullyAddedCardMessageVisible(), "Successfully added card message is not visible.");
         cart.creditCardCheckoxCheck();
-        Assertions.assertTrue(cart.isCreditCardCheckboxSelected());
+        Assertions.assertTrue(cart.isCreditCardCheckboxSelected(), "Credit card checkbox is not selected.");
     }
 
     @Test
@@ -203,14 +199,14 @@ public class Cart extends BaseTest {
         cart.fillZipCodeField(zipCode);
         String city = service.getRandomValue(service.randomCities());
         cart.fillCityNameField(city);
-        Assertions.assertTrue(cart.isSubmitButtonEnabled());
+        Assertions.assertTrue(cart.isSubmitButtonEnabled(), "Submit button is not enabled.");
         cart.submitButtonClick();
         cart.selectAddressClick();
-        Assertions.assertTrue(cart.isContinueButtonClickable());
+        Assertions.assertTrue(cart.isContinueButtonClickable(), "Continue button is not clickable.");
         cart.continueButtonClick();
-        Assertions.assertTrue(cart.isDeliveryMessageVisible());
+        Assertions.assertTrue(cart.isDeliveryMessageVisible(), "Delivery message is not visible.");
         cart.randomDeliveryOption();
-        Assertions.assertTrue(cart.isContinueButtonClickable());
+        Assertions.assertTrue(cart.isContinueButtonClickable(), "Continue button is not clickable.");
         cart.continueButtonClick();
         cart.creditCardDropdownClick();
         cart.fillCardNumberField(service.cardNumber());
@@ -221,13 +217,13 @@ public class Cart extends BaseTest {
         cart.randomExpiryMonth();
         cart.randomExpiryYear();
         cart.submitButtonClick();
-        Assertions.assertTrue(cart.isSuccessfullyAddedCardMessageVisible());
+        Assertions.assertTrue(cart.isSuccessfullyAddedCardMessageVisible(), "Successfully added card message is not visible.");
         cart.creditCardCheckoxCheck();
-        Assertions.assertTrue(cart.isCreditCardCheckboxSelected());
+        Assertions.assertTrue(cart.isCreditCardCheckboxSelected(), "Credit card checkbox is not selected.");
         cart.continueButtonClick();
-        Assertions.assertTrue(cart.isOrderSummaryVisible());
+        Assertions.assertTrue(cart.isOrderSummaryVisible(), "Order summary is not visible.");
         cart.purchaseProductsButtonClick();
-        Assertions.assertTrue(cart.checkIfConfirmationMessageIsVisible());
+        Assertions.assertTrue(cart.checkIfConfirmationMessageIsVisible(), "Confirmation message is not visible.");
     }
 
     @Test
@@ -242,7 +238,7 @@ public class Cart extends BaseTest {
         Assertions.assertTrue(page.isCartButtonVisible(), "You are not logged!");
         page.chooseProductToAdd("Green Smoothie");
         cart = page.goToCartPage();
-        Assertions.assertTrue(page.isTotalPriceFieldVisible());
+        Assertions.assertTrue(page.isTotalPriceFieldVisible(), "Total price is not visible.");
         cart.checkoutButtonClick();
         cart.addNewAdress();
         String randomCountry = service.getRandomValue(service.countriesList());
@@ -255,14 +251,14 @@ public class Cart extends BaseTest {
         cart.fillZipCodeField(zipCode);
         String city = service.getRandomValue(service.randomCities());
         cart.fillCityNameField(city);
-        Assertions.assertTrue(cart.isSubmitButtonEnabled());
+        Assertions.assertTrue(cart.isSubmitButtonEnabled(), "Submit button is not enabled.");
         cart.submitButtonClick();
         cart.selectAddressClick();
-        Assertions.assertTrue(cart.isContinueButtonClickable());
+        Assertions.assertTrue(cart.isContinueButtonClickable(), "Continue button is not clickable.");
         cart.continueButtonClick();
-        Assertions.assertTrue(cart.isDeliveryMessageVisible());
+        Assertions.assertTrue(cart.isDeliveryMessageVisible(), "Delivery Message is not visible.");
         cart.randomDeliveryOption();
-        Assertions.assertTrue(cart.isContinueButtonClickable());
+        Assertions.assertTrue(cart.isContinueButtonClickable(), "Continue button is not clickable.");
         cart.continueButtonClick();
         cart.creditCardDropdownClick();
         cart.fillCardNumberField(service.cardNumber2());
@@ -273,7 +269,7 @@ public class Cart extends BaseTest {
         cart.randomExpiryMonth();
         cart.randomExpiryYear();
         Assertions.assertEquals("Please enter a valid sixteen digit card number.", cart.invalidSixteenDigitCardNumber());
-    }// TODO: 30.12.2023 zrobić asercję z tekstem (zrobione)
+    }
 
     @Test
     public void isThePriceIsAppropriateAfterAddingProductToCart() {
@@ -290,7 +286,7 @@ public class Cart extends BaseTest {
         Assertions.assertTrue(cart.doesTotalPriceShowsProperPrice("1.99"), "Total Price is different than expected");
     }
 }
-// TODO: 08.01.2024 Odpalać testy przez TestNG
+
 
 
 
