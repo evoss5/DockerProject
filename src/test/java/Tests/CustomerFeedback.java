@@ -1,6 +1,5 @@
 package Tests;
 
-import Pages.AfterLoginPage;
 import Pages.CartPage;
 import Pages.CustomerFeedbackPage;
 import Pages.LoginPage;
@@ -9,21 +8,19 @@ import org.testng.annotations.Test;
 
 public class CustomerFeedback extends BaseTest {
     private CustomerFeedbackPage customer;
-    private AfterLoginPage page;
     private LoginPage login;
     private CartPage cart;
 
 
     @Test
     public void becomeADeluxeMember() {
-        page = new AfterLoginPage(driver);
         login = home.goToLoginPage();
         String myLogin = service.getCredentialValue("myLogin");
         String myPassword = service.getCredentialValue("myPassword");
         login.fillMyLoginField(myLogin);
         login.fillMyPasswordField(myPassword);
         home = login.loginButtonClick();
-        Assertions.assertTrue(page.isCartButtonVisible(), "You are not logged!");
+        Assertions.assertTrue(home.isCartButtonVisible(), "You are not logged!");
 //        home.sideNavButtonClick();
         home.deluxeMembershipButtonClick();
         home.becomeAMemberButtonClick();
@@ -43,28 +40,26 @@ public class CustomerFeedback extends BaseTest {
     }
     @Test
     public void checkIfYouAreDeluxeMemberAlready() {
-        page = new AfterLoginPage(driver);
         login = home.goToLoginPage();
         String myLogin = service.getCredentialValue("myLogin");
         String myPassword = service.getCredentialValue("myPassword");
         login.fillMyLoginField(myLogin);
         login.fillMyPasswordField(myPassword);
         home = login.loginButtonClick();
-        Assertions.assertTrue(page.isCartButtonVisible(), "You are not logged!");
+        Assertions.assertTrue(home.isCartButtonVisible(), "You are not logged!");
         home.sideNavButtonClick();
         home.deluxeMembershipButtonClick();
         Assertions.assertTrue(home.isDeluxeMembershipButtonVisible(), "You are not Deluxe Member yet!");
     }
     @Test
     public void choosingRateOnSliderForCustomerFeedback() throws InterruptedException {
-        page = new AfterLoginPage(driver);
         login = home.goToLoginPage();
         String myLogin = service.getCredentialValue("myLogin");
         String myPassword = service.getCredentialValue("myPassword");
         login.fillMyLoginField(myLogin);
         login.fillMyPasswordField(myPassword);
         home = login.loginButtonClick();
-        Assertions.assertTrue(page.isCartButtonVisible(), "You are not logged!");
+        Assertions.assertTrue(home.isCartButtonVisible(), "You are not logged!");
         customer = home.goToCustomerPage();
         customer.fillCommentField("Hello!");
         int rating = 2;

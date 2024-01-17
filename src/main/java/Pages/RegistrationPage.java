@@ -30,6 +30,16 @@ public class RegistrationPage extends BasicPage {
         super(driver);
     }
 
+    public RegistrationPage registerAccount(String email, String password, String question, String answer) {
+        fillEmailField(email);
+        fillPasswordField(password);
+        fillRepeatPasswordField(password);
+        securityQuestionFieldClick();
+        securityQuestionChooseClick(question);
+        fillAnswerForSecurityQuestion(answer);
+        return this;
+    }
+
     public RegistrationPage fillEmailField(String email) {
         sendKeysToElement(emailField, email);
         return this;

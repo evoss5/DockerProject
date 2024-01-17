@@ -31,6 +31,13 @@ public class LoginPage extends BasicPage {
         super(driver);
     }
 
+    public LoginPage LogToThePage(String login, String password) {
+        fillMyLoginField(login);
+        fillMyPasswordField(password);
+        loginButtonClick();
+        return this;
+    }
+
 
     public LoginPage fillLoginField(String login) {
         sendKeysToElement(emailField, login);

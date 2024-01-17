@@ -22,9 +22,9 @@ public class BaseTest {
         home = new HomePage(driver);
         home.welcomeBannerOkButtonClick();
     }
-    @AfterMethod
-    public void afterTest(){
-        driver.close();
-        driver.quit();
+//    @AfterMethod
+//    public void afterTest(){
+//        driver.close();
+//        driver.quit();
     }
-}
+

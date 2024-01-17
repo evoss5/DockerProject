@@ -65,6 +65,7 @@ public class CartPage extends BasicPage {
     private WebElement cardExpiryDateField;
     @FindBy(xpath = "//mat-error[@id='mat-error-19']")
     private WebElement invalidCardNumberMessage;
+    @FindBy(xpath = "//span[@class='fa-layers-counter fa-layers-top-right fa-3x warn-notification']")
 
 
     private final Random random = new Random();
@@ -224,7 +225,6 @@ public class CartPage extends BasicPage {
     public String invalidSixteenDigitCardNumber() {
         wait.until(ExpectedConditions.visibilityOf(invalidCardNumberMessage));
         return invalidCardNumberMessage.getText();
-        // TODO: 08.01.2024 Do poprawy (zrobione)
     }
 
     public boolean doesTotalPriceShowsProperPrice(String element) {

@@ -31,6 +31,10 @@ public class HomePage extends BasicPage {
     private WebElement logOutButton;
     @FindBy (xpath = "//div[@class='heading mat-elevation-z6']/div[text()='All Products']")
     private WebElement allProductsHeader;
+    @FindBy(xpath = "//div[@id='price']")
+    private WebElement totalPriceField;
+    @FindBy(xpath = "//span[@class='fa-layers-counter fa-layers-top-right fa-3x warn-notification']")
+    private WebElement cartButton;
 
 
     public HomePage(WebDriver driver) {
@@ -142,6 +146,23 @@ public class HomePage extends BasicPage {
     public boolean isLanguageChanged() {
         return isElementVisible(allProductsHeader);
     }
+    public HomePage chooseProductToAdd(String product) {
+        WebElement productName = driver.findElement(By.xpath("//button[@aria-label='Add to Basket']/../../div/div/img[@alt='" + product + "']/../../following-sibling::div/button"));
+        clickElement(productName);
+        return this;
+    }
+    public boolean isTotalPriceFieldVisible() {
+        return isElementVisible(totalPriceField);
+    }
+    public boolean isCartButtonVisible() {
+        return isElementVisible(cartButton);
+    }
+    public CartPage goToCartPage() {
+        clickElement(cartButton);
+        return new CartPage(driver);
+    }
+
+
 }
 
 

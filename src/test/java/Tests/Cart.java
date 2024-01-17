@@ -1,6 +1,5 @@
 package Tests;
 
-import Pages.AfterLoginPage;
 import Pages.CartPage;
 import Pages.LoginPage;
 import org.junit.jupiter.api.Assertions;
@@ -9,23 +8,22 @@ import org.testng.annotations.Test;
 public class Cart extends BaseTest {
 
     private LoginPage login;
-    private AfterLoginPage page;
+
     private CartPage cart;
 
 
     @Test
     public void addProductToCart() {
-        page = new AfterLoginPage(driver);
         login = home.goToLoginPage();
         String myLogin = service.getCredentialValue("myLogin");
         String myPassword = service.getCredentialValue("myPassword");
         login.fillMyLoginField(myLogin);
         login.fillMyPasswordField(myPassword);
         home = login.loginButtonClick();
-        Assertions.assertTrue(page.isCartButtonVisible(), "You are not logged!");
-        page.chooseProductToAdd("Green Smoothie");
-        cart = page.goToCartPage();
-        Assertions.assertTrue(page.isTotalPriceFieldVisible(), "Total Price is not visible.");
+        Assertions.assertTrue(home.isCartButtonVisible(), "You are not logged!");
+        home.chooseProductToAdd("Green Smoothie");
+        cart = home.goToCartPage();
+        Assertions.assertTrue(home.isTotalPriceFieldVisible(), "Total Price is not visible.");
         cart.checkoutButtonClick();
         cart.addNewAdress();
         String randomCountry = service.getRandomValue(service.countriesList());
@@ -46,17 +44,16 @@ public class Cart extends BaseTest {
 
     @Test
     public void choosingDeliveryOption() {
-        page = new AfterLoginPage(driver);
         login = home.goToLoginPage();
         String myLogin = service.getCredentialValue("myLogin");
         String myPassword = service.getCredentialValue("myPassword");
         login.fillMyLoginField(myLogin);
         login.fillMyPasswordField(myPassword);
         home = login.loginButtonClick();
-        Assertions.assertTrue(page.isCartButtonVisible(), "You are not logged!");
-        page.chooseProductToAdd("Green Smoothie");
-        cart = page.goToCartPage();
-        Assertions.assertTrue(page.isTotalPriceFieldVisible(), "Total Price is not visible.");
+        Assertions.assertTrue(home.isCartButtonVisible(), "You are not logged!");
+        home.chooseProductToAdd("Green Smoothie");
+        cart = home.goToCartPage();
+        Assertions.assertTrue(home.isTotalPriceFieldVisible(), "Total Price is not visible.");
         cart.checkoutButtonClick();
         cart.addNewAdress();
         String randomCountry = service.getRandomValue(service.countriesList());
@@ -82,17 +79,16 @@ public class Cart extends BaseTest {
 
     @Test
     public void addingCardNumber() {
-        page = new AfterLoginPage(driver);
         login = home.goToLoginPage();
         String myLogin = service.getCredentialValue("myLogin");
         String myPassword = service.getCredentialValue("myPassword");
         login.fillMyLoginField(myLogin);
         login.fillMyPasswordField(myPassword);
         home = login.loginButtonClick();
-        Assertions.assertTrue(page.isCartButtonVisible(), "You are not logged!");
-        page.chooseProductToAdd("Green Smoothie");
-        cart = page.goToCartPage();
-        Assertions.assertTrue(page.isTotalPriceFieldVisible(), "Total price is not visible.");
+        Assertions.assertTrue(home.isCartButtonVisible(), "You are not logged!");
+        home.chooseProductToAdd("Green Smoothie");
+        cart = home.goToCartPage();
+        Assertions.assertTrue(home.isTotalPriceFieldVisible(), "Total price is not visible.");
         cart.checkoutButtonClick();
         cart.addNewAdress();
         String randomCountry = service.getRandomValue(service.countriesList());
@@ -128,17 +124,16 @@ public class Cart extends BaseTest {
 
     @Test
     public void choosingPaymentOption() {
-        page = new AfterLoginPage(driver);
         login = home.goToLoginPage();
         String myLogin = service.getCredentialValue("myLogin");
         String myPassword = service.getCredentialValue("myPassword");
         login.fillMyLoginField(myLogin);
         login.fillMyPasswordField(myPassword);
         home = login.loginButtonClick();
-        Assertions.assertTrue(page.isCartButtonVisible(), "You are not logged!");
-        page.chooseProductToAdd("Green Smoothie");
-        cart = page.goToCartPage();
-        Assertions.assertTrue(page.isTotalPriceFieldVisible());
+        Assertions.assertTrue(home.isCartButtonVisible(), "You are not logged!");
+        home.chooseProductToAdd("Green Smoothie");
+        cart = home.goToCartPage();
+        Assertions.assertTrue(home.isTotalPriceFieldVisible());
         cart.checkoutButtonClick();
         cart.addNewAdress();
         String randomCountry = service.getRandomValue(service.countriesList());
@@ -176,17 +171,16 @@ public class Cart extends BaseTest {
 
     @Test
     public void finishPurchase() {
-        page = new AfterLoginPage(driver);
         login = home.goToLoginPage();
         String myLogin = service.getCredentialValue("myLogin");
         String myPassword = service.getCredentialValue("myPassword");
         login.fillMyLoginField(myLogin);
         login.fillMyPasswordField(myPassword);
         home = login.loginButtonClick();
-        Assertions.assertTrue(page.isCartButtonVisible(), "You are not logged!");
-        page.chooseProductToAdd("Green Smoothie");
-        cart = page.goToCartPage();
-        Assertions.assertTrue(page.isTotalPriceFieldVisible());
+        Assertions.assertTrue(home.isCartButtonVisible(), "You are not logged!");
+        home.chooseProductToAdd("Green Smoothie");
+        cart = home.goToCartPage();
+        Assertions.assertTrue(home.isTotalPriceFieldVisible());
         cart.checkoutButtonClick();
         cart.addNewAdress();
         String randomCountry = service.getRandomValue(service.countriesList());
@@ -228,17 +222,16 @@ public class Cart extends BaseTest {
 
     @Test
     public void checkingIfNon16DigitNumberCardAllowToContinueProcess() {
-        page = new AfterLoginPage(driver);
         login = home.goToLoginPage();
         String myLogin = service.getCredentialValue("myLogin");
         String myPassword = service.getCredentialValue("myPassword");
         login.fillMyLoginField(myLogin);
         login.fillMyPasswordField(myPassword);
         home = login.loginButtonClick();
-        Assertions.assertTrue(page.isCartButtonVisible(), "You are not logged!");
-        page.chooseProductToAdd("Green Smoothie");
-        cart = page.goToCartPage();
-        Assertions.assertTrue(page.isTotalPriceFieldVisible(), "Total price is not visible.");
+        Assertions.assertTrue(home.isCartButtonVisible(), "You are not logged!");
+        home.chooseProductToAdd("Green Smoothie");
+        cart = home.goToCartPage();
+        Assertions.assertTrue(home.isTotalPriceFieldVisible(), "Total price is not visible.");
         cart.checkoutButtonClick();
         cart.addNewAdress();
         String randomCountry = service.getRandomValue(service.countriesList());
@@ -273,16 +266,15 @@ public class Cart extends BaseTest {
 
     @Test
     public void isThePriceIsAppropriateAfterAddingProductToCart() {
-        page = new AfterLoginPage(driver);
         login = home.goToLoginPage();
         String myLogin = service.getCredentialValue("myLogin");
         String myPassword = service.getCredentialValue("myPassword");
         login.fillMyLoginField(myLogin);
         login.fillMyPasswordField(myPassword);
         home = login.loginButtonClick();
-        Assertions.assertTrue(page.isCartButtonVisible(), "You are not logged!");
-        page.chooseProductToAdd("Green Smoothie");
-        cart = page.goToCartPage();
+        Assertions.assertTrue(home.isCartButtonVisible(), "You are not logged!");
+        home.chooseProductToAdd("Green Smoothie");
+        cart = home.goToCartPage();
         Assertions.assertTrue(cart.doesTotalPriceShowsProperPrice("1.99"), "Total Price is different than expected");
     }
 }
