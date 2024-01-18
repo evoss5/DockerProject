@@ -11,17 +11,14 @@ public class CustomerFeedback extends BaseTest {
     private LoginPage login;
     private CartPage cart;
 
-
     @Test
     public void becomeADeluxeMember() {
         login = home.goToLoginPage();
         String myLogin = service.getCredentialValue("myLogin");
         String myPassword = service.getCredentialValue("myPassword");
-        login.fillMyLoginField(myLogin);
-        login.fillMyPasswordField(myPassword);
+        login.logToThePage(myLogin,myPassword);
         home = login.loginButtonClick();
         Assertions.assertTrue(home.isCartButtonVisible(), "You are not logged!");
-//        home.sideNavButtonClick();
         home.deluxeMembershipButtonClick();
         home.becomeAMemberButtonClick();
         cart = new CartPage(driver);
@@ -43,8 +40,7 @@ public class CustomerFeedback extends BaseTest {
         login = home.goToLoginPage();
         String myLogin = service.getCredentialValue("myLogin");
         String myPassword = service.getCredentialValue("myPassword");
-        login.fillMyLoginField(myLogin);
-        login.fillMyPasswordField(myPassword);
+        login.logToThePage(myLogin,myPassword);
         home = login.loginButtonClick();
         Assertions.assertTrue(home.isCartButtonVisible(), "You are not logged!");
         home.sideNavButtonClick();
@@ -56,8 +52,7 @@ public class CustomerFeedback extends BaseTest {
         login = home.goToLoginPage();
         String myLogin = service.getCredentialValue("myLogin");
         String myPassword = service.getCredentialValue("myPassword");
-        login.fillMyLoginField(myLogin);
-        login.fillMyPasswordField(myPassword);
+        login.logToThePage(myLogin,myPassword);
         home = login.loginButtonClick();
         Assertions.assertTrue(home.isCartButtonVisible(), "You are not logged!");
         customer = home.goToCustomerPage();

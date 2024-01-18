@@ -1,10 +1,11 @@
-package Pages.Utllities;
+package Pages.Utilities;
 
 public enum Languages {
 
     POLISH("Język Polski", "PL"),
     FRENCH("Français", "FR"),
     SPANISH("Español", "SP");
+
     private final String displayName;
     private String languageNameShortcut;
 

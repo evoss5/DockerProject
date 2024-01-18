@@ -31,7 +31,7 @@ public class LoginPage extends BasicPage {
         super(driver);
     }
 
-    public LoginPage LogToThePage(String login, String password) {
+    public LoginPage logToThePage(String login, String password) {
         fillMyLoginField(login);
         fillMyPasswordField(password);
         loginButtonClick();

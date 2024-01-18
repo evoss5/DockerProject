@@ -1,6 +1,6 @@
 package Tests;
 
-import Pages.Utllities.Languages;
+import Pages.Utilities.Languages;
 import Pages.LoginPage;
 import org.junit.jupiter.api.Assertions;
 import org.testng.annotations.Test;
@@ -12,7 +12,7 @@ public class LogIn extends BaseTest {
     @Test
     public void LoginPage() {
         login = home.goToLoginPage();
-        login.LogToThePage("admin", "admin");
+        login.logToThePage("admin", "admin");
         Assertions.assertTrue(login.isInvalidEmailOrPasswordMessageVisible(), "Invalid email or password.");
     }
 
@@ -30,7 +30,7 @@ public class LogIn extends BaseTest {
         Assertions.assertEquals(login.urlLogin, driver.getCurrentUrl(), "The page is not login page");
         String myLogin = service.getCredentialValue("myLogin");
         String myPassword = service.getCredentialValue("myPassword");
-        login.LogToThePage(myLogin, myPassword);
+        login.logToThePage(myLogin, myPassword);
         home = login.loginButtonClick();
         Assertions.assertTrue(home.isAddToCartButtonVisible(), "You are not logged into account!");
     }
@@ -41,7 +41,7 @@ public class LogIn extends BaseTest {
         Assertions.assertEquals(login.urlLogin, driver.getCurrentUrl(), "The page is not login page");
         String myLogin = service.getCredentialValue("myLogin");
         String myPassword = service.getCredentialValue("myPassword");
-        login.LogToThePage(myLogin, myPassword);
+        login.logToThePage(myLogin, myPassword);
         home = login.loginButtonClick();
         Assertions.assertTrue(home.isAddToCartButtonVisible(), "Add to cart button is not visible.");
         home.acceptCookieButtonClick();
@@ -54,7 +54,7 @@ public class LogIn extends BaseTest {
         Assertions.assertEquals(login.urlLogin, driver.getCurrentUrl(), "The page is not login page");
         String myLogin = service.getCredentialValue("myLogin");
         String myPassword = service.getCredentialValue("myPassword");
-        login.LogToThePage(myLogin, myPassword);
+        login.logToThePage(myLogin, myPassword);
         home = login.loginButtonClick();
         Assertions.assertTrue(home.isAddToCartButtonVisible(), "Add to cart button is not visible.");
         home.accountIconClick();
@@ -69,7 +69,7 @@ public class LogIn extends BaseTest {
         login.rememberMeCheckboxCheck();
         String myLogin = service.getCredentialValue("myLogin");
         String myPassword = service.getCredentialValue("myPassword");
-        login.LogToThePage(myLogin, myPassword);
+        login.logToThePage(myLogin, myPassword);
         home = login.loginButtonClick();
         Assertions.assertTrue(home.isAddToCartButtonVisible(), "Add to cart button is not visible.");
         home.accountIconClick();
@@ -84,10 +84,10 @@ public class LogIn extends BaseTest {
         login.rememberMeCheckboxCheck();
         String myLogin = service.getCredentialValue("myLogin");
         String myPassword = service.getCredentialValue("myPassword");
-        login.LogToThePage(myLogin, myPassword);
+        login.logToThePage(myLogin, myPassword);
         home = login.loginButtonClick();
         home.languageSelectionMenuButtonClick();
-        home.selectLanguage(Languages.POLISH.getDisplayName());
+        home.selectLanguage(Languages.FRENCH.getDisplayName());
         Assertions.assertFalse(home.isLanguageChanged(), "You haven't changed language");
     }
 }

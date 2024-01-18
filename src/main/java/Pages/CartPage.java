@@ -29,11 +29,11 @@ public class CartPage extends BasicPage {
     private WebElement addressField;
     @FindBy(xpath = "//button[@id='submitButton']")
     private WebElement submitButton;
-    @FindBy(xpath = "//span[@class='mat-radio-container']")
+    @FindBy(xpath = "//span[@class='mat-radio-container']/../..")
     private WebElement selectAddress;
     @FindBy(xpath = "//span[text()='Continue']")
     private WebElement continueButton;
-    @FindBy(xpath = "//mat-row")
+    @FindBy(xpath = "//mat-row//mat-radio-button")
     private WebElement deliveryOptionRadioButton;
     @FindBy(xpath = "//input[@type='number']")
     private WebElement cardNumberField;
@@ -206,12 +206,29 @@ public class CartPage extends BasicPage {
 
     // TODO: 30.12.2023 Zrobić dwie metody w jednej. Jedną prywatną a drugą publiczną (zrobione)
 
+    public CartPage fillPurchaserData(String name, String city, String country, String zipCode, String phoneNumber, String address) {
+        fillNameField(name);
+        fillCityNameField(city);
+        fillCountryNameField(country);
+        fillAddressField(address);
+        fillZipCodeField(zipCode);
+        fillPhoneNumberField(phoneNumber);
+        return this;
+    }
+    public CartPage fillPurchaserCardData(String cardNumber,String name) {
+        fillCardNumberField(cardNumber);
+        fillPurchaserNameField(name);
+        expiryMonthFieldClick();
+        randomExpiryMonth();
+        randomExpiryYear();
+        return this;
+    }
     public boolean isSuccessfullyAddedCardMessageVisible() {
         return isElementVisible(successfulAddedCardMessage);
     }
 
     public boolean isAddressRadioButtonSelected() {
-        return isElementSelected(selectAddress);
+        return isRadioButtonSelected(selectAddress);
     }
 
     public boolean isDeliveryOptionSelected() {
