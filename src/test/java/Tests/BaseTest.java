@@ -8,8 +8,8 @@ import org.testng.annotations.BeforeMethod;
 
 public class BaseTest {
 
-    protected Service service;
-    protected WebDriver driver;
+    protected static Service service;
+    protected static WebDriver driver;
     protected HomePage home;
 
     @BeforeMethod

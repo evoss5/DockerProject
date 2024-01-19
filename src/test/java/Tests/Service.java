@@ -39,6 +39,14 @@ public class Service {
         return "webdriver.chrome.driver";
     }
 
+    public final  String dockerPath() {
+        return "C:/PROGRA~1/Docker/Docker/DockerApp.exe/";
+    }
+    public final String containerName() {
+        return "stupefied_knuth";
+    }
+
+
 
     public String getCredentialValue(String credentialName) {
         String credentialValue = null;
