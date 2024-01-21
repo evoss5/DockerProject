@@ -9,6 +9,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -39,13 +40,13 @@ public class Service {
         return "webdriver.chrome.driver";
     }
 
-    public final  String dockerPath() {
+    public final String dockerPath() {
         return "C:/PROGRA~1/Docker/Docker/DockerApp.exe/";
     }
+
     public final String containerName() {
         return "stupefied_knuth";
     }
-
 
 
     public String getCredentialValue(String credentialName) {
@@ -175,6 +176,7 @@ public class Service {
     public String createEmailAddress(String name, String sureName, int number, String mailDomen) {
         return name + sureName + number + mailDomen;
     }
+
     public String createEmailAddress(String name, String sureName, int number) {
         return name + sureName + number;
     }
@@ -218,6 +220,30 @@ public class Service {
     public String cardNumber2() {
         String cardNumber = String.valueOf(randomNumber(1000, 9999)) + String.valueOf(randomNumber(1000, 9999)) + String.valueOf(randomNumber(1000, 9999));
         return cardNumber;
+    }
+
+    public String dockerProjectDatabase(String sqlQuery) {
+        String url = getCredentialValue("sqlURL");
+        String username = getCredentialValue("sqlLogin");
+        String password = getCredentialValue("sqlPassword");
+        String queryResult = null;
+
+        try {
+            Connection dbConnection = DriverManager.getConnection(url, username, password);
+            Statement st = dbConnection.createStatement();
+            ResultSet rs = st.executeQuery(sqlQuery);
+            System.out.println("Executing query: " + sqlQuery);
+            while (rs.next()) {
+                queryResult = rs.getString(1);
+                System.out.println("Result: " + queryResult);
+            }
+            rs.close();
+            st.close();
+            dbConnection.close();
+        } catch (java.sql.SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return queryResult;
     }
 }
 

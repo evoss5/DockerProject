@@ -2,13 +2,13 @@ package Tests;
 
 import Pages.LoginPage;
 import Pages.RegistrationPage;
-import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Assertions;
 import org.testng.annotations.Test;
 
 public class Registration extends BaseTest {
     private LoginPage login;
     private RegistrationPage register;
+    private SqlQueries database;
 
 
     @Test
@@ -79,5 +79,21 @@ public class Registration extends BaseTest {
         Assertions.assertTrue(register.isPasswordDoNotMatchMessageVisible());
         register.fillAnswerForSecurityQuestion(name);
         Assertions.assertTrue(register.isPasswordDoNotMatchMessageVisible(), "Passwords do not match!");
+    }
+    @Test
+    public void registerNewAccountBySqlDatabase() {
+        database = new SqlQueries(driver);
+        login = home.goToLoginPage();
+        Assertions.assertEquals(login.urlLogin, driver.getCurrentUrl(), "The page is not login page");
+        register = login.goToRegistrationPage();
+        Assertions.assertTrue(register.isEmailFieldVisible(), "The page is not login page");
+        String name = service.dockerProjectDatabase(database.getFirstName());
+        String surname = service.dockerProjectDatabase(database.getLastName());
+        String email = service.createEmailAddress(name, surname, service.randomNumber(), service.getRandomValue(service.eMailsDomenList()));
+        String password = service.getRandomValue(service.randomPasswordList());
+        service.createRandomPassword(password, service.randomNumber());
+        register.registerAccount(email, password, "Your eldest siblings middle name?", "Evo");
+        login = register.goToLoginPage();
+        Assertions.assertTrue(register.isRegistrationCompletedMessageVisible(), "Account has not been created");
     }
 }

@@ -5,9 +5,12 @@ import Pages.LoginPage;
 import org.junit.jupiter.api.Assertions;
 import org.testng.annotations.Test;
 
+import java.sql.SQLException;
+
 public class LogIn extends BaseTest {
 
     private LoginPage login;
+    private SqlQueries database;
 
     @Test
     public void LoginPage() {
@@ -90,4 +93,5 @@ public class LogIn extends BaseTest {
         home.selectLanguage(Languages.FRENCH.getDisplayName());
         Assertions.assertFalse(home.isLanguageChanged(), "You haven't changed language");
     }
-}
+    }
+
