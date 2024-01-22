@@ -82,7 +82,7 @@ public class Registration extends BaseTest {
     }
     @Test
     public void registerNewAccountBySqlDatabase() {
-        database = new SqlQueries(driver);
+        database = new SqlQueries();
         login = home.goToLoginPage();
         Assertions.assertEquals(login.urlLogin, driver.getCurrentUrl(), "The page is not login page");
         register = login.goToRegistrationPage();
